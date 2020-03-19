@@ -1,0 +1,59 @@
+#myBtn {
+  /* display: none; */
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: #38acec;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+#myBtn:hover {
+  background-color: #555;
+}
+
+#myBtn1 {
+  /* display: none; */
+  position: fixed;
+  bottom: 20px;
+  left: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: #38acec;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+#myBtn1:hover {
+  background-color: #555;
+}
+.blinking {
+  animation: blinkingText 0.7s infinite;
+}
+@keyframes blinkingText {
+  0% {
+    color: #fff;
+  }
+  49% {
+    color: #444;
+  }
+  50% {
+    color: #888;
+  }
+  99% {
+    color: #444;
+  }
+  100% {
+    color: #fff;
+  }
+}
