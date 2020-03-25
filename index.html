@@ -34,7 +34,10 @@
     <link rel="stylesheet" href="owlcarousel/assets/owl.carousel.css" />
 
     <!-- Default Theme -->
-    <link rel="stylesheet" href="owlcarousel/assets/owl.theme.css" />
+    <link
+      rel="stylesheet"
+      href="owlcarousel/assets/owl.theme.default.min.css"
+    />
   </head>
 
   <body>
@@ -200,7 +203,7 @@
         <div class="col-2"></div>
         <div class="col-8">
           <!-- Carousel -->
-          <div id="owl-example" class="owl-carousel">
+          <div id="owl-example" class="owl-carousel owl-theme">
             <div class="ml-2 mr-2" style="">
               <div class="card mb-2">
                 <img
@@ -433,7 +436,34 @@
     <script src="owlcarousel/assets/owl.carousel.js"></script>
     <script>
       $(document).ready(function() {
-        $("#owl-example").owlCarousel();
+        $(".owl-carousel").owlCarousel({
+          loop: true,
+          margin: 10,
+          nav: true,
+          responsive: {
+            0: {
+              items: 1
+            },
+            600: {
+              items: 2
+            },
+            1000: {
+              items: 3
+            }
+          }
+        });
+
+        document.getElementsByClassName("owl-prev")[0].style.outline = "none";
+        document.getElementsByClassName("owl-next")[0].style.outline = "none";
+
+        var dots = (document.getElementsByClassName(
+          "owl-dot"
+        )[0].style.outline = "none");
+
+        for (let index = 0; index < dots.length; index++) {
+          document.getElementsByClassName("owl-dot")[index].style.outline =
+            "none";
+        }
       });
     </script>
   </body>
