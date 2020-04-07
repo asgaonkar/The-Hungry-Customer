@@ -51,19 +51,29 @@
         style="color: white; text-decoration: none !important;"
       ></a>
     </div>
-    <div
-      onclick="window.scrollTo(0,document.body.scrollHeight);"
-      id="myBtn"
-      title="Go Down"
-    >
-      <a
-        class="fa fa-arrow-down fa-x blinking"
-        href="#"
-        id="downBtn"
-        onclick="window.scrollTo(0,document.body.scrollHeight);"
-        style="color: white; text-decoration: none !important;"
-      ></a>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-5"></div>
+        <div class="col-2">
+          <div
+            onclick="window.scrollTo(0,document.body.scrollHeight);"
+            id="myBtn"
+            title="Go Down"
+            style="display: none;"
+          >
+            <a
+              class="fa fa-arrow-down fa-x blinking"
+              id="downBtn"
+              onclick="window.scrollTo(0,document.body.scrollHeight);"
+              style="color: white; text-decoration: none !important;"
+            ></a>
+          </div>
+        </div>
+        <div class="col-5"></div>
+      </div>
     </div>
+
     <!-- Button trigger modal -->
     <button
       type="button"
@@ -172,7 +182,7 @@
               <a href="#" class="nav-item nav-link">Messages</a>
             </div>
             <div class="navbar-nav ml-auto">
-              <form class="form-inline">
+              <!-- <form class="form-inline">
                 <div class="input-group">
                   <input
                     type="text"
@@ -186,7 +196,8 @@
                     </button>
                   </div>
                 </div>
-              </form>
+              </form> -->
+              <a href="#" class="nav-item nav-link">Contact Us</a>
             </div>
           </div>
         </nav>
@@ -195,329 +206,466 @@
     <div class="container-fluid" style="padding-top: 50px;">
       <div class="row" style="">
         <div class="col-lg-6 text-center" style="margin: auto;">
-          <!-- <img src="assets/img/usa.png" alt="" width="100%" /> -->
+          <!-- Map -->
+          <div class="row">
+            <div id="map"></div>
 
-          <div id="map"></div>
+            <script src="assets/js/leaflet.js"></script>
+            <script
+              type="text/javascript"
+              src="assets/js/us-states.js"
+            ></script>
+            <script type="text/javascript">
+              var map = L.map("map").setView([37.8, -96], 4);
 
-          <script src="assets/js/leaflet.js"></script>
-          <script type="text/javascript" src="assets/js/us-states.js"></script>
-          <script type="text/javascript">
-            var map = L.map("map").setView([37.8, -96], 4);
+              // control that shows state info on hover
+              var info = L.control();
 
-            // control that shows state info on hover
-            var info = L.control();
-
-            info.onAdd = function(map) {
-              this._div = L.DomUtil.create("div", "info");
-              this.update();
-              return this._div;
-            };
-
-            info.update = function(props) {
-              this._div.innerHTML =
-                "<h4>US Population Density</h4>" +
-                (props
-                  ? "<b>" +
-                    props.name +
-                    "</b><br />" +
-                    props.density +
-                    " people / mi<sup>2</sup>"
-                  : "Hover over a state");
-            };
-
-            info.addTo(map);
-
-            // get color depending on population density value
-            function getColor(d) {
-              return d > 1000
-                ? "#800026"
-                : d > 500
-                ? "#BD0026"
-                : d > 200
-                ? "#E31A1C"
-                : d > 100
-                ? "#FC4E2A"
-                : d > 50
-                ? "#FD8D3C"
-                : d > 20
-                ? "#FEB24C"
-                : d > 10
-                ? "#FED976"
-                : "#FFEDA0";
-            }
-
-            function style(feature) {
-              return {
-                weight: 2,
-                opacity: 1,
-                color: "white",
-                dashArray: "3",
-                fillOpacity: 0.7,
-                fillColor: getColor(feature.properties.density)
+              info.onAdd = function (map) {
+                this._div = L.DomUtil.create("div", "info");
+                this.update();
+                return this._div;
               };
-            }
 
-            function highlightFeature(e) {
-              var layer = e.target;
+              info.update = function (props) {
+                this._div.innerHTML =
+                  "<h4>State</h4>" +
+                  (props
+                    ? "Current State: <b>" + props.name + "</b><br />"
+                    : // props.density +
+                      // " people / mi<sup>2</sup>"
+                      "Hover over a state");
+              };
 
-              layer.setStyle({
-                weight: 5,
-                color: "#666",
-                dashArray: "",
-                fillOpacity: 0.7
-              });
+              info.addTo(map);
 
-              if (!L.Browser.ie && !L.Browser.opera) {
-                layer.bringToFront();
+              // get color depending on population density value
+              function getColor(d) {
+                return d > 1000
+                  ? "#800026"
+                  : d > 500
+                  ? "#BD0026"
+                  : d > 200
+                  ? "#E31A1C"
+                  : d > 100
+                  ? "#FC4E2A"
+                  : d > 50
+                  ? "#FD8D3C"
+                  : d > 20
+                  ? "#FEB24C"
+                  : d > 10
+                  ? "#FED976"
+                  : "#FFEDA0";
               }
 
-              info.update(layer.feature.properties);
-            }
+              function style(feature) {
+                return {
+                  weight: 2,
+                  opacity: 1,
+                  color: "white",
+                  dashArray: "3",
+                  fillOpacity: 0.7,
+                  fillColor: getColor(feature.properties.density),
+                };
+              }
 
-            var geojson;
+              function highlightFeature(e) {
+                var layer = e.target;
 
-            function resetHighlight(e) {
-              geojson.resetStyle(e.target);
-              info.update();
-            }
+                layer.setStyle({
+                  weight: 5,
+                  color: "#666",
+                  dashArray: "",
+                  fillOpacity: 0.7,
+                });
 
-            function zoomToFeature(e) {
-              map.fitBounds(e.target.getBounds());
-            }
+                if (!L.Browser.ie && !L.Browser.opera) {
+                  layer.bringToFront();
+                }
 
-            function onEachFeature(feature, layer) {
-              layer.on({
-                mouseover: highlightFeature,
-                mouseout: resetHighlight
-                // click: zoomToFeature
-              });
-            }
+                info.update(layer.feature.properties);
+              }
 
-            geojson = L.geoJson(statesData, {
-              style: style,
-              onEachFeature: onEachFeature
-            }).addTo(map);
-          </script>
+              var geojson;
+
+              function resetHighlight(e) {
+                geojson.resetStyle(e.target);
+                info.update();
+              }
+
+              function zoomToFeature(e) {
+                map.fitBounds(e.target.getBounds());
+              }
+
+              function onEachFeature(feature, layer) {
+                layer.on({
+                  mouseover: highlightFeature,
+                  mouseout: resetHighlight,
+                  // click: zoomToFeature
+                });
+              }
+
+              geojson = L.geoJson(statesData, {
+                style: style,
+                onEachFeature: onEachFeature,
+              }).addTo(map);
+            </script>
+          </div>
+          <!-- Bubble Cloud -->
+          <div class="row">
+            <div id="vis"></div>
+            <div id="status"></div>
+          </div>
         </div>
-        <div class="col-lg-6 text-center" style="margin: auto;">
-          <div id="vis"></div>
-          <div id="status"></div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-2"></div>
-        <div class="col-8">
+        <div class="col-lg-6">
+          <div class="row" style="">
+            <div class="bd-example" style="margin-top: 10px;">
+              <blockquote class="blockquote">
+                <p class="mb-0">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Integer posuere erat a ante.
+                </p>
+                <footer class="blockquote-footer">
+                  Someone famous in
+                  <cite title="Source Title">Source Title</cite>
+                </footer>
+              </blockquote>
+              <blockquote class="blockquote">
+                <p class="mb-0">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Integer posuere erat a ante.
+                </p>
+                <footer class="blockquote-footer">
+                  Someone famous in
+                  <cite title="Source Title">Source Title</cite>
+                </footer>
+              </blockquote>
+              <blockquote class="blockquote">
+                <p class="mb-0">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Integer posuere erat a ante.
+                </p>
+                <footer class="blockquote-footer">
+                  Someone famous in
+                  <cite title="Source Title">Source Title</cite>
+                </footer>
+              </blockquote>
+              <blockquote class="blockquote">
+                <p class="mb-0">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Integer posuere erat a ante.
+                </p>
+                <footer class="blockquote-footer">
+                  Someone famous in
+                  <cite title="Source Title">Source Title</cite>
+                </footer>
+              </blockquote>
+            </div>
+          </div>
           <!-- Carousel -->
-          <div id="owl-example" class="owl-carousel owl-theme">
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
+          <div class="row">
+            <div class="col-5"></div>
+            <div class="col-2" id="left_right"></div>
+            <div class="col-5"></div>
+          </div>
+          <div class="row" style="margin-top: 25px;">
+            <div id="owl-example" class="owl-carousel owl-theme">
+              <div class="ml-2 mr-2" style="">
+                <div class="card mb-2">
+                  <img
+                    class="card-img-top"
+                    src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
+                    alt="Card image cap"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-title font-weight-bold">1. Card Title</h4>
+                    <p class="card-text">
+                      Restaurant Abstract Data
+                      <br />
+                      Line 1
+                      <br />
+                      Line 2
+                    </p>
+                    <a
+                      class="btn btn-primary btn-md btn-rounded"
+                      style="background-color: #38acec !important;"
+                      >Button</a
+                    >
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (27).jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
+              <div class="ml-2 mr-2" style="">
+                <div class="card mb-2">
+                  <img
+                    class="card-img-top"
+                    src="https://mdbootstrap.com/img/Photos/Others/img (27).jpg"
+                    alt="Card image cap"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-title font-weight-bold">2. Card title</h4>
+                    <p class="card-text">
+                      Restaurant Abstract Data
+                      <br />
+                      Line 1
+                      <br />
+                      Line 2
+                    </p>
+                    <a
+                      class="btn btn-primary btn-md btn-rounded"
+                      style="background-color: #38acec !important;"
+                      >Button</a
+                    >
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
+              <div class="ml-2 mr-2" style="">
+                <div class="card mb-2">
+                  <img
+                    class="card-img-top"
+                    src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
+                    alt="Card image cap"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-title font-weight-bold">3. Card title</h4>
+                    <p class="card-text">
+                      Restaurant Abstract Data
+                      <br />
+                      Line 1
+                      <br />
+                      Line 2
+                    </p>
+                    <a
+                      class="btn btn-primary btn-md btn-rounded"
+                      style="background-color: #38acec !important;"
+                      >Button</a
+                    >
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
+              <div class="ml-2 mr-2" style="">
+                <div class="card mb-2">
+                  <img
+                    class="card-img-top"
+                    src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
+                    alt="Card image cap"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-title font-weight-bold">4. Card title</h4>
+                    <p class="card-text">
+                      Restaurant Abstract Data
+                      <br />
+                      Line 1
+                      <br />
+                      Line 2
+                    </p>
+                    <a
+                      class="btn btn-primary btn-md btn-rounded"
+                      style="background-color: #38acec !important;"
+                      >Button</a
+                    >
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
+              <div class="ml-2 mr-2" style="">
+                <div class="card mb-2">
+                  <img
+                    class="card-img-top"
+                    src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
+                    alt="Card image cap"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-title font-weight-bold">5. Card title</h4>
+                    <p class="card-text">
+                      Restaurant Abstract Data
+                      <br />
+                      Line 1
+                      <br />
+                      Line 2
+                    </p>
+                    <a
+                      class="btn btn-primary btn-md btn-rounded"
+                      style="background-color: #38acec !important;"
+                      >Button</a
+                    >
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
+              <div class="ml-2 mr-2" style="">
+                <div class="card mb-2">
+                  <img
+                    class="card-img-top"
+                    src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
+                    alt="Card image cap"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-title font-weight-bold">6. Card title</h4>
+                    <p class="card-text">
+                      Restaurant Abstract Data
+                      <br />
+                      Line 1
+                      <br />
+                      Line 2
+                    </p>
+                    <a
+                      class="btn btn-primary btn-md btn-rounded"
+                      style="background-color: #38acec !important;"
+                      >Button</a
+                    >
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
+              <div class="ml-2 mr-2" style="">
+                <div class="card mb-2">
+                  <img
+                    class="card-img-top"
+                    src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
+                    alt="Card image cap"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-title font-weight-bold">7. Card title</h4>
+                    <p class="card-text">
+                      Restaurant Abstract Data
+                      <br />
+                      Line 1
+                      <br />
+                      Line 2
+                    </p>
+                    <a
+                      class="btn btn-primary btn-md btn-rounded"
+                      style="background-color: #38acec !important;"
+                      >Button</a
+                    >
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
+              <div class="ml-2 mr-2" style="">
+                <div class="card mb-2">
+                  <img
+                    class="card-img-top"
+                    src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
+                    alt="Card image cap"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-title font-weight-bold">8. Card title</h4>
+                    <p class="card-text">
+                      Restaurant Abstract Data
+                      <br />
+                      Line 1
+                      <br />
+                      Line 2
+                    </p>
+                    <a
+                      class="btn btn-primary btn-md btn-rounded"
+                      style="background-color: #38acec !important;"
+                      >Button</a
+                    >
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
+              <div class="ml-2 mr-2" style="">
+                <div class="card mb-2">
+                  <img
+                    class="card-img-top"
+                    src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
+                    alt="Card image cap"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-title font-weight-bold">9. Card title</h4>
+                    <p class="card-text">
+                      Restaurant Abstract Data
+                      <br />
+                      Line 1
+                      <br />
+                      Line 2
+                    </p>
+                    <a
+                      class="btn btn-primary btn-md btn-rounded"
+                      style="background-color: #38acec !important;"
+                      >Button</a
+                    >
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
+              <div class="ml-2 mr-2" style="">
+                <div class="card mb-2">
+                  <img
+                    class="card-img-top"
+                    src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
+                    alt="Card image cap"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-title font-weight-bold">10. Card title</h4>
+                    <p class="card-text">
+                      Restaurant Abstract Data
+                      <br />
+                      Line 1
+                      <br />
+                      Line 2
+                    </p>
+                    <a
+                      class="btn btn-primary btn-md btn-rounded"
+                      style="background-color: #38acec !important;"
+                      >Button</a
+                    >
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
+              <div class="ml-2 mr-2" style="">
+                <div class="card mb-2">
+                  <img
+                    class="card-img-top"
+                    src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
+                    alt="Card image cap"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-title font-weight-bold">11. Card title</h4>
+                    <p class="card-text">
+                      Restaurant Abstract Data
+                      <br />
+                      Line 1
+                      <br />
+                      Line 2
+                    </p>
+                    <a
+                      class="btn btn-primary btn-md btn-rounded"
+                      style="background-color: #38acec !important;"
+                      >Button</a
+                    >
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (38).jpg"
-                  alt="Card image cap"
-                  29
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
+              <div class="ml-2 mr-2" style="">
+                <div class="card mb-2">
+                  <img
+                    class="card-img-top"
+                    src="https://mdbootstrap.com/img/Photos/Others/img (38).jpg"
+                    alt="Card image cap"
+                    29
+                  />
+                  <div class="card-body">
+                    <h4 class="card-title font-weight-bold">12. Card title</h4>
+                    <p class="card-text">
+                      Restaurant Abstract Data
+                      <br />
+                      Line 1
+                      <br />
+                      Line 2
+                    </p>
+                    <a
+                      class="btn btn-primary btn-md btn-rounded"
+                      style="background-color: #38acec !important;"
+                      >Button</a
+                    >
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-2"></div>
       </div>
+      <!-- Trial Start -->
+
+      <!-- Trial End -->
     </div>
 
     <!-- Optional JavaScript -->
@@ -543,26 +691,38 @@
     <script src="assets/js/libs/d3.min.js"></script>
     <script src="assets/js/bubble.js"></script>
     <script>
-      $(document).ready(function() {
+      $(document).ready(function () {
+        if ($("body").height() > $(window).height()) {
+          document.getElementById("myBtn").style.display = "block";
+        }
+
+        document.getElementsByTagName("nav")[0].style.paddingBottom = "4px";
+        document.getElementsByTagName("nav")[0].style.paddingTop = "4px";
         $(".owl-carousel").owlCarousel({
           loop: true,
           margin: 10,
-          nav: true,
+          nav: false,
           responsive: {
             0: {
-              items: 1
+              items: 1,
             },
-            600: {
-              items: 2
+            768: {
+              items: 2,
             },
-            1000: {
-              items: 3
-            }
-          }
+            1024: {
+              items: 3,
+            },
+          },
         });
+        document.getElementsByClassName("owl-dots")[0].style.marginTop = "0px";
+        // document.getElementsByClassName("owl-nav")[0].style.marginTop = "-10px";
 
-        document.getElementsByClassName("owl-prev")[0].style.outline = "none";
-        document.getElementsByClassName("owl-next")[0].style.outline = "none";
+        // document
+        //   .getElementById("left_right")
+        //   .append(document.getElementsByClassName("owl-nav")[0]);
+        // document.getElementsByClassName("owl-nav")[1].style.display = "none";
+        // document.getElementsByClassName("owl-prev")[0].style.outline = "none";
+        // document.getElementsByClassName("owl-next")[0].style.outline = "none";
 
         var dots = (document.getElementsByClassName(
           "owl-dot"
@@ -577,141 +737,141 @@
         x = [
           {
             name: "lion",
-            count: 143
+            count: 143,
           },
           {
             name: "fox",
-            count: 130
+            count: 130,
           },
           {
             name: "ass",
-            count: 119
+            count: 119,
           },
           {
             name: "wolf",
-            count: 105
+            count: 105,
           },
           {
             name: "time",
-            count: 99
+            count: 99,
           },
           {
             name: "day",
-            count: 78
+            count: 78,
           },
           {
             name: "replied",
-            count: 61
+            count: 61,
           },
           {
             name: "dog",
-            count: 52
+            count: 52,
           },
           {
             name: "eagle",
-            count: 46
+            count: 46,
           },
           {
             name: "caught",
-            count: 43
+            count: 43,
           },
           {
             name: "friend",
-            count: 43
+            count: 43,
           },
           {
             name: "fell",
-            count: 42
+            count: 42,
           },
           {
             name: "found",
-            count: 41
+            count: 41,
           },
           {
             name: "jupiter",
-            count: 41
+            count: 41,
           },
           {
             name: "mouse",
-            count: 39
+            count: 39,
           },
           {
             name: "stag",
-            count: 39
+            count: 39,
           },
           {
             name: "little",
-            count: 37
+            count: 37,
           },
           {
             name: "master",
-            count: 37
+            count: 37,
           },
           {
             name: "cock",
-            count: 34
+            count: 34,
           },
           {
             name: "cried",
-            count: 34
+            count: 34,
           },
           {
             name: "water",
-            count: 34
+            count: 34,
           },
           {
             name: "dont",
-            count: 33
+            count: 33,
           },
           {
             name: "farmer",
-            count: 33
+            count: 33,
           },
           {
             name: "sheep",
-            count: 32
+            count: 32,
           },
           {
             name: "presently",
-            count: 31
+            count: 31,
           },
           {
             name: "horse",
-            count: 30
+            count: 30,
           },
           {
             name: "life",
-            count: 30
+            count: 30,
           },
           {
             name: "set",
-            count: 30
+            count: 30,
           },
           {
             name: "hare",
-            count: 29
+            count: 29,
           },
           {
             name: "begged",
-            count: 28
-          }
+            count: 28,
+          },
         ];
         plot = Bubbles();
-        display = function(data) {
+        display = function (data) {
           return plotData("#vis", x, plot);
         };
         key = decodeURIComponent(location.search).replace("?", "");
-        text = texts.filter(function(t) {
+        text = texts.filter(function (t) {
           return t.key === key;
         })[0];
         if (!text) {
           text = texts[0];
         }
         $("#text-select").val(key);
-        d3.select("#jitter").on("input", function() {
+        d3.select("#jitter").on("input", function () {
           return plot.jitter(parseFloat(this.output.value));
         });
-        d3.select("#text-select").on("change", function(e) {
+        d3.select("#text-select").on("change", function (e) {
           key = $(this).val();
           location.replace("#");
           return (location.search = encodeURIComponent(key));

@@ -1,6 +1,8 @@
 body {
 }
-
+.amber-text {
+  color: #ffc107 !important;
+}
 a,
 a:visited {
   color: #333;
