@@ -20,25 +20,8 @@
     <style></style>
     <script src="https://use.fontawesome.com/922eaae474.js"></script>
 
-    <!-- Carousel Stylesheets-->
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap"
-    />
-
-    <!-- Important Owl stylesheet -->
-    <link rel="stylesheet" href="owlcarousel/assets/owl.carousel.css" />
-
-    <!-- Default Theme -->
-    <link
-      rel="stylesheet"
-      href="owlcarousel/assets/owl.theme.default.min.css"
-    />
     <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/leaflet.css" />
   </head>
 
   <body>
@@ -50,19 +33,29 @@
         style="color: white; text-decoration: none !important;"
       ></a>
     </div>
-    <div
-      onclick="window.scrollTo(0,document.body.scrollHeight);"
-      id="myBtn"
-      title="Go Down"
-    >
-      <a
-        class="fa fa-arrow-down fa-x blinking"
-        href="#"
-        id="downBtn"
-        onclick="window.scrollTo(0,document.body.scrollHeight);"
-        style="color: white; text-decoration: none !important;"
-      ></a>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-5"></div>
+        <div class="col-2">
+          <div
+            onclick="window.scrollTo(0,document.body.scrollHeight);"
+            id="myBtn"
+            title="Go Down"
+            style="display: none;"
+          >
+            <a
+              class="fa fa-arrow-down fa-x blinking"
+              id="downBtn"
+              onclick="window.scrollTo(0,document.body.scrollHeight);"
+              style="color: white; text-decoration: none !important;"
+            ></a>
+          </div>
+        </div>
+        <div class="col-5"></div>
+      </div>
     </div>
+
     <!-- Button trigger modal -->
     <button
       type="button"
@@ -142,6 +135,7 @@
         </div>
       </div>
     </div>
+
     <div class="container-fluid" style="margin: 0px; padding: 0px;">
       <div class="bs-example">
         <nav
@@ -171,7 +165,7 @@
               <a href="#" class="nav-item nav-link">Messages</a>
             </div>
             <div class="navbar-nav ml-auto">
-              <form class="form-inline">
+              <!-- <form class="form-inline">
                 <div class="input-group">
                   <input
                     type="text"
@@ -185,235 +179,621 @@
                     </button>
                   </div>
                 </div>
-              </form>
+              </form> -->
+              <a href="#" class="nav-item nav-link">Contact Us</a>
             </div>
           </div>
         </nav>
       </div>
     </div>
+
     <div class="container-fluid" style="padding-top: 50px;">
       <div class="row" style="">
-        <div class="col-lg-6 text-center" style="margin: auto;">
-          <img src="assets/img/usa.png" alt="" width="100%" />
-        </div>
-        <div class="col-lg-6 text-center" style="margin: auto;">
-          <div id="vis"></div>
-          <div id="status"></div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-2"></div>
-        <div class="col-8">
-          <!-- Carousel -->
-          <div id="owl-example" class="owl-carousel owl-theme">
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
-                </div>
-              </div>
-            </div>
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (27).jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
-                </div>
-              </div>
-            </div>
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
-                </div>
-              </div>
-            </div>
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
-                </div>
-              </div>
-            </div>
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
-                </div>
-              </div>
-            </div>
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
-                </div>
-              </div>
-            </div>
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
-                </div>
-              </div>
-            </div>
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
-                </div>
-              </div>
-            </div>
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
-                </div>
-              </div>
-            </div>
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
-                </div>
-              </div>
-            </div>
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
-                </div>
-              </div>
-            </div>
-            <div class="ml-2 mr-2" style="">
-              <div class="card mb-2">
-                <img
-                  class="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/img (38).jpg"
-                  alt="Card image cap"
-                  29
-                />
-                <div class="card-body">
-                  <h4 class="card-title font-weight-bold">Card title</h4>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
-                </div>
-              </div>
-            </div>
+        <div
+          class="col-lg-6 text-center"
+          style="margin: auto; overflow: hidden;"
+        >
+          <!-- Map -->
+          <div
+            class="row"
+            style="margin-left: 20px; margin-right: 20px; margin-top: 10px;"
+          >
+            <div id="map"></div>
+
+            <script src="assets/js/leaflet.js"></script>
+            <script
+              type="text/javascript"
+              src="assets/js/us-states.js"
+            ></script>
+            <script type="text/javascript">
+              var map = L.map("map").setView([37.8, -96], 4);
+
+              // control that shows state info on hover
+              var info = L.control();
+
+              info.onAdd = function (map) {
+                this._div = L.DomUtil.create("div", "info");
+                this.update();
+                return this._div;
+              };
+
+              info.update = function (props) {
+                this._div.innerHTML =
+                  "<h4>State</h4>" +
+                  (props
+                    ? "Current State: <b>" + props.name + "</b><br />"
+                    : // props.density +
+                      // " people / mi<sup>2</sup>"
+                      "Hover over a state");
+              };
+
+              info.addTo(map);
+
+              // get color depending on population density value
+              function getColor(d) {
+                return d > 1000
+                  ? "#800026"
+                  : d > 500
+                  ? "#BD0026"
+                  : d > 200
+                  ? "#E31A1C"
+                  : d > 100
+                  ? "#FC4E2A"
+                  : d > 50
+                  ? "#FD8D3C"
+                  : d > 20
+                  ? "#FEB24C"
+                  : d > 10
+                  ? "#FED976"
+                  : "#FFEDA0";
+              }
+
+              function style(feature) {
+                return {
+                  weight: 2,
+                  opacity: 1,
+                  color: "white",
+                  dashArray: "3",
+                  fillOpacity: 0.7,
+                  fillColor: getColor(feature.properties.density),
+                };
+              }
+
+              function highlightFeature(e) {
+                var layer = e.target;
+
+                layer.setStyle({
+                  weight: 5,
+                  color: "#666",
+                  dashArray: "",
+                  fillOpacity: 0.7,
+                });
+
+                if (!L.Browser.ie && !L.Browser.opera) {
+                  layer.bringToFront();
+                }
+
+                info.update(layer.feature.properties);
+              }
+
+              var geojson;
+
+              function resetHighlight(e) {
+                geojson.resetStyle(e.target);
+                info.update();
+              }
+
+              function zoomToFeature(e) {
+                map.fitBounds(e.target.getBounds());
+              }
+
+              function onEachFeature(feature, layer) {
+                layer.on({
+                  mouseover: highlightFeature,
+                  mouseout: resetHighlight,
+                  // click: zoomToFeature
+                });
+              }
+
+              geojson = L.geoJson(statesData, {
+                style: style,
+                onEachFeature: onEachFeature,
+              }).addTo(map);
+            </script>
+          </div>
+          <!-- Bubble Cloud -->
+          <div class="row">
+            <div id="vis"></div>
+            <div id="status"></div>
           </div>
         </div>
-        <div class="col-2"></div>
+        <div class="col-lg-6">
+          <!-- Stats -->
+          <!-- <div class="row" style="">
+            <div class="bd-example" style="margin-top: 10px;">
+              <blockquote class="blockquote">
+                <p class="mb-0">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Integer posuere erat a ante.
+                </p>
+                <footer class="blockquote-footer">
+                  Someone famous in
+                  <cite title="Source Title">Source Title</cite>
+                </footer>
+              </blockquote>
+              <blockquote class="blockquote">
+                <p class="mb-0">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Integer posuere erat a ante.
+                </p>
+                <footer class="blockquote-footer">
+                  Someone famous in
+                  <cite title="Source Title">Source Title</cite>
+                </footer>
+              </blockquote>
+              <blockquote class="blockquote">
+                <p class="mb-0">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Integer posuere erat a ante.
+                </p>
+                <footer class="blockquote-footer">
+                  Someone famous in
+                  <cite title="Source Title">Source Title</cite>
+                </footer>
+              </blockquote>
+              <blockquote class="blockquote">
+                <p class="mb-0">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Integer posuere erat a ante.
+                </p>
+                <footer class="blockquote-footer">
+                  Someone famous in
+                  <cite title="Source Title">Source Title</cite>
+                </footer>
+              </blockquote>
+            </div>
+          </div> -->
+          <br />
+          <div class="row trial_cards" id="trial_cards" style="height: auto;">
+            <!-- Trial Start -->
+            <!-- Card -->
+            <div class="row" style="width: 100%; margin-left: 20px;">
+              <div class="col-6" style="padding-right: 10px;">
+                <h3 class="text-center">California</h3>
+                <hr />
+                <!-- Stats -->
+                <div class="row" style="">
+                  <div class="bd-example" style="margin-top: 10px;">
+                    <blockquote class="blockquote">
+                      <p class="mb-0">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Integer posuere erat a ante.
+                      </p>
+                      <footer class="blockquote-footer">
+                        Someone famous in
+                        <cite title="Source Title">Source Title</cite>
+                      </footer>
+                    </blockquote>
+                    <blockquote class="blockquote">
+                      <p class="mb-0">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Integer posuere erat a ante.
+                      </p>
+                      <footer class="blockquote-footer">
+                        Someone famous in
+                        <cite title="Source Title">Source Title</cite>
+                      </footer>
+                    </blockquote>
+                    <blockquote class="blockquote">
+                      <p class="mb-0">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Integer posuere erat a ante.
+                      </p>
+                      <footer class="blockquote-footer">
+                        Someone famous in
+                        <cite title="Source Title">Source Title</cite>
+                      </footer>
+                    </blockquote>
+                    <blockquote class="blockquote">
+                      <p class="mb-0">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Integer posuere erat a ante.
+                      </p>
+                      <footer class="blockquote-footer">
+                        Someone famous in
+                        <cite title="Source Title">Source Title</cite>
+                      </footer>
+                    </blockquote>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6" style="">
+                <!-- Card  0 -->
+                <div class="row" style="width: 100%;">
+                  <div class="card display-card" style="">
+                    <img
+                      class="card-img-top"
+                      src="https://mdbootstrap.com/img/Photos/Horizontal/Food/8-col/img(5).jpg"
+                      alt="Card image cap"
+                    />
+                    <div class="card-body">
+                      <!-- Title -->
+                      <h4 class="card-title font-weight-bold">
+                        <a>1. La Sirena restaurant</a>
+                      </h4>
+                      <!-- Data -->
+                      <ul class="list-unstyled list-inline rating mb-0">
+                        <li class="list-inline-item mr-0">
+                          <i class="fa fa-star amber-text"> </i>
+                        </li>
+                        <li class="list-inline-item mr-0">
+                          <i class="fa fa-star amber-text"></i>
+                        </li>
+                        <li class="list-inline-item mr-0">
+                          <i class="fa fa-star amber-text"></i>
+                        </li>
+                        <li class="list-inline-item mr-0">
+                          <i class="fa fa-star amber-text"></i>
+                        </li>
+                        <li class="list-inline-item">
+                          <i class="fa fa-star-half amber-text"></i>
+                        </li>
+                        <li class="list-inline-item">
+                          <p class="text-muted">4.5 (413)</p>
+                        </li>
+                      </ul>
+                      <p class="mb-2">$ • American, Restaurant</p>
+                      <hr class="my-2" />
+                      <!-- Text -->
+                      <p class="card-text">
+                        Small Content
+                      </p>
+
+                      <a
+                        class="btn btn-flat red-text p-1 my-3 mr-4 mml-1 deep-purple-text collapsed"
+                        data-toggle="collapse"
+                        href="#collapseExample"
+                        aria-expanded="false"
+                        aria-controls="collapseExample"
+                        style="background-color: #38acec;"
+                        >Read More
+                        <i class="fa fa-angle-down" aria-hidden="true"></i
+                      ></a>
+                      <a
+                        class="btn btn-flat red-text p-1 my-3 mr-4 mml-1 deep-purple-text collapsed"
+                        data-toggle="collapse"
+                        href=""
+                        style="background-color: #38acec;"
+                        >Maps <i class="fas fa-map-marker-alt"></i
+                      ></a>
+
+                      <div class="collapse-content">
+                        <div class="collapse" id="collapseExample">
+                          <h5>Timing</h5>
+                          <table class="table table-borderless table-sm mb-0">
+                            <tbody>
+                              <tr>
+                                <td class="font-weight-normal align-middle">
+                                  Monday
+                                </td>
+                                <td class="float-right font-weight-normal">
+                                  <p class="mb-1">
+                                    24&deg;<span class="text-muted"
+                                      >/12&deg;</span
+                                    >
+                                  </p>
+                                </td>
+                                <td class="float-right mr-3">
+                                  <i class="fas fa-sun fa-lg amber-text"></i>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="font-weight-normal align-middle">
+                                  Tuesday
+                                </td>
+                                <td class="float-right font-weight-normal">
+                                  <p class="mb-1">
+                                    24&deg;<span class="text-muted"
+                                      >/12&deg;</span
+                                    >
+                                  </p>
+                                </td>
+                                <td class="float-right mr-3">
+                                  <i class="fas fa-sun fa-lg amber-text"></i>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="font-weight-normal align-middle">
+                                  Wednesday
+                                </td>
+                                <td class="float-right font-weight-normal">
+                                  <p class="mb-1">
+                                    19&deg;<span class="text-muted"
+                                      >/10&deg;</span
+                                    >
+                                  </p>
+                                </td>
+                                <td class="float-right mr-3">
+                                  <i class="fas fa-cloud-showers-heavy"></i>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="font-weight-normal align-middle">
+                                  Thursday
+                                </td>
+                                <td class="float-right font-weight-normal">
+                                  <p class="mb-1">
+                                    23&deg;<span class="text-muted"
+                                      >/15&deg;</span
+                                    >
+                                  </p>
+                                </td>
+                                <td class="float-right mr-3">
+                                  <i class="fa fa-wind fa-lg amber-text"></i>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="font-weight-normal align-middle">
+                                  Friday
+                                </td>
+                                <td class="float-right font-weight-normal">
+                                  <p class="mb-1">
+                                    26&deg;<span class="text-muted"
+                                      >/19&deg;</span
+                                    >
+                                  </p>
+                                </td>
+                                <td class="float-right mr-3">
+                                  <i class="fas fa-sun fa-lg amber-text"></i>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="font-weight-normal align-middle">
+                                  Saturday
+                                </td>
+                                <td class="float-right font-weight-normal">
+                                  <p class="mb-1">
+                                    20&deg;<span class="text-muted"
+                                      >/16&deg;</span
+                                    >
+                                  </p>
+                                </td>
+                                <td class="float-right mr-3">
+                                  <i class="fa fa-bolt fa-lg text-info"></i>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="font-weight-normal align-middle">
+                                  Sunday
+                                </td>
+                                <td class="float-right font-weight-normal">
+                                  <p class="mb-1">
+                                    22&deg;<span class="text-muted"
+                                      >/13&deg;</span
+                                    >
+                                  </p>
+                                </td>
+                                <td class="float-right mr-3">
+                                  <i class="fa fa-cloud fa-lg text-info"></i>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <!-- Card 1 -->
+                <div class="row" style="width: 100%;">
+                  <div class="card display-card" style="">
+                    <!-- Card 0 -->
+                    <img
+                      class="card-img-top"
+                      src="https://mdbootstrap.com/img/Photos/Horizontal/Food/8-col/img(5).jpg"
+                      alt="Card image cap"
+                    />
+                    <div class="card-body">
+                      <!-- Title -->
+                      <h4 class="card-title font-weight-bold">
+                        <a>2. Chinese restaurant</a>
+                      </h4>
+                      <!-- Data -->
+                      <ul class="list-unstyled list-inline rating mb-0">
+                        <li class="list-inline-item mr-0">
+                          <i class="fa fa-star amber-text"> </i>
+                        </li>
+                        <li class="list-inline-item mr-0">
+                          <i class="fa fa-star amber-text"></i>
+                        </li>
+                        <li class="list-inline-item mr-0">
+                          <i class="fa fa-star amber-text"></i>
+                        </li>
+                        <li class="list-inline-item mr-0">
+                          <i class="fa fa-star amber-text"></i>
+                        </li>
+                        <li class="list-inline-item">
+                          <i class="fa fa-star-half amber-text"></i>
+                        </li>
+                        <li class="list-inline-item">
+                          <p class="text-muted">4.5 (413)</p>
+                        </li>
+                      </ul>
+                      <p class="mb-2">$ • American, Restaurant</p>
+                      <hr class="my-2" />
+                      <!-- Text -->
+                      <p class="card-text">
+                        Small Content
+                      </p>
+
+                      <a
+                        class="btn btn-flat red-text p-1 my-3 mr-4 mml-1 deep-purple-text collapsed card-btn"
+                        data-toggle="collapse"
+                        href="#collapseExample1"
+                        aria-expanded="false"
+                        aria-controls="collapseExample"
+                        style="background-color: #38acec;"
+                        >Read More
+                        <i class="fa fa-angle-down" aria-hidden="true"></i
+                      ></a>
+                      <a
+                        class="btn btn-flat red-text p-1 my-3 mr-4 mml-1 deep-purple-text collapsed card-btn"
+                        data-toggle="collapse"
+                        href=""
+                        style="background-color: #38acec;"
+                        >Maps <i class="fas fa-map-marker-alt"></i
+                      ></a>
+
+                      <div class="collapse-content">
+                        <div class="collapse" id="collapseExample1">
+                          <h5>Timing</h5>
+                          <table class="table table-borderless table-sm mb-0">
+                            <tbody>
+                              <tr>
+                                <td class="font-weight-normal align-middle">
+                                  Monday
+                                </td>
+                                <td class="float-right font-weight-normal">
+                                  <p class="mb-1">
+                                    24&deg;<span class="text-muted"
+                                      >/12&deg;</span
+                                    >
+                                  </p>
+                                </td>
+                                <td class="float-right mr-3">
+                                  <i class="fas fa-sun fa-lg amber-text"></i>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="font-weight-normal align-middle">
+                                  Tuesday
+                                </td>
+                                <td class="float-right font-weight-normal">
+                                  <p class="mb-1">
+                                    24&deg;<span class="text-muted"
+                                      >/12&deg;</span
+                                    >
+                                  </p>
+                                </td>
+                                <td class="float-right mr-3">
+                                  <i class="fas fa-sun fa-lg amber-text"></i>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="font-weight-normal align-middle">
+                                  Wednesday
+                                </td>
+                                <td class="float-right font-weight-normal">
+                                  <p class="mb-1">
+                                    19&deg;<span class="text-muted"
+                                      >/10&deg;</span
+                                    >
+                                  </p>
+                                </td>
+                                <td class="float-right mr-3">
+                                  <i class="fas fa-cloud-showers-heavy"></i>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="font-weight-normal align-middle">
+                                  Thursday
+                                </td>
+                                <td class="float-right font-weight-normal">
+                                  <p class="mb-1">
+                                    23&deg;<span class="text-muted"
+                                      >/15&deg;</span
+                                    >
+                                  </p>
+                                </td>
+                                <td class="float-right mr-3">
+                                  <i class="fa fa-wind fa-lg amber-text"></i>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="font-weight-normal align-middle">
+                                  Friday
+                                </td>
+                                <td class="float-right font-weight-normal">
+                                  <p class="mb-1">
+                                    26&deg;<span class="text-muted"
+                                      >/19&deg;</span
+                                    >
+                                  </p>
+                                </td>
+                                <td class="float-right mr-3">
+                                  <i class="fas fa-sun fa-lg amber-text"></i>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="font-weight-normal align-middle">
+                                  Saturday
+                                </td>
+                                <td class="float-right font-weight-normal">
+                                  <p class="mb-1">
+                                    20&deg;<span class="text-muted"
+                                      >/16&deg;</span
+                                    >
+                                  </p>
+                                </td>
+                                <td class="float-right mr-3">
+                                  <i class="fa fa-bolt fa-lg text-info"></i>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="font-weight-normal align-middle">
+                                  Sunday
+                                </td>
+                                <td class="float-right font-weight-normal">
+                                  <p class="mb-1">
+                                    22&deg;<span class="text-muted"
+                                      >/13&deg;</span
+                                    >
+                                  </p>
+                                </td>
+                                <td class="float-right mr-3">
+                                  <i class="fa fa-cloud fa-lg text-info"></i>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br />
+            <br />
+            <!-- Card -->
+
+            <script>
+              // fetch("trial_card.html")
+              //   .then((response) => {
+              //     return response.text();
+              //   })
+              //   .then((data) => {
+              //     document.getElementById("trial_cards").innerHTML = data;
+              //   });
+              document.getElementById("trial_cards").style.height =
+                window.innerHeight / 1.25 + "px";
+
+              for (
+                var i = 0;
+                i < document.getElementsByClassName("card-body").length;
+                i++
+              ) {
+                document.getElementsByClassName("card-body")[i].style.padding =
+                  "10px";
+                document.getElementsByClassName("card-text")[i].style.margin =
+                  "0px";
+              }
+            </script>
+            <!-- Trial End -->
+          </div>
+        </div>
       </div>
     </div>
 
@@ -436,103 +816,158 @@
       crossorigin="anonymous"
     ></script>
     <!-- Include js plugin -->
-    <script src="owlcarousel/assets/owl.carousel.js"></script>
     <script src="assets/js/libs/d3.min.js"></script>
     <script src="assets/js/bubble.js"></script>
     <script>
-      $(document).ready(function() {
-        $(".owl-carousel").owlCarousel({
-          loop: true,
-          margin: 10,
-          nav: true,
-          responsive: {
-            0: {
-              items: 1
-            },
-            600: {
-              items: 2
-            },
-            1000: {
-              items: 3
-            }
-          }
-        });
-
-        document.getElementsByClassName("owl-prev")[0].style.outline = "none";
-        document.getElementsByClassName("owl-next")[0].style.outline = "none";
-
-        var dots = (document.getElementsByClassName(
-          "owl-dot"
-        )[0].style.outline = "none");
-
-        for (let index = 0; index < dots.length; index++) {
-          document.getElementsByClassName("owl-dot")[index].style.outline =
-            "none";
+      $(document).ready(function () {
+        if ($("body").height() > $(window).height()) {
+          document.getElementById("myBtn").style.display = "block";
         }
 
         var display, key, plot, text, x;
         x = [
           {
-            name: "alice",
-            count: 60
+            name: "lion",
+            count: 143,
           },
           {
-            name: "little",
-            count: 44
+            name: "fox",
+            count: 130,
           },
           {
-            name: "queen",
-            count: 28
+            name: "ass",
+            count: 119,
           },
           {
-            name: "rabbit",
-            count: 28
+            name: "wolf",
+            count: 105,
           },
           {
-            name: "king",
-            count: 24
+            name: "time",
+            count: 99,
           },
           {
-            name: "voice",
-            count: 19
+            name: "day",
+            count: 78,
           },
           {
-            name: "duchess",
-            count: 18
+            name: "replied",
+            count: 61,
+          },
+          {
+            name: "dog",
+            count: 52,
+          },
+          {
+            name: "eagle",
+            count: 46,
+          },
+          {
+            name: "caught",
+            count: 43,
+          },
+          {
+            name: "friend",
+            count: 43,
+          },
+          {
+            name: "fell",
+            count: 42,
+          },
+          {
+            name: "found",
+            count: 41,
+          },
+          {
+            name: "jupiter",
+            count: 41,
           },
           {
             name: "mouse",
-            count: 18
+            count: 39,
           },
           {
-            name: "white",
-            count: 18
+            name: "stag",
+            count: 39,
           },
           {
-            name: "door",
-            count: 17
-          }
+            name: "little",
+            count: 37,
+          },
+          {
+            name: "master",
+            count: 37,
+          },
+          {
+            name: "cock",
+            count: 34,
+          },
+          {
+            name: "cried",
+            count: 34,
+          },
+          {
+            name: "water",
+            count: 34,
+          },
+          {
+            name: "dont",
+            count: 33,
+          },
+          {
+            name: "farmer",
+            count: 33,
+          },
+          {
+            name: "sheep",
+            count: 32,
+          },
+          {
+            name: "presently",
+            count: 31,
+          },
+          {
+            name: "horse",
+            count: 30,
+          },
+          {
+            name: "life",
+            count: 30,
+          },
+          {
+            name: "set",
+            count: 30,
+          },
+          {
+            name: "hare",
+            count: 29,
+          },
+          {
+            name: "begged",
+            count: 28,
+          },
         ];
         plot = Bubbles();
-        display = function(data) {
+        display = function (data) {
           return plotData("#vis", x, plot);
         };
         key = decodeURIComponent(location.search).replace("?", "");
-        text = texts.filter(function(t) {
+        text = texts.filter(function (t) {
           return t.key === key;
         })[0];
         if (!text) {
           text = texts[0];
         }
         $("#text-select").val(key);
-        d3.select("#jitter").on("input", function() {
+        d3.select("#jitter").on("input", function () {
           return plot.jitter(parseFloat(this.output.value));
         });
-        d3.select("#text-select").on("change", function(e) {
+        d3.select("#text-select").on("change", function (e) {
           key = $(this).val();
           location.replace("#");
           return (location.search = encodeURIComponent(key));
         });
+
         d3.select("#book-title").html(text.name);
         return display();
       });
