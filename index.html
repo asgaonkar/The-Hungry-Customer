@@ -22,9 +22,6 @@
 
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/leaflet.css" />
-
-    <!-- Imports -->
-    <link rel="import" href="trial_card.html" />
   </head>
 
   <body>
@@ -188,16 +185,17 @@
         </nav>
       </div>
     </div>
+
     <div class="container-fluid" style="padding-top: 50px;">
       <div class="row" style="">
         <div
-          class="col-lg-7 text-center"
+          class="col-lg-6 text-center"
           style="margin: auto; overflow: hidden;"
         >
           <!-- Map -->
           <div
             class="row"
-            style="margin-left: 20px; margin-right: 20px; margin-top: 10px;"
+            style="margin-left: 20px; margin-right: 20px; margin-top: 0px;"
           >
             <div id="map"></div>
 
@@ -308,7 +306,7 @@
             <div id="status"></div>
           </div>
         </div>
-        <div class="col-lg-5">
+        <div class="col-lg-6">
           <br />
           <div class="row trial_cards" style="height: auto;">
             <!-- Trial Start -->
@@ -367,7 +365,7 @@
 
               <div class="col-6" id="trial_cards" style="overflow-y: scroll;">
                 <!-- Card  0 -->
-                <div class="row" style="width: 100%;">
+                <div class="row card_container" style="width: 100%;">
                   <div class="card display-card" style="">
                     <img
                       class="card-img-top"
@@ -544,7 +542,7 @@
                 </div>
                 <br />
                 <!-- Card 1 -->
-                <div class="row" style="width: 100%;">
+                <div class="row card_container" style="width: 100%;">
                   <div class="card display-card" style="">
                     <!-- Card 0 -->
                     <img
@@ -720,8 +718,15 @@
                     </div>
                   </div>
                 </div>
+                <br />
               </div>
+              <br />
             </div>
+            <!-- <div class="row" style="width: 100%;">
+              <div class="col-6"></div>
+              <div class="col-6 text-center">Hi</div>
+            </div> -->
+
             <br />
             <br />
             <!-- Card -->
@@ -781,12 +786,14 @@
           document.getElementById("myBtn").style.display = "block";
         }
 
-        var display, key, plot, text, x;
-        x = [
-          {
-            name: "lion",
-            count: 143,
-          },
+        var display,
+          key,
+          plot,
+          text,
+          x,
+          dict = {};
+
+        dict["AZ"] = [
           {
             name: "fox",
             count: 130,
@@ -904,9 +911,36 @@
             count: 28,
           },
         ];
+
+        dict["CA"] = [
+          {
+            name: "lion",
+            count: 143,
+          },
+          {
+            name: "fox",
+            count: 130,
+          },
+          {
+            name: "ass",
+            count: 119,
+          },
+          {
+            name: "wolf",
+            count: 105,
+          },
+          {
+            name: "time",
+            count: 99,
+          },
+        ];
+
+        // x = dict["AZ"];
+        console.log(x);
         plot = Bubbles();
-        display = function (data) {
-          return plotData("#vis", x, plot);
+
+        display = function (state) {
+          return plotData("#vis", dict[state], plot);
         };
         key = decodeURIComponent(location.search).replace("?", "");
         text = texts.filter(function (t) {
@@ -926,7 +960,28 @@
         });
 
         d3.select("#book-title").html(text.name);
-        return display();
+
+        // Call Display
+
+        function call_display(state) {
+          return display(state);
+        }
+
+        call_display("CA");
+        setTimeout(() => {
+          history.pushState(
+            {
+              id: "unselected",
+            },
+            "",
+            "http://127.0.0.1:5500/index.html#"
+          );
+          d3.select("#vis").select("svg").remove();
+          $("#bubble-labels").remove();
+        }, 2000);
+        setTimeout(() => {
+          call_display("AZ");
+        }, 2000);
       });
     </script>
   </body>

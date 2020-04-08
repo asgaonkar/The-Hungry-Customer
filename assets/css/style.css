@@ -6,12 +6,46 @@ body {
 
 .display-card {
   width: 300px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+/*
+ *  STYLE 1
+ */
+
+#trial_cards::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  background-color: #f5f5f5;
 }
 
 #trial_cards::-webkit-scrollbar {
-  width: 0 !important;
-  background: transparent;
+  width: 12px;
+  background-color: #f5f5f5;
+}
+
+#trial_cards::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.25);
+  background-color: #888;
+}
+
+.row {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.card_container {
+  margin-left: 5px;
+}
+
+#trial_cards {
+  border-radius: 0px;
+}
+
+#trial_cards::-webkit-scrollbar {
+  /* width: 0 !important; */
+  /* background: transparent; */
 }
 
 .card-btn {
