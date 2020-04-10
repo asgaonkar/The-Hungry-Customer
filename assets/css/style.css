@@ -4,6 +4,11 @@ body {
   color: #ffc107 !important;
 }
 
+a.restaurant:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .display-card {
   width: 300px;
   box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 20px 0 rgba(0, 0, 0, 0.2);

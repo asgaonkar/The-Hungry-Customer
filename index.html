@@ -81,7 +81,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalCenterTitle">
-              <strong>AusOpen's</strong> - Road to Glory
+              <strong>Hungry Customer</strong> - How-to-Navigate
             </h5>
             <button
               type="button"
@@ -135,6 +135,63 @@
         </div>
       </div>
     </div>
+
+    <!-- Restaurant Modal -->
+    <!-- Button trigger modal -->
+    <button
+      type="button"
+      class="btn btn-primary"
+      style="display: none;"
+      data-toggle="modal"
+      id="btnTrigger1"
+      data-target="#exampleModalCenter1"
+    >
+      Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModalCenter1"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">
+              <strong>Hungry Customer</strong> - Restaurant Data
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="information" style="display: block;">
+              <p>Restaurant Map and Details</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Restaurant Modal -->
+
     <div class="container-fluid" style="margin: 0px; padding: 0px;">
       <div class="bs-example">
         <nav
@@ -286,7 +343,12 @@
                     <div class="card-body">
                       <!-- Title -->
                       <h4 class="card-title font-weight-bold">
-                        <a>1. La Sirena restaurant</a>
+                        <a
+                          class="restaurant"
+                          onclick="$('#btnTrigger1').click();"
+                          id="1"
+                          >1. La Sirena restaurant</a
+                        >
                       </h4>
                       <!-- Data -->
                       <ul class="list-unstyled list-inline rating mb-0">
@@ -704,7 +766,7 @@
           x,
           dict = {};
 
-        dict["AZ"] = [
+        dict["Arizona"] = [
           {
             name: "fox",
             count: 130,
@@ -823,7 +885,7 @@
           },
         ];
 
-        dict["CA"] = [
+        dict["California"] = [
           {
             name: "lion",
             count: 143,
@@ -878,7 +940,7 @@
           return display(state);
         }
 
-        call_display("AZ");
+        call_display("Arizona");
 
         var baseurl = "http://127.0.0.1:5500/";
 
@@ -893,7 +955,7 @@
           );
           d3.select("#vis").select("svg").remove();
           $("#bubble-labels").remove();
-          call_display("CA");
+          call_display(state);
         }
 
         // Map Scripts
@@ -989,7 +1051,7 @@
         function resetHighlight(e) {
           geojson.resetStyle(e.target);
           info.update();
-          console.log(save_layer);
+          // console.log(save_layer);
           if (save_layer) {
             // alert(1);
             save_layer.setStyle({
@@ -1002,13 +1064,14 @@
         }
 
         function state_click(e) {
+          var layer = e.target;
           var x = document.getElementsByClassName("leaflet-zoom-animated")[0];
           var y = x.children,
             path_element;
 
           for (var i = 0; i < y.length; i++) {
             path_element = y[i].children[0].attributes;
-            console.log(path_element);
+            // console.log(path_element);
 
             if (path_element["stroke"].value == "red") {
               geojson.resetStyle(save_layer);
@@ -1026,9 +1089,11 @@
           document.getElementById("selected_state").innerHTML =
             layer.feature.properties.name;
 
+          // console.log(layer.feature.properties.name);
+
           // alert(document.getElementById("selected_state").innerHTML);
           // map.fitBounds(e.target.getBounds());
-          StatePush(1);
+          StatePush(layer.feature.properties.name);
         }
 
         function onEachFeature(feature, layer) {
