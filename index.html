@@ -179,9 +179,14 @@
             </div>
             <!-- Google Map -->
             <div>
-              <a href="https://www.google.com/maps/place/India/" target="blank"
-                >Click</a
+              Click
+              <a
+                href="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=30%20Eglinton%20Avenue%20W%2C%20Mississauga+(Emerald%20Chinese%20Restaurant)"
+                target="blank"
+                style="text-decoration: underline; color: blue;"
+                >Here</a
               >
+              if browser doesnt loads map!
 
               <!-- <div style="width: 100%;">
                 <iframe
@@ -218,11 +223,7 @@
                     src="https://www.google.com/maps/embed/v1/place?q=La+Sirena+Restaurant&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
                   ></iframe>
                 </div>
-                <a
-                  class="googlemap-html"
-                  href="https://www.bootstrapskins.com/themes/opencart"
-                  id="authmap-data"
-                  >best opencart themes</a
+
                 ><style>
                   #googlemaps-canvas img.text-marker {
                     max-width: none !important;
@@ -1043,7 +1044,9 @@
           this._div.innerHTML =
             "<h4>State</h4>" +
             (props
-              ? "Hovered State: <b>" + props.name + "</b><br /><br /<i><strong>*Note: </strong><u>Data Unavailable</i></u><br />"
+              ? "Hovered State: <b>" +
+                props.name +
+                "</b><br /><br /<i><strong>*Note: </strong><u>Data Unavailable</i></u><br />"
               : // props.density +
                 // " people / mi<sup>2</sup>"
                 "Hover over a state");
@@ -1121,8 +1124,7 @@
           }
         }
 
-
-        function resetHighlight_disabled(e){
+        function resetHighlight_disabled(e) {
           info.update_disabled();
         }
 
@@ -1163,7 +1165,7 @@
           StatePush(layer.feature.properties.name);
         }
 
-        function disabled_states_mouseover(e){
+        function disabled_states_mouseover(e) {
           var layer = e.target;
           // console.log(e);
           // layer.setStyle({
