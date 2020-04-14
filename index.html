@@ -177,6 +177,64 @@
             <div id="information" style="display: block;">
               <p>Restaurant Map and Details</p>
             </div>
+            <!-- Google Map -->
+            <div>
+              <a href="https://www.google.com/maps/place/India/" target="blank"
+                >Click</a
+              >
+
+              <!-- <div style="width: 100%;">
+                <iframe
+                  width="100%"
+                  height="600"
+                  src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=30%20Eglinton%20Avenue%20W%2C%20Mississauga+(Emerald%20Chinese%20Restaurant)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"
+                  frameborder="0"
+                  scrolling="no"
+                  marginheight="0"
+                  marginwidth="0"
+                  ><a href="https://www.maps.ie/draw-radius-circle-map/"
+                    >km radius map</a
+                  ></iframe
+                >
+              </div> -->
+              <br />
+              <div
+                style="
+                  max-width: 100%;
+                  list-style: none;
+                  transition: none;
+                  overflow: hidden;
+                  width: 500px;
+                  height: 500px;
+                "
+              >
+                <div
+                  id="googlemaps-canvas"
+                  style="height: 100%; width: 100%; max-width: 100%;"
+                >
+                  <iframe
+                    style="height: 100%; width: 100%; border: 0;"
+                    frameborder="0"
+                    src="https://www.google.com/maps/embed/v1/place?q=La+Sirena+Restaurant&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
+                  ></iframe>
+                </div>
+                <a
+                  class="googlemap-html"
+                  href="https://www.bootstrapskins.com/themes/opencart"
+                  id="authmap-data"
+                  >best opencart themes</a
+                ><style>
+                  #googlemaps-canvas img.text-marker {
+                    max-width: none !important;
+                    background: none !important;
+                  }
+                  img {
+                    max-width: none;
+                  }
+                </style>
+              </div>
+              <br />
+            </div>
           </div>
           <div class="modal-footer">
             <button
@@ -281,7 +339,7 @@
                     style="width: 100%;"
                     id="selected_state"
                   >
-                    California
+                    Arizona
                   </h4>
                   <!-- Stats -->
                   <div class="row" style="">
@@ -940,6 +998,7 @@
           return display(state);
         }
 
+        // Initial Call
         call_display("Arizona");
 
         var baseurl = "http://127.0.0.1:5500/";
@@ -980,25 +1039,21 @@
                 "Hover over a state");
         };
 
+        info.update_disabled = function (props) {
+          this._div.innerHTML =
+            "<h4>State</h4>" +
+            (props
+              ? "Hovered State: <b>" + props.name + "</b><br /><br /<i><strong>*Note: </strong><u>Data Unavailable</i></u><br />"
+              : // props.density +
+                // " people / mi<sup>2</sup>"
+                "Hover over a state");
+        };
+
         info.addTo(map);
 
         // get color depending on population density value
         function getColor(d) {
-          return d > 1000
-            ? "#800026"
-            : d > 500
-            ? "#BD0026"
-            : d > 200
-            ? "#E31A1C"
-            : d > 100
-            ? "#FC4E2A"
-            : d > 50
-            ? "#FD8D3C"
-            : d > 20
-            ? "#FEB24C"
-            : d > 10
-            ? "#FED976"
-            : "#FFEDA0";
+          return d == 100 ? "#B2B2B2" : "#DDDDDD";
         }
 
         function style(feature) {
@@ -1006,13 +1061,15 @@
             weight: 2,
             opacity: 1,
             color: "white",
-            dashArray: "3",
+            dashArray: "4",
             fillOpacity: 0.7,
             fillColor: getColor(feature.properties.density),
           };
         }
 
         var save_layer;
+
+        var disabled_states = ["Texas", "Utah", "Nebraska", "Tennessee"];
 
         function highlightFeature(e) {
           // var x = document.getElementsByClassName("leaflet-zoom-animated")[0];
@@ -1056,24 +1113,34 @@
             // alert(1);
             save_layer.setStyle({
               weight: 5,
-              color: "red",
+              color: boundary_color,
               dashArray: "",
-              fillOpacity: 0.7,
+              fillOpacity: 1,
             });
+            save_layer._path.attributes["fill"].value = "#888888";
           }
         }
 
+
+        function resetHighlight_disabled(e){
+          info.update_disabled();
+        }
+
+        boundary_color = "#666666";
+
         function state_click(e) {
           var layer = e.target;
+          console.log(layer._path.attributes["fill"].value);
+
           var x = document.getElementsByClassName("leaflet-zoom-animated")[0];
           var y = x.children,
             path_element;
 
           for (var i = 0; i < y.length; i++) {
             path_element = y[i].children[0].attributes;
-            // console.log(path_element);
+            console.log(y[i]);
 
-            if (path_element["stroke"].value == "red") {
+            if (path_element["stroke"].value == boundary_color) {
               geojson.resetStyle(save_layer);
             }
           }
@@ -1096,12 +1163,38 @@
           StatePush(layer.feature.properties.name);
         }
 
+        function disabled_states_mouseover(e){
+          var layer = e.target;
+          // console.log(e);
+          // layer.setStyle({
+          //   weight: 5,
+          //   color: "#666",
+          //   dashArray: "",
+          //   fillOpacity: 0.7,
+          // });
+
+          // if (!L.Browser.ie && !L.Browser.opera) {
+          //   layer.bringToFront();
+          // }
+
+          info.update_disabled(layer.feature.properties);
+        }
+
         function onEachFeature(feature, layer) {
-          layer.on({
-            mouseover: highlightFeature,
-            mouseout: resetHighlight,
-            click: state_click,
-          });
+          // console.log(layer.feature.properties.name);
+          if (disabled_states.includes(layer.feature.properties.name)) {
+            //Disabled States
+            layer.on({
+              mouseover: disabled_states_mouseover,
+              mouseout: resetHighlight_disabled,
+            });
+          } else {
+            layer.on({
+              mouseover: highlightFeature,
+              mouseout: resetHighlight,
+              click: state_click,
+            });
+          }
         }
 
         geojson = L.geoJson(statesData, {
