@@ -257,6 +257,7 @@ Bubbles = function () {
     return location.replace("#");
   };
   click = function (d) {
+    console.log("Hi");
     location.replace("#" + encodeURIComponent(idValue(d)));
     return d3.event.preventDefault();
   };
@@ -271,15 +272,12 @@ Bubbles = function () {
     });
     if (id.length > 0) {
       console.log("Selected Word: " + id);
-      // return d3
-      //   .select("#status")
-      //   .html(
-      //     '<h3>The word <span class="active">' +
-      //       id +
-      //       "</span> is now active</h3>"
-      //   );
+      d3.select("#selected_food").html("#" + id + "</h5>");
+
+      update_recommend(id);
+      return;
     } else {
-      // return d3.select("#status").html("<h3>No word is active</h3>");
+      return d3.select("#selected_food").html("");
     }
   };
   mouseover = function (d) {
@@ -348,3 +346,38 @@ texts = [
     name: "Gulliver's Travels",
   },
 ];
+
+function update_recommend(food) {
+  // Trial
+
+  if (food.length) {
+    document.getElementsByClassName("card_container")[0].style.display =
+      "block";
+  }
+
+  var state = document.getElementById("selected_state").innerText;
+  console.log(state, food);
+
+  var card_holder = document.getElementsByClassName("rest_recommend")[0];
+  var card_template = document.getElementsByClassName("card_container")[0]
+    .outerHTML;
+
+  var recommendation_number = 3;
+
+  card_holder.innerHTML = "<br />";
+  card_holder.innerHTML += card_template;
+  card_holder.innerHTML += "<br />";
+
+  if (food.length) {
+    for (var i = 1; i < recommendation_number; i++) {
+      card_holder.innerHTML += card_template;
+      card_holder.innerHTML += "<br />";
+    }
+  }
+  for (var i = 0; i < recommendation_number; i++) {
+    document.getElementsByClassName("restaurant_name")[i].innerHTML =
+      (i + 1).toString() + ". " + recommend[state][food][i + 1];
+  }
+
+  console.log(recommend);
+}
