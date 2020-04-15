@@ -196,7 +196,7 @@
           <!-- Map -->
           <div
             class="row"
-            style="margin-left: 20px; margin-right: 20px; margin-top: 10px;"
+            style="margin-left: 20px; margin-right: 20px; margin-top: 0px;"
           >
             <div id="map"></div>
 
@@ -205,101 +205,6 @@
               type="text/javascript"
               src="assets/js/us-states.js"
             ></script>
-            <script type="text/javascript">
-              var map = L.map("map").setView([37.8, -96], 4);
-
-              // control that shows state info on hover
-              var info = L.control();
-
-              info.onAdd = function (map) {
-                this._div = L.DomUtil.create("div", "info");
-                this.update();
-                return this._div;
-              };
-
-              info.update = function (props) {
-                this._div.innerHTML =
-                  "<h4>State</h4>" +
-                  (props
-                    ? "Current State: <b>" + props.name + "</b><br />"
-                    : // props.density +
-                      // " people / mi<sup>2</sup>"
-                      "Hover over a state");
-              };
-
-              info.addTo(map);
-
-              // get color depending on population density value
-              function getColor(d) {
-                return d > 1000
-                  ? "#800026"
-                  : d > 500
-                  ? "#BD0026"
-                  : d > 200
-                  ? "#E31A1C"
-                  : d > 100
-                  ? "#FC4E2A"
-                  : d > 50
-                  ? "#FD8D3C"
-                  : d > 20
-                  ? "#FEB24C"
-                  : d > 10
-                  ? "#FED976"
-                  : "#FFEDA0";
-              }
-
-              function style(feature) {
-                return {
-                  weight: 2,
-                  opacity: 1,
-                  color: "white",
-                  dashArray: "3",
-                  fillOpacity: 0.7,
-                  fillColor: getColor(feature.properties.density),
-                };
-              }
-
-              function highlightFeature(e) {
-                var layer = e.target;
-
-                layer.setStyle({
-                  weight: 5,
-                  color: "#666",
-                  dashArray: "",
-                  fillOpacity: 0.7,
-                });
-
-                if (!L.Browser.ie && !L.Browser.opera) {
-                  layer.bringToFront();
-                }
-
-                info.update(layer.feature.properties);
-              }
-
-              var geojson;
-
-              function resetHighlight(e) {
-                geojson.resetStyle(e.target);
-                info.update();
-              }
-
-              function zoomToFeature(e) {
-                map.fitBounds(e.target.getBounds());
-              }
-
-              function onEachFeature(feature, layer) {
-                layer.on({
-                  mouseover: highlightFeature,
-                  mouseout: resetHighlight,
-                  // click: zoomToFeature
-                });
-              }
-
-              geojson = L.geoJson(statesData, {
-                style: style,
-                onEachFeature: onEachFeature,
-              }).addTo(map);
-            </script>
           </div>
           <!-- Bubble Cloud -->
           <div class="row">
@@ -308,109 +213,71 @@
           </div>
         </div>
         <div class="col-lg-6">
-          <!-- Stats -->
-          <!-- <div class="row" style="">
-            <div class="bd-example" style="margin-top: 10px;">
-              <blockquote class="blockquote">
-                <p class="mb-0">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Integer posuere erat a ante.
-                </p>
-                <footer class="blockquote-footer">
-                  Someone famous in
-                  <cite title="Source Title">Source Title</cite>
-                </footer>
-              </blockquote>
-              <blockquote class="blockquote">
-                <p class="mb-0">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Integer posuere erat a ante.
-                </p>
-                <footer class="blockquote-footer">
-                  Someone famous in
-                  <cite title="Source Title">Source Title</cite>
-                </footer>
-              </blockquote>
-              <blockquote class="blockquote">
-                <p class="mb-0">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Integer posuere erat a ante.
-                </p>
-                <footer class="blockquote-footer">
-                  Someone famous in
-                  <cite title="Source Title">Source Title</cite>
-                </footer>
-              </blockquote>
-              <blockquote class="blockquote">
-                <p class="mb-0">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Integer posuere erat a ante.
-                </p>
-                <footer class="blockquote-footer">
-                  Someone famous in
-                  <cite title="Source Title">Source Title</cite>
-                </footer>
-              </blockquote>
-            </div>
-          </div> -->
           <br />
-          <div class="row trial_cards" id="trial_cards" style="height: auto;">
+          <div class="row trial_cards" style="height: auto;">
             <!-- Trial Start -->
             <!-- Card -->
-            <div class="row" style="width: 100%; margin-left: 20px;">
-              <div class="col-6" style="padding-right: 10px;">
-                <h3 class="text-center">California</h3>
-                <hr />
-                <!-- Stats -->
-                <div class="row" style="">
-                  <div class="bd-example" style="margin-top: 10px;">
-                    <blockquote class="blockquote">
-                      <p class="mb-0">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Integer posuere erat a ante.
-                      </p>
-                      <footer class="blockquote-footer">
-                        Someone famous in
-                        <cite title="Source Title">Source Title</cite>
-                      </footer>
-                    </blockquote>
-                    <blockquote class="blockquote">
-                      <p class="mb-0">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Integer posuere erat a ante.
-                      </p>
-                      <footer class="blockquote-footer">
-                        Someone famous in
-                        <cite title="Source Title">Source Title</cite>
-                      </footer>
-                    </blockquote>
-                    <blockquote class="blockquote">
-                      <p class="mb-0">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Integer posuere erat a ante.
-                      </p>
-                      <footer class="blockquote-footer">
-                        Someone famous in
-                        <cite title="Source Title">Source Title</cite>
-                      </footer>
-                    </blockquote>
-                    <blockquote class="blockquote">
-                      <p class="mb-0">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Integer posuere erat a ante.
-                      </p>
-                      <footer class="blockquote-footer">
-                        Someone famous in
-                        <cite title="Source Title">Source Title</cite>
-                      </footer>
-                    </blockquote>
+            <div class="row" style="width: 100%;">
+              <div class="col-6">
+                <div class="row" style="width: 100%; padding-left: 10px;">
+                  <h4
+                    class="text-center"
+                    style="width: 100%;"
+                    id="selected_state"
+                  >
+                    California
+                  </h4>
+                  <!-- Stats -->
+                  <div class="row" style="">
+                    <div class="bd-example" style="margin-top: 10px;">
+                      <blockquote class="blockquote">
+                        <p class="mb-0">
+                          Lorem ipsum dolor sit amet, consectetur adipiscing
+                          elit. Integer posuere erat a ante.
+                        </p>
+                        <footer class="blockquote-footer">
+                          Someone famous in
+                          <cite title="Source Title">Source Title</cite>
+                        </footer>
+                      </blockquote>
+                      <blockquote class="blockquote">
+                        <p class="mb-0">
+                          Lorem ipsum dolor sit amet, consectetur adipiscing
+                          elit. Integer posuere erat a ante.
+                        </p>
+                        <footer class="blockquote-footer">
+                          Someone famous in
+                          <cite title="Source Title">Source Title</cite>
+                        </footer>
+                      </blockquote>
+                      <blockquote class="blockquote">
+                        <p class="mb-0">
+                          Lorem ipsum dolor sit amet, consectetur adipiscing
+                          elit. Integer posuere erat a ante.
+                        </p>
+                        <footer class="blockquote-footer">
+                          Someone famous in
+                          <cite title="Source Title">Source Title</cite>
+                        </footer>
+                      </blockquote>
+                      <blockquote class="blockquote">
+                        <p class="mb-0">
+                          Lorem ipsum dolor sit amet, consectetur adipiscing
+                          elit. Integer posuere erat a ante.
+                        </p>
+                        <footer class="blockquote-footer">
+                          Someone famous in
+                          <cite title="Source Title">Source Title</cite>
+                        </footer>
+                      </blockquote>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div class="col-6" style="">
+              <div class="col-6" id="trial_cards" style="overflow-y: scroll;">
                 <!-- Card  0 -->
-                <div class="row" style="width: 100%;">
+                <div class="row card_container" style="width: 100%;">
                   <div class="card display-card" style="">
                     <img
                       class="card-img-top"
@@ -420,7 +287,12 @@
                     <div class="card-body">
                       <!-- Title -->
                       <h4 class="card-title font-weight-bold">
-                        <a>1. La Sirena restaurant</a>
+                        <a
+                          class="restaurant"
+                          onclick="$('#restTrigger').click();"
+                          id="1"
+                          >1. La Sirena restaurant</a
+                        >
                       </h4>
                       <!-- Data -->
                       <ul class="list-unstyled list-inline rating mb-0">
@@ -587,7 +459,7 @@
                 </div>
                 <br />
                 <!-- Card 1 -->
-                <div class="row" style="width: 100%;">
+                <div class="row card_container" style="width: 100%;">
                   <div class="card display-card" style="">
                     <!-- Card 0 -->
                     <img
@@ -763,8 +635,15 @@
                     </div>
                   </div>
                 </div>
+                <br />
               </div>
+              <br />
             </div>
+            <!-- <div class="row" style="width: 100%;">
+              <div class="col-6"></div>
+              <div class="col-6 text-center">Hi</div>
+            </div> -->
+
             <br />
             <br />
             <!-- Card -->
@@ -824,12 +703,14 @@
           document.getElementById("myBtn").style.display = "block";
         }
 
-        var display, key, plot, text, x;
-        x = [
-          {
-            name: "lion",
-            count: 143,
-          },
+        var display,
+          key,
+          plot,
+          text,
+          x,
+          dict = {};
+
+        dict["Arizona"] = [
           {
             name: "fox",
             count: 130,
@@ -947,9 +828,36 @@
             count: 28,
           },
         ];
+
+        dict["California"] = [
+          {
+            name: "lion",
+            count: 143,
+          },
+          {
+            name: "fox",
+            count: 130,
+          },
+          {
+            name: "ass",
+            count: 119,
+          },
+          {
+            name: "wolf",
+            count: 105,
+          },
+          {
+            name: "time",
+            count: 99,
+          },
+        ];
+
+        // x = dict["AZ"];
+        // console.log(x);
         plot = Bubbles();
-        display = function (data) {
-          return plotData("#vis", x, plot);
+
+        display = function (state) {
+          return plotData("#vis", dict[state], plot);
         };
         key = decodeURIComponent(location.search).replace("?", "");
         text = texts.filter(function (t) {
@@ -969,7 +877,181 @@
         });
 
         d3.select("#book-title").html(text.name);
-        return display();
+
+        // Call Display
+
+        function call_display(state) {
+          return display(state);
+        }
+
+        call_display("Arizona");
+
+        var baseurl = "http://127.0.0.1:5500/";
+
+        function StatePush(state) {
+          // alert("State Change");
+          history.pushState(
+            {
+              id: "unselected",
+            },
+            "",
+            baseurl + "index.html"
+          );
+          d3.select("#vis").select("svg").remove();
+          $("#bubble-labels").remove();
+          call_display(state);
+        }
+
+        // Map Scripts
+        var map = L.map("map").setView([37.8, -96], 4);
+
+        // control that shows state info on hover
+        var info = L.control();
+
+        info.onAdd = function (map) {
+          this._div = L.DomUtil.create("div", "info");
+          this.update();
+          return this._div;
+        };
+
+        info.update = function (props) {
+          this._div.innerHTML =
+            "<h4>State</h4>" +
+            (props
+              ? "Hovered State: <b>" + props.name + "</b><br />"
+              : // props.density +
+                // " people / mi<sup>2</sup>"
+                "Hover over a state");
+        };
+
+        info.addTo(map);
+
+        // get color depending on population density value
+        function getColor(d) {
+          return d > 1000
+            ? "#800026"
+            : d > 500
+            ? "#BD0026"
+            : d > 200
+            ? "#E31A1C"
+            : d > 100
+            ? "#FC4E2A"
+            : d > 50
+            ? "#FD8D3C"
+            : d > 20
+            ? "#FEB24C"
+            : d > 10
+            ? "#FED976"
+            : "#FFEDA0";
+        }
+
+        function style(feature) {
+          return {
+            weight: 2,
+            opacity: 1,
+            color: "white",
+            dashArray: "3",
+            fillOpacity: 0.7,
+            fillColor: getColor(feature.properties.density),
+          };
+        }
+
+        var save_layer;
+
+        function highlightFeature(e) {
+          // var x = document.getElementsByClassName("leaflet-zoom-animated")[0];
+          // var y = x.children,
+          //   path_element;
+          // for (var i = 0; i < y.length; i++) {
+          //   // console.log(i);
+          //   path_element = y[i].children[0].attributes;
+          //   console.log(path_element["d"].value);
+
+          //   if (path_element["stroke-width"].value == "5") {
+          //     path_element["stroke-width"].value = "2";
+          //     path_element["stroke-dasharray"].value = "3";
+          //     path_element["stroke"].value = "white";
+          //   }
+          // }
+
+          var layer = e.target;
+          // console.log(e);
+          layer.setStyle({
+            weight: 5,
+            color: "#666",
+            dashArray: "",
+            fillOpacity: 0.7,
+          });
+
+          if (!L.Browser.ie && !L.Browser.opera) {
+            layer.bringToFront();
+          }
+
+          info.update(layer.feature.properties);
+        }
+
+        var geojson;
+
+        function resetHighlight(e) {
+          geojson.resetStyle(e.target);
+          info.update();
+          // console.log(save_layer);
+          if (save_layer) {
+            // alert(1);
+            save_layer.setStyle({
+              weight: 5,
+              color: "red",
+              dashArray: "",
+              fillOpacity: 0.7,
+            });
+          }
+        }
+
+        function state_click(e) {
+          var layer = e.target;
+          var x = document.getElementsByClassName("leaflet-zoom-animated")[0];
+          var y = x.children,
+            path_element;
+
+          for (var i = 0; i < y.length; i++) {
+            path_element = y[i].children[0].attributes;
+            // console.log(path_element);
+
+            if (path_element["stroke"].value == "red") {
+              geojson.resetStyle(save_layer);
+            }
+          }
+
+          if (e.target != save_layer) {
+            save_layer = e.target;
+          }
+          // console.log(save_layer);
+
+          if (!L.Browser.ie && !L.Browser.opera) {
+            layer.bringToFront();
+          }
+          document.getElementById("selected_state").innerHTML =
+            layer.feature.properties.name;
+
+          // console.log(layer.feature.properties.name);
+
+          // alert(document.getElementById("selected_state").innerHTML);
+          // map.fitBounds(e.target.getBounds());
+          StatePush(layer.feature.properties.name);
+        }
+
+        function onEachFeature(feature, layer) {
+          layer.on({
+            mouseover: highlightFeature,
+            mouseout: resetHighlight,
+            click: state_click,
+          });
+        }
+
+        geojson = L.geoJson(statesData, {
+          style: style,
+          onEachFeature: onEachFeature,
+        }).addTo(map);
       });
     </script>
   </body>

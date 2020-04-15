@@ -18,6 +18,10 @@
   background-color: #555;
 }
 
+div.modal {
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
 #myBtn1 {
   display: block;
   position: fixed;
