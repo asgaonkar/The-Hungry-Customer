@@ -3,6 +3,7 @@
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
+
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -22,6 +23,9 @@
 
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/leaflet.css" />
+    <script>
+      var baseurl = "http://127.0.0.1:5500/";
+    </script>
   </head>
 
   <body>
@@ -333,7 +337,7 @@
             <!-- Trial Start -->
             <!-- Card -->
             <div class="row" style="width: 100%;">
-              <div class="col-6">
+              <div class="col-lg-6 col-sm-12">
                 <div class="row" style="width: 100%; padding-left: 10px;">
                   <h4
                     class="text-center"
@@ -407,7 +411,7 @@
               <script src="restaurant.js"></script>
 
               <div
-                class="col-6 rest_recommend"
+                class="col-lg-6 col-sm-12 rest_recommend"
                 id="trial_cards"
                 style="overflow-y: scroll;"
               >
@@ -675,30 +679,33 @@
 
         // x = dict["AZ"];
         // console.log(x);
-        plot = Bubbles();
 
-        display = function (state) {
-          return plotData("#vis", dict[state], plot);
-        };
-        key = decodeURIComponent(location.search).replace("?", "");
-        text = texts.filter(function (t) {
-          return t.key === key;
-        })[0];
-        if (!text) {
-          text = texts[0];
+        function Bubble_Call() {
+          plot = Bubbles();
+
+          display = function (state) {
+            return plotData("#vis", dict[state], plot);
+          };
+          key = decodeURIComponent(location.search).replace("?", "");
+          text = texts.filter(function (t) {
+            return t.key === key;
+          })[0];
+          if (!text) {
+            text = texts[0];
+          }
+          $("#text-select").val(key);
+          d3.select("#jitter").on("input", function () {
+            return plot.jitter(parseFloat(this.output.value));
+          });
+          d3.select("#text-select").on("change", function (e) {
+            key = $(this).val();
+
+            location.replace("#");
+            return (location.search = encodeURIComponent(key));
+          });
+
+          d3.select("#book-title").html(text.name);
         }
-        $("#text-select").val(key);
-        d3.select("#jitter").on("input", function () {
-          return plot.jitter(parseFloat(this.output.value));
-        });
-        d3.select("#text-select").on("change", function (e) {
-          key = $(this).val();
-
-          location.replace("#");
-          return (location.search = encodeURIComponent(key));
-        });
-
-        d3.select("#book-title").html(text.name);
 
         // Call Display
 
@@ -707,9 +714,8 @@
         }
 
         // Initial Call
+        Bubble_Call();
         // call_display("Arizona");
-
-        var baseurl = "http://127.0.0.1:5500/";
 
         function StatePush(state) {
           // alert("State Change");
@@ -737,6 +743,7 @@
         }
 
         // Map Scripts
+
         var map = L.map("map").setView([37.8, -96], 4);
 
         // control that shows state info on hover

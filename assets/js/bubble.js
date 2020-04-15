@@ -257,7 +257,6 @@ Bubbles = function () {
     return location.replace("#");
   };
   click = function (d) {
-    console.log("Hi");
     location.replace("#" + encodeURIComponent(idValue(d)));
     return d3.event.preventDefault();
   };
