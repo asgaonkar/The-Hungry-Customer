@@ -42,8 +42,8 @@ Bubbles = function () {
     maxRadius = window.innerWidth / 30;
   } else {
     calculated_width = window.innerWidth;
-    calculated_height = window.innerHeight - 100;
-    maxRadius = window.innerWidth / 15;
+    calculated_height = window.innerHeight - 200;
+    maxRadius = window.innerWidth / 12;
   }
   width = calculated_width;
   height = calculated_height;
