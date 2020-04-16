@@ -42,8 +42,8 @@ Bubbles = function () {
     maxRadius = window.innerWidth / 30;
   } else {
     calculated_width = window.innerWidth;
-    calculated_height = window.innerHeight - 100;
-    maxRadius = window.innerWidth / 15;
+    calculated_height = window.innerHeight - 200;
+    maxRadius = window.innerWidth / 12;
   }
   width = calculated_width;
   height = calculated_height;
@@ -270,7 +270,7 @@ Bubbles = function () {
       return id === idValue(d);
     });
     if (id.length > 0) {
-      console.log("Selected Word: " + id);
+      // console.log("Selected Word: " + id);
       d3.select("#selected_food").html("#" + id + "</h5>");
 
       update_recommend(id);
@@ -355,7 +355,7 @@ function update_recommend(food) {
   }
 
   var state = document.getElementById("selected_state").innerText;
-  console.log(state, food);
+  // console.log(state, food);
 
   var card_holder = document.getElementsByClassName("rest_recommend")[0];
   var card_template = document.getElementsByClassName("card_container")[0]
@@ -374,9 +374,13 @@ function update_recommend(food) {
     }
   }
   for (var i = 0; i < recommendation_number; i++) {
+
+   
+
     document.getElementsByClassName("restaurant_name")[i].innerHTML =
       (i + 1).toString() + ". " + recommend[state][food][i + 1];
+      console.log((i+1).toString())
   }
 
-  console.log(recommend);
+  // console.log(recommend);
 }

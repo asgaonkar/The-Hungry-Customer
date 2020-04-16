@@ -4787,7 +4787,7 @@
         return (
           (this._map = t),
           (this._zoomInButton = this._createButton(
-            "+",
+            "<i class='fa fa-plus' style='font-size: 1rem;'></i>",
             "Zoom in",
             e + "-in " + o + " " + o + "-top",
             s,
@@ -4795,11 +4795,19 @@
             this
           )),
           (this._zoomOutButton = this._createButton(
-            "-",
+            "<i class='fa fa-minus' style='font-size: 1rem;'></i>",
             "Zoom out",
-            e + "-out " + o + " " + o + "-bottom",
+            e + "-out " + o + " " + o + "-middle",
             s,
             this._zoomOut,
+            this
+          )),
+          (this._zoomOutButton = this._createButton(
+            "<i class='fa fa-undo' style='font-size: 1rem;'></i>",
+            "Reset",
+            e + "-out " + o + " " + o + "-bottom reset",
+            s,
+            // this._zoomOut,
             this
           )),
           t.on("zoomend", this._updateDisabled, this),

@@ -24,7 +24,8 @@
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/leaflet.css" />
     <script>
-      var baseurl = "https://asgaonkar.github.io/The-Hungry-Customer/";
+      // var baseurl = "https://asgaonkar.github.io/The-Hungry-Customer/";
+      var baseurl = "http://127.0.0.1:5500/";
       // Change the base URL
     </script>
   </head>
@@ -193,20 +194,7 @@
               >
               if browser doesnt loads map!
 
-              <!-- <div style="width: 100%;">
-                <iframe
-                  width="100%"
-                  height="600"
-                  src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=30%20Eglinton%20Avenue%20W%2C%20Mississauga+(Emerald%20Chinese%20Restaurant)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"
-                  frameborder="0"
-                  scrolling="no"
-                  marginheight="0"
-                  marginwidth="0"
-                  ><a href="https://www.maps.ie/draw-radius-circle-map/"
-                    >km radius map</a
-                  ></iframe
-                >
-              </div> -->
+             
               <br />
               <div
                 style="
@@ -228,16 +216,6 @@
                     src="https://www.google.com/maps/embed/v1/place?q=La+Sirena+Restaurant&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
                   ></iframe>
                 </div>
-
-                ><style>
-                  /* #googlemaps-canvas img.text-marker {
-                    max-width: none !important;
-                    background: none !important;
-                  }
-                  img {
-                    max-width: none;
-                  } */
-                </style>
               </div>
               <br />
             </div>
@@ -285,21 +263,6 @@
               <a href="#" class="nav-item nav-link">Messages</a>
             </div>
             <div class="navbar-nav ml-auto">
-              <!-- <form class="form-inline">
-                <div class="input-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Search"
-                    style="outline: none;"
-                  />
-                  <div class="input-group-append">
-                    <button type="button" class="btn btn-secondary">
-                      <i class="fa fa-search"></i>
-                    </button>
-                  </div>
-                </div>
-              </form> -->
               <a href="#" class="nav-item nav-link">Contact Us</a>
             </div>
           </div>
@@ -324,6 +287,10 @@
             <script
               type="text/javascript"
               src="assets/js/us-states.js"
+            ></script>
+            <script
+              type="text/javascript"
+              src="assets/js/us-states-disabled.js"
             ></script>
           </div>
           <!-- Bubble Cloud -->
@@ -412,222 +379,231 @@
               <script src="restaurant.js"></script>
 
               <div
-                class="col-lg-6 col-sm-12 rest_recommend"
+                class="col-lg-6 col-sm-12"
                 id="trial_cards"
                 style="overflow-y: scroll;"
               >
-                <!-- Card  0 -->
-                <br />
-                <div
-                  class="row card_container"
-                  style="width: 100%; display: none;"
-                >
-                  <div class="card display-card">
-                    <img
-                      class="card-img-top"
-                      src="https://mdbootstrap.com/img/Photos/Horizontal/Food/8-col/img(5).jpg"
-                      alt="Card image cap"
-                    />
-                    <div class="card-body">
-                      <!-- Title -->
-                      <h4 class="card-title font-weight-bold">
-                        <a
-                          class="restaurant restaurant_name"
-                          onclick="$('#btnTrigger1').click();"
-                          id="1"
-                          >1. La Sirena restaurant</a
-                        >
-                      </h4>
-                      <!-- Data -->
-                      <ul class="list-unstyled list-inline rating mb-0">
-                        <li class="list-inline-item mr-0">
-                          <i class="fa fa-star amber-text"> </i>
-                        </li>
-                        <li class="list-inline-item mr-0">
-                          <i class="fa fa-star amber-text"></i>
-                        </li>
-                        <li class="list-inline-item mr-0">
-                          <i class="fa fa-star amber-text"></i>
-                        </li>
-                        <li class="list-inline-item mr-0">
-                          <i class="fa fa-star amber-text"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fa fa-star-half amber-text"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <p class="text-muted" id="star_rating_number">
-                            4.5 (413)
+                <div class="row" style="width: 100%;">
+                  <div class="col-sm-2 col-md-3"></div>
+                  <div class="col-lg-12 col-sm-8 col-md-6 rest_recommend">
+                    <!-- Card  0 -->
+                    <br />
+                    <div
+                      class="row card_container"
+                      style="width: 100%; display: none;"
+                    >
+                      <div class="card display-card" style="width: 100%;">
+                        <img
+                          class="card-img-top"
+                          src="https://mdbootstrap.com/img/Photos/Horizontal/Food/8-col/img(5).jpg"
+                          alt="Card image cap"
+                        />
+                        <div class="card-body">
+                          <!-- Title -->
+                          <h4 class="card-title font-weight-bold">
+                            <a
+                              class="restaurant restaurant_name"
+                              onclick="$('#btnTrigger1').click();"
+                              id="1"
+                              >1. La Sirena restaurant</a
+                            >
+                          </h4>
+                          <!-- Data -->
+                          <ul class="list-unstyled list-inline rating mb-0">
+                            <li class="list-inline-item mr-0">
+                              <i class="fa fa-star amber-text"> </i>
+                            </li>
+                            <li class="list-inline-item mr-0">
+                              <i class="fa fa-star amber-text"></i>
+                            </li>
+                            <li class="list-inline-item mr-0">
+                              <i class="fa fa-star amber-text"></i>
+                            </li>
+                            <li class="list-inline-item mr-0">
+                              <i class="fa fa-star amber-text"></i>
+                            </li>
+                            <li class="list-inline-item">
+                              <i class="fa fa-star-half amber-text"></i>
+                            </li>
+                            <li class="list-inline-item">
+                              <p class="text-muted" id="star_rating_number">
+                                4.5 (413)
+                              </p>
+                            </li>
+                          </ul>
+                          <p class="mb-2" id="">
+                            Type: American, Restaurant
                           </p>
-                        </li>
-                      </ul>
-                      <p class="mb-2" id="">
-                        Type: American, Restaurant
-                      </p>
-                      <hr class="my-2" />
-                      <!-- Text -->
-                      <p class="card-text">
-                        <strong>Cuisine Available: </strong>
-                      </p>
-                      <p class="card-text cuisine"></p>
+                          <hr class="my-2" />
+                          <!-- Text -->
+                          <p class="card-text">
+                            <strong>Cuisine Available: </strong>
+                          </p>
+                          <p class="card-text cuisine"></p>
 
-                      <a
-                        class="btn btn-flat red-text p-1 my-3 mr-4 mml-1 deep-purple-text collapsed"
-                        data-toggle="collapse"
-                        href="#collapseExample"
-                        aria-expanded="false"
-                        aria-controls="collapseExample"
-                        style="background-color: #38acec;"
-                        >Read More
-                        <i class="fa fa-angle-down" aria-hidden="true"></i
-                      ></a>
-                      <a
-                        class="btn btn-flat red-text p-1 my-3 mr-4 mml-1 deep-purple-text collapsed"
-                        data-toggle="collapse"
-                        href=""
-                        style="background-color: #38acec;"
-                        >Maps <i class="fas fa-map-marker-alt"></i
-                      ></a>
+                          <a
+                            class="btn btn-flat red-text p-1 my-3 mr-4 mml-1 deep-purple-text collapsed"
+                            data-toggle="collapse"
+                            href="#collapseExample"
+                            aria-expanded="false"
+                            aria-controls="collapseExample"
+                            style="background-color: #38acec;"
+                            >Read More
+                            <i class="fa fa-angle-down" aria-hidden="true"></i
+                          ></a>
+                          <a
+                            class="btn btn-flat red-text p-1 my-3 mr-4 mml-1 deep-purple-text collapsed"
+                            data-toggle="collapse"
+                            href=""
+                            style="background-color: #38acec;"
+                            >Maps <i class="fas fa-map-marker-alt"></i
+                          ></a>
 
-                      <div class="collapse-content">
-                        <div class="collapse" id="collapseExample">
-                          <h5>Timing</h5>
-                          <table class="table table-borderless table-sm mb-0">
-                            <tbody>
-                              <tr>
-                                <td class="font-weight-normal align-middle">
-                                  Monday
-                                </td>
-                                <td class="float-right font-weight-normal">
-                                  <p class="mb-1">
-                                    24&deg;<span class="text-muted"
-                                      >/12&deg;</span
-                                    >
-                                  </p>
-                                </td>
-                                <td class="float-right mr-3">
-                                  <i class="fas fa-sun fa-lg amber-text"></i>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td class="font-weight-normal align-middle">
-                                  Tuesday
-                                </td>
-                                <td class="float-right font-weight-normal">
-                                  <p class="mb-1">
-                                    24&deg;<span class="text-muted"
-                                      >/12&deg;</span
-                                    >
-                                  </p>
-                                </td>
-                                <td class="float-right mr-3">
-                                  <i class="fas fa-sun fa-lg amber-text"></i>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td class="font-weight-normal align-middle">
-                                  Wednesday
-                                </td>
-                                <td class="float-right font-weight-normal">
-                                  <p class="mb-1">
-                                    19&deg;<span class="text-muted"
-                                      >/10&deg;</span
-                                    >
-                                  </p>
-                                </td>
-                                <td class="float-right mr-3">
-                                  <i class="fas fa-cloud-showers-heavy"></i>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td class="font-weight-normal align-middle">
-                                  Thursday
-                                </td>
-                                <td class="float-right font-weight-normal">
-                                  <p class="mb-1">
-                                    23&deg;<span class="text-muted"
-                                      >/15&deg;</span
-                                    >
-                                  </p>
-                                </td>
-                                <td class="float-right mr-3">
-                                  <i class="fa fa-wind fa-lg amber-text"></i>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td class="font-weight-normal align-middle">
-                                  Friday
-                                </td>
-                                <td class="float-right font-weight-normal">
-                                  <p class="mb-1">
-                                    26&deg;<span class="text-muted"
-                                      >/19&deg;</span
-                                    >
-                                  </p>
-                                </td>
-                                <td class="float-right mr-3">
-                                  <i class="fas fa-sun fa-lg amber-text"></i>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td class="font-weight-normal align-middle">
-                                  Saturday
-                                </td>
-                                <td class="float-right font-weight-normal">
-                                  <p class="mb-1">
-                                    20&deg;<span class="text-muted"
-                                      >/16&deg;</span
-                                    >
-                                  </p>
-                                </td>
-                                <td class="float-right mr-3">
-                                  <i class="fa fa-bolt fa-lg text-info"></i>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td class="font-weight-normal align-middle">
-                                  Sunday
-                                </td>
-                                <td class="float-right font-weight-normal">
-                                  <p class="mb-1">
-                                    22&deg;<span class="text-muted"
-                                      >/13&deg;</span
-                                    >
-                                  </p>
-                                </td>
-                                <td class="float-right mr-3">
-                                  <i class="fa fa-cloud fa-lg text-info"></i>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
+                          <div class="collapse-content">
+                            <div class="collapse" id="collapseExample">
+                              <h5>Timing</h5>
+                              <table
+                                class="table table-borderless table-sm mb-0"
+                              >
+                                <tbody>
+                                  <tr>
+                                    <td class="font-weight-normal align-middle">
+                                      Monday
+                                    </td>
+                                    <td class="float-right font-weight-normal">
+                                      <p class="mb-1">
+                                        24&deg;<span class="text-muted"
+                                          >/12&deg;</span
+                                        >
+                                      </p>
+                                    </td>
+                                    <td class="float-right mr-3">
+                                      <i
+                                        class="fas fa-sun fa-lg amber-text"
+                                      ></i>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td class="font-weight-normal align-middle">
+                                      Tuesday
+                                    </td>
+                                    <td class="float-right font-weight-normal">
+                                      <p class="mb-1">
+                                        24&deg;<span class="text-muted"
+                                          >/12&deg;</span
+                                        >
+                                      </p>
+                                    </td>
+                                    <td class="float-right mr-3">
+                                      <i
+                                        class="fas fa-sun fa-lg amber-text"
+                                      ></i>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td class="font-weight-normal align-middle">
+                                      Wednesday
+                                    </td>
+                                    <td class="float-right font-weight-normal">
+                                      <p class="mb-1">
+                                        19&deg;<span class="text-muted"
+                                          >/10&deg;</span
+                                        >
+                                      </p>
+                                    </td>
+                                    <td class="float-right mr-3">
+                                      <i class="fas fa-cloud-showers-heavy"></i>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td class="font-weight-normal align-middle">
+                                      Thursday
+                                    </td>
+                                    <td class="float-right font-weight-normal">
+                                      <p class="mb-1">
+                                        23&deg;<span class="text-muted"
+                                          >/15&deg;</span
+                                        >
+                                      </p>
+                                    </td>
+                                    <td class="float-right mr-3">
+                                      <i
+                                        class="fa fa-wind fa-lg amber-text"
+                                      ></i>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td class="font-weight-normal align-middle">
+                                      Friday
+                                    </td>
+                                    <td class="float-right font-weight-normal">
+                                      <p class="mb-1">
+                                        26&deg;<span class="text-muted"
+                                          >/19&deg;</span
+                                        >
+                                      </p>
+                                    </td>
+                                    <td class="float-right mr-3">
+                                      <i
+                                        class="fas fa-sun fa-lg amber-text"
+                                      ></i>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td class="font-weight-normal align-middle">
+                                      Saturday
+                                    </td>
+                                    <td class="float-right font-weight-normal">
+                                      <p class="mb-1">
+                                        20&deg;<span class="text-muted"
+                                          >/16&deg;</span
+                                        >
+                                      </p>
+                                    </td>
+                                    <td class="float-right mr-3">
+                                      <i class="fa fa-bolt fa-lg text-info"></i>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td class="font-weight-normal align-middle">
+                                      Sunday
+                                    </td>
+                                    <td class="float-right font-weight-normal">
+                                      <p class="mb-1">
+                                        22&deg;<span class="text-muted"
+                                          >/13&deg;</span
+                                        >
+                                      </p>
+                                    </td>
+                                    <td class="float-right mr-3">
+                                      <i
+                                        class="fa fa-cloud fa-lg text-info"
+                                      ></i>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
+                    <br />
                   </div>
+                  <div class="col-sm-2 col-md-3"></div>
                 </div>
-                <br />
               </div>
 
               <br />
             </div>
-            <!-- <div class="row" style="width: 100%;">
-              <div class="col-6"></div>
-              <div class="col-6 text-center">Hi</div>
-            </div> -->
+            
 
             <br />
             <br />
             <!-- Card -->
 
             <script>
-              // fetch("trial_card.html")
-              //   .then((response) => {
-              //     return response.text();
-              //   })
-              //   .then((data) => {
-              //     document.getElementById("trial_cards").innerHTML = data;
-              //   });
+            
               document.getElementById("trial_cards").style.height =
                 window.innerHeight / 1.25 + "px";
 
@@ -652,11 +628,7 @@
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- <script
-      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-      crossorigin="anonymous"
-    ></script> -->
+    
     <script
       src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
       integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
@@ -678,9 +650,6 @@
         }
 
         var display, key, plot, text, x;
-
-        // x = dict["AZ"];
-        // console.log(x);
 
         function Bubble_Call() {
           plot = Bubbles();
@@ -746,7 +715,14 @@
 
         // Map Scripts
 
-        var map = L.map("map").setView([37.8, -96], 4);
+        var map;
+
+        if (window.innerWidth < 768) {
+          map = L.map("map").setView([37.8, -96], 3.25);
+        } else {
+          map = L.map("map").setView([37.8, -96], 4);
+        }
+
 
         // control that shows state info on hover
         var info = L.control();
@@ -801,21 +777,13 @@
 
         var disabled_states = ["Texas", "Utah", "Nebraska", "Tennessee"];
 
-        function highlightFeature(e) {
-          // var x = document.getElementsByClassName("leaflet-zoom-animated")[0];
-          // var y = x.children,
-          //   path_element;
-          // for (var i = 0; i < y.length; i++) {
-          //   // console.log(i);
-          //   path_element = y[i].children[0].attributes;
-          //   console.log(path_element["d"].value);
+        Texas.addTo(map);
+        Utah.addTo(map);
+        Nebraska.addTo(map);
+        Tennessee.addTo(map);
 
-          //   if (path_element["stroke-width"].value == "5") {
-          //     path_element["stroke-width"].value = "2";
-          //     path_element["stroke-dasharray"].value = "3";
-          //     path_element["stroke"].value = "white";
-          //   }
-          // }
+
+        function highlightFeature(e) {
 
           var layer = e.target;
           // console.log(e);
@@ -937,6 +905,15 @@
         // console.log(
         //   document.getElementsByClassName("card_container")[0].outerHTML
         // );
+
+        $(".reset").on("click", function () {
+          if (window.innerWidth < 768) {
+            map.setView([37.8, -96], 3.25);
+          } else {
+            map.setView([37.8, -96], 4);
+          }
+          
+        });
       });
     </script>
   </body>
