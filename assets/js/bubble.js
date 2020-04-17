@@ -352,6 +352,9 @@ function update_recommend(food) {
   if (food.length) {
     document.getElementsByClassName("card_container")[0].style.display =
       "block";
+    document.getElementsByClassName("food_details")[0].style.display = "block";
+    document.getElementsByClassName("restaurant_details")[0].style.display =
+      "block";
   }
 
   var state = document.getElementById("selected_state").innerText;
@@ -373,14 +376,61 @@ function update_recommend(food) {
       card_holder.innerHTML += "<br />";
     }
   }
-  for (var i = 0; i < recommendation_number; i++) {
+  var current_business,
+    categories,
+    tags = "";
 
-   
+  var full_star =
+    '<li class="list-inline-item mr-0"><i class="fa fa-star amber-text"></i></li>';
+  var half_star =
+    '<li class="list-inline-item mr-0"><i class="fa fa-star-half amber-text"></i></li>';
+
+  var pre_star_list;
+
+  for (var i = 0; i < recommendation_number; i++) {
+    // console.log(i);
+    current_business = business[recommend[state][food][i + 1]];
+
+    pre_star_list = document.getElementsByClassName("restaurant_stars_list")[i]
+      .innerHTML;
+
+    // console.log(current_business.stars == Math.floor(current_business.stars));
+    document.getElementsByClassName("restaurant_stars_list")[i].innerHTML = "";
+    for (
+      var i_star = 0;
+      i_star < Math.floor(current_business.stars);
+      i_star++
+    ) {
+      document.getElementsByClassName("restaurant_stars_list")[
+        i
+      ].innerHTML += full_star;
+    }
+
+    if (current_business.stars != Math.floor(current_business.stars)) {
+      document.getElementsByClassName("restaurant_stars_list")[
+        i
+      ].innerHTML += half_star;
+    }
+    document.getElementsByClassName("restaurant_stars_list")[
+      i
+    ].innerHTML += pre_star_list;
 
     document.getElementsByClassName("restaurant_name")[i].innerHTML =
-      (i + 1).toString() + ". " + recommend[state][food][i + 1];
-      console.log((i+1).toString())
-  }
+      (i + 1).toString() + ". " + current_business.name;
 
-  // console.log(recommend);
+    document.getElementsByClassName("star_rating_number")[i].innerHTML =
+      "<strong>" + current_business.stars + "</strong>";
+    document.getElementsByClassName("review_count")[i].innerHTML =
+      "Review Count: <strong>" + current_business.review_count + "</strong>";
+
+    categories = current_business.categories.split(";");
+    tags = "";
+    for (var k = 0; k < categories.length; k++) {
+      tags += "#" + categories[k] + " ";
+    }
+    // console.log(tags);
+    document.getElementsByClassName("cuisine_tags")[i].innerHTML =
+      "<strong>" + tags + "</strong>";
+    // console.log(document.getElementsByClassName("cuisine_tags")[i]);
+  }
 }
