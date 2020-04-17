@@ -439,22 +439,130 @@ function update_recommend(food) {
       "restaurant_select_" + (i + 1);
     document.getElementsByClassName("read_more")[i].id = "read_more_" + (i + 1);
   }
+
+  var get_rest_id, get_selected_food, get_selected_state;
+  var pre_query_string = "https://www.google.com/maps/embed/v1/place?q==",
+    key = "AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8";
+  var pre_query_string_link =
+    "https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=";
+  var full_address_frame, full_address_link;
+
   $("button.map_call").click(function () {
     // var class_names = $(this).attr("class").split(" ");
     console.log($(this));
-    console.log(document.getElementsByClassName("map_frame"));
-    console.log(document.getElementsByClassName("map_link"));
+    console.log(
+      document.getElementsByClassName("map_frame")[0].getAttribute("src")
+    );
+    console.log(
+      document.getElementsByClassName("map_link")[0].getAttribute("href")
+    );
+
+    get_rest_id = $(this).attr("id").split("_");
+    get_rest_id = get_rest_id[get_rest_id.length - 1];
+
+    get_selected_food = document
+      .getElementById("selected_food")
+      .innerHTML.substring(1);
+    get_selected_state = document.getElementById("selected_state").innerHTML;
+
+    console.log(
+      business[recommend[get_selected_state][get_selected_food][get_rest_id]]
+    );
+
+    full_address_frame =
+      business[recommend[get_selected_state][get_selected_food][get_rest_id]]
+        .name +
+      " " +
+      business[recommend[get_selected_state][get_selected_food][get_rest_id]]
+        .address +
+      " " +
+      business[recommend[get_selected_state][get_selected_food][get_rest_id]]
+        .city;
+
+    full_address_link =
+      pre_query_string_link +
+      encodeURI(
+        business[recommend[get_selected_state][get_selected_food][get_rest_id]]
+          .address +
+          " " +
+          business[
+            recommend[get_selected_state][get_selected_food][get_rest_id]
+          ].city
+      ) +
+      "+(" +
+      encodeURI(
+        business[recommend[get_selected_state][get_selected_food][get_rest_id]]
+          .name
+      ) +
+      ")";
+
+    document
+      .getElementsByClassName("map_link")[0]
+      .setAttribute("href", full_address_link);
+
+    full_address_frame = full_address_frame.split(" ").join("+");
+
+    full_address_frame = pre_query_string + full_address_frame + "&key=" + key;
+    console.log(full_address_frame);
+    console.log(full_address_link);
+
+    document
+      .getElementsByClassName("map_frame")[0]
+      .setAttribute("src", full_address_frame);
+
+    $("#btnTrigger1").click();
   });
 
   $("button.restaurant_select").click(function () {
     // var class_names = $(this).attr("class").split(" ");
-    console.log($(this));
-    console.log(document.getElementsByClassName("monday"));
-    console.log(document.getElementsByClassName("tuesday"));
-    console.log(document.getElementsByClassName("wednesday"));
-    console.log(document.getElementsByClassName("thursday"));
-    console.log(document.getElementsByClassName("friday"));
-    console.log(document.getElementsByClassName("saturday"));
-    console.log(document.getElementsByClassName("sunday"));
+    // console.log($(this));
+    // console.log(document.getElementsByClassName("monday")[0]);
+    // console.log(document.getElementsByClassName("tuesday")[0]);
+    // console.log(document.getElementsByClassName("wednesday")[0]);
+    // console.log(document.getElementsByClassName("thursday")[0]);
+    // console.log(document.getElementsByClassName("friday")[0]);
+    // console.log(document.getElementsByClassName("saturday")[0]);
+    // console.log(document.getElementsByClassName("sunday")[0]);
+
+    get_rest_id = $(this).attr("id").split("_");
+    get_rest_id = get_rest_id[get_rest_id.length - 1];
+
+    get_selected_food = document
+      .getElementById("selected_food")
+      .innerHTML.substring(1);
+    get_selected_state = document.getElementById("selected_state").innerHTML;
+
+    // console.log(get_rest_id, get_selected_state, get_selected_food);
+
+    // console.log(document.getElementsByClassName("monday")[0].innerHTML);
+
+    document.getElementsByClassName("monday")[0].innerHTML =
+      hours[
+        recommend[get_selected_state][get_selected_food][get_rest_id]
+      ].monday;
+    document.getElementsByClassName("tuesday")[0].innerHTML =
+      hours[
+        recommend[get_selected_state][get_selected_food][get_rest_id]
+      ].tuesday;
+    document.getElementsByClassName("wednesday")[0].innerHTML =
+      hours[
+        recommend[get_selected_state][get_selected_food][get_rest_id]
+      ].wednesday;
+    document.getElementsByClassName("thursday")[0].innerHTML =
+      hours[
+        recommend[get_selected_state][get_selected_food][get_rest_id]
+      ].thursday;
+    document.getElementsByClassName("friday")[0].innerHTML =
+      hours[
+        recommend[get_selected_state][get_selected_food][get_rest_id]
+      ].friday;
+    document.getElementsByClassName("saturday")[0].innerHTML =
+      hours[
+        recommend[get_selected_state][get_selected_food][get_rest_id]
+      ].saturday;
+    document.getElementsByClassName("sunday")[0].innerHTML =
+      hours[
+        recommend[get_selected_state][get_selected_food][get_rest_id]
+      ].sunday;
   });
 }

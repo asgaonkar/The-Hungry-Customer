@@ -362,114 +362,41 @@
 
                       <div class="restaurant_details" style="display: none;">
                         <div class="" id="">
-                          <u><h5>Timing</h5></u>
-
-                          <table class="table table-borderless table-sm mb-0">
+                          <table class="table">
+                            <thead style="border-bottom: 0px !important;">
+                              <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Open - Close</th>
+                              </tr>
+                            </thead>
                             <tbody>
                               <tr>
-                                <td class="font-weight-normal align-middle">
-                                  Monday
-                                </td>
-                                <td class="float-right font-weight-normal">
-                                  <p class="mb-1 monday">
-                                    24&deg;<span class="text-muted"
-                                      >/12&deg;</span
-                                    >
-                                  </p>
-                                </td>
-                                <td class="float-right mr-3">
-                                  <i class="fas fa-sun fa-lg amber-text"></i>
-                                </td>
+                                <th scope="row">Monday</th>
+                                <td class="monday"></td>
                               </tr>
                               <tr>
-                                <td class="font-weight-normal align-middle">
-                                  Tuesday
-                                </td>
-                                <td class="float-right font-weight-normal">
-                                  <p class="mb-1 tuesday">
-                                    24&deg;<span class="text-muted"
-                                      >/12&deg;</span
-                                    >
-                                  </p>
-                                </td>
-                                <td class="float-right mr-3">
-                                  <i class="fas fa-sun fa-lg amber-text"></i>
-                                </td>
+                                <th scope="row">Tuesday</th>
+                                <td class="tuesday"></td>
                               </tr>
                               <tr>
-                                <td class="font-weight-normal align-middle">
-                                  Wednesday
-                                </td>
-                                <td class="float-right font-weight-normal">
-                                  <p class="mb-1 wednesday">
-                                    19&deg;<span class="text-muted"
-                                      >/10&deg;</span
-                                    >
-                                  </p>
-                                </td>
-                                <td class="float-right mr-3">
-                                  <i class="fas fa-cloud-showers-heavy"></i>
-                                </td>
+                                <th scope="row">Wednesday</th>
+                                <td class="wednesday"></td>
                               </tr>
                               <tr>
-                                <td class="font-weight-normal align-middle">
-                                  Thursday
-                                </td>
-                                <td class="float-right font-weight-normal">
-                                  <p class="mb-1 thursday">
-                                    23&deg;<span class="text-muted"
-                                      >/15&deg;</span
-                                    >
-                                  </p>
-                                </td>
-                                <td class="float-right mr-3">
-                                  <i class="fa fa-wind fa-lg amber-text"></i>
-                                </td>
+                                <th scope="row">Thursday</th>
+                                <td class="thursday"></td>
                               </tr>
                               <tr>
-                                <td class="font-weight-normal align-middle">
-                                  Friday
-                                </td>
-                                <td class="float-right font-weight-normal">
-                                  <p class="mb-1 friday">
-                                    26&deg;<span class="text-muted"
-                                      >/19&deg;</span
-                                    >
-                                  </p>
-                                </td>
-                                <td class="float-right mr-3">
-                                  <i class="fas fa-sun fa-lg amber-text"></i>
-                                </td>
+                                <th scope="row">Friday</th>
+                                <td class="friday"></td>
                               </tr>
                               <tr>
-                                <td class="font-weight-normal align-middle">
-                                  Saturday
-                                </td>
-                                <td class="float-right font-weight-normal">
-                                  <p class="mb-1 saturday">
-                                    20&deg;<span class="text-muted"
-                                      >/16&deg;</span
-                                    >
-                                  </p>
-                                </td>
-                                <td class="float-right mr-3">
-                                  <i class="fa fa-bolt fa-lg text-info"></i>
-                                </td>
+                                <th scope="row">Saturday</th>
+                                <td class="saturday"></td>
                               </tr>
                               <tr>
-                                <td class="font-weight-normal align-middle">
-                                  Sunday
-                                </td>
-                                <td class="float-right font-weight-normal">
-                                  <p class="mb-1 sunday">
-                                    22&deg;<span class="text-muted"
-                                      >/13&deg;</span
-                                    >
-                                  </p>
-                                </td>
-                                <td class="float-right mr-3">
-                                  <i class="fa fa-cloud fa-lg text-info"></i>
-                                </td>
+                                <th scope="row">Sunday</th>
+                                <td class="sunday"></td>
                               </tr>
                             </tbody>
                           </table>
@@ -481,6 +408,7 @@
               </div>
 
               <script src="restaurant.js"></script>
+              <script src="business_hours.js"></script>
 
               <div
                 class="col-lg-6 col-sm-12"
@@ -553,7 +481,7 @@
                             aria-expanded="false"
                             aria-controls="collapseExample"
                             style="background-color: #38acec;"
-                            >Read More
+                            >Details
                             <i class="fa fa-angle-down" aria-hidden="true"></i
                           ></a>
                           <button
