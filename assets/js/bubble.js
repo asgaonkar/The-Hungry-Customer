@@ -387,7 +387,7 @@ function update_recommend(food) {
 
   var pre_star_list;
 
-  for (var i = 0; i < recommendation_number; i++) {
+  for (var i = 0; i < Object.keys(recommend[state][food]).length; i++) {
     // console.log(i);
     current_business = business[recommend[state][food][i + 1]];
 
@@ -423,7 +423,7 @@ function update_recommend(food) {
     document.getElementsByClassName("review_count")[i].innerHTML =
       "Review Count: <strong>" + current_business.review_count + "</strong>";
 
-    categories = current_business.categories.split(";");
+    categories = current_business.categories.split(" ").join("").split(";");
     tags = "";
     for (var k = 0; k < categories.length; k++) {
       tags += "#" + categories[k] + " ";
@@ -431,6 +431,30 @@ function update_recommend(food) {
     // console.log(tags);
     document.getElementsByClassName("cuisine_tags")[i].innerHTML =
       "<strong>" + tags + "</strong>";
-    // console.log(document.getElementsByClassName("cuisine_tags")[i]);
+    document.getElementsByClassName("restaurant_name")[i].id = i + 1;
+    // console.log(document.getElementsByClassName("restaurant_name")[i]);
+
+    document.getElementsByClassName("map_call")[i].id = "map_call_" + (i + 1);
+    document.getElementsByClassName("restaurant_select")[i].id =
+      "restaurant_select_" + (i + 1);
+    document.getElementsByClassName("read_more")[i].id = "read_more_" + (i + 1);
   }
+  $("button.map_call").click(function () {
+    // var class_names = $(this).attr("class").split(" ");
+    console.log($(this));
+    console.log(document.getElementsByClassName("map_frame"));
+    console.log(document.getElementsByClassName("map_link"));
+  });
+
+  $("button.restaurant_select").click(function () {
+    // var class_names = $(this).attr("class").split(" ");
+    console.log($(this));
+    console.log(document.getElementsByClassName("monday"));
+    console.log(document.getElementsByClassName("tuesday"));
+    console.log(document.getElementsByClassName("wednesday"));
+    console.log(document.getElementsByClassName("thursday"));
+    console.log(document.getElementsByClassName("friday"));
+    console.log(document.getElementsByClassName("saturday"));
+    console.log(document.getElementsByClassName("sunday"));
+  });
 }
