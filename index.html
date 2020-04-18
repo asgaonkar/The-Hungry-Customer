@@ -17,6 +17,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="assets/css/modal.css" />
+
     <title>Hungry Customer</title>
     <style></style>
     <script src="https://use.fontawesome.com/922eaae474.js"></script>
@@ -24,10 +25,43 @@
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/leaflet.css" />
     <script>
-      var baseurl = "https://asgaonkar.github.io/The-Hungry-Customer/";
-      // var baseurl = "http://127.0.0.1:5500/";
+      // var baseurl = "https://asgaonkar.github.io/The-Hungry-Customer/";
+      var baseurl = "http://127.0.0.1:5500/";
       // Change the base URL
     </script>
+    <style>
+      .table td,
+      .table th {
+        padding: 0.25rem;
+        vertical-align: top;
+        border-bottom: 1px solid #dee2e6;
+        border-top: 0px solid #dee2e6;
+      }
+      /* Chart */
+      .axis path,
+      .axis line {
+        fill: none;
+        stroke: #fff;
+      }
+      .axis text {
+        font-size: 13px;
+      }
+      .bar {
+        fill: #8cd3dd;
+      }
+      .bar:hover {
+        fill: #f56c4e;
+      }
+      svg text.label {
+        fill: white;
+        font: 15px;
+        font-weight: 400;
+        text-anchor: middle;
+      }
+      #chartID {
+        min-width: 531px;
+      }
+    </style>
   </head>
 
   <body>
@@ -209,18 +243,37 @@
               </div>
               <br />
             </div>
+            <div class="row example" style="width: 100%;">
+              <button
+                type="button"
+                class="btn btn-toggle"
+                data-toggle="button"
+                aria-pressed="false"
+                autocomplete="off"
+              >
+                <div class="handle"></div>
+              </button>
+            </div>
           </div>
           <div class="modal-footer">
             <div class="row" style="width: 100%;">
-              <div class="col-6 d-flex flex-row">
+              <div class="col-8 d-flex flex-row">
                 <a
                   href="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=30%20Eglinton%20Avenue%20W%2C%20Mississauga+(Emerald%20Chinese%20Restaurant)"
                   target="blank"
-                  class="btn btn-primary map_link"
+                  class="btn btn-primary map_link mr-2"
                   >Google-Maps</a
                 >
+                <br />
+                <a
+                  href="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=30%20Eglinton%20Avenue%20W%2C%20Mississauga+(Emerald%20Chinese%20Restaurant)"
+                  target="blank"
+                  class="btn btn-primary lat_long_link"
+                >
+                  Lat-Long
+                </a>
               </div>
-              <div class="col-6 d-flex flex-row-reverse">
+              <div class="col-4 d-flex flex-row-reverse">
                 <button
                   type="button"
                   class="btn btn-secondary"
@@ -247,7 +300,11 @@
             class="navbar-brand"
             style="text-decoration: none !important;"
           >
-            <img src="assets/img/logo.svg" height="28" alt="CoolBrand" />
+            <img
+              src="assets/img/hungry_customer.png"
+              height="30"
+              alt="Hungry-Customer"
+            />
           </a>
           <button
             type="button"
@@ -319,7 +376,10 @@
             <!-- Card -->
             <div class="row" style="width: 100%;">
               <div class="col-lg-6 col-sm-12">
-                <div class="row" style="width: 100%; padding-left: 10px;">
+                <div
+                  class="row state_click"
+                  style="width: 100%; padding-left: 10px; display: none;"
+                >
                   <h4
                     class="text-center"
                     style="width: 100%; margin-bottom: 2px;"
@@ -345,28 +405,23 @@
                   <div class="row">
                     <div
                       class="bd-example state_details"
-                      style="margin-top: 10px;"
+                      style="margin-top: 10px; width: 100%;"
                     >
-                      <blockquote class="blockquote">
-                        <p class="mb-0">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Integer posuere erat a ante.
-                        </p>
-                        <footer class="blockquote-footer">
-                          Someone famous in
-                          <cite title="Source Title">Source Title</cite>
-                        </footer>
-                      </blockquote>
-
                       <div class="food_details" style="display: none;"></div>
 
                       <div class="restaurant_details" style="display: none;">
+                        <!-- Checkin Hours -->
+                        
+
+                      
+
+                        <!-- Timing -->
                         <div class="" id="">
                           <table class="table">
                             <thead style="border-bottom: 0px !important;">
                               <tr>
                                 <th scope="col"></th>
-                                <th scope="col">Open - Close</th>
+                                <th scope="col">Timing</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -416,8 +471,8 @@
                 style="overflow-y: scroll;"
               >
                 <div class="row" style="width: 100%;">
-                  <div class="col-sm-2 col-md-3"></div>
-                  <div class="col-lg-12 col-sm-8 col-md-6 rest_recommend">
+                  <div class="col-sm-1 col-md-2"></div>
+                  <div class="col-lg-12 col-sm-10 col-md-8 rest_recommend">
                     <!-- Card  0 -->
                     <br />
                     <div
@@ -495,7 +550,7 @@
                     </div>
                     <br />
                   </div>
-                  <div class="col-sm-2 col-md-3"></div>
+                  <div class="col-sm-1 col-md-2"></div>
                 </div>
               </div>
 
@@ -561,6 +616,7 @@
     <script src="assets/js/libs/d3.min.js"></script>
     <script src="assets/js/bubble.js"></script>
     <script src="bubble_data.js"></script>
+
     <script>
       $(document).ready(function () {
         if ($("body").height() > $(window).height()) {
@@ -754,6 +810,27 @@
         boundary_color = "#666666";
 
         function state_click(e) {
+          // Clearing Timing
+          document.getElementsByClassName("monday")[0].innerHTML = "";
+          document.getElementsByClassName("tuesday")[0].innerHTML = "";
+          document.getElementsByClassName("wednesday")[0].innerHTML = "";
+          document.getElementsByClassName("thursday")[0].innerHTML = "";
+          document.getElementsByClassName("friday")[0].innerHTML = "";
+          document.getElementsByClassName("saturday")[0].innerHTML = "";
+          document.getElementsByClassName("sunday")[0].innerHTML = "";
+
+          document.getElementsByClassName(
+            "restaurant_details"
+          )[0].style.display = "none";
+
+          if (
+            document.getElementsByClassName("state_click")[0].style.display ==
+            "none"
+          ) {
+            document.getElementsByClassName("state_click")[0].style.display =
+              "block";
+          }
+
           var layer = e.target;
           // console.log(layer._path.attributes["fill"].value);
 
@@ -842,7 +919,8 @@
           }
           // map.fitBounds([37.8, -96], 3.25);
         });
-      });
+
+              });
     </script>
   </body>
 </html>
