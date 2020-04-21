@@ -1,8 +1,9 @@
+// Requires recommended
 var recommend = {
   Arizona: {
     time: {
       1: "PfOCPjBrlQAnz__NXj9h_w",
-      2: "o9eMRCWt5PkpLDE0gOPtcQ",
+      2: "DPmZTwZuknnVPAeIGJq5SA",
       3: "l09JfMeQ6ynYs5MCJtrcmQ",
     },
     wolf: {
@@ -13,18 +14,19 @@ var recommend = {
   },
   California: {
     wolf: {
-      1: "l09JfMeQ6ynYs5MCJtrcmQ",
+      1: "DPmZTwZuknnVPAeIGJq5SA",
       2: "Gu-xs3NIQTj3Mj2xYoN2aw",
       3: "1K4qrnfyzKzGgJPBEcJaNQ",
     },
     time: {
       1: "o9eMRCWt5PkpLDE0gOPtcQ",
-      2: "XOSRcvtaKc_Q5H1SAzN20A",
+      2: "DPmZTwZuknnVPAeIGJq5SA",
       3: "fNMVV_ZX7CJSDWQGdOM8Nw",
     },
   },
 };
 
+// Requires All business
 var business = {
   FYWN1wneV18bWNgQjJ2GNg: {
     business_id: "FYWN1wneV18bWNgQjJ2GNg",
@@ -180,8 +182,8 @@ var business = {
     is_open: 1,
     categories: "Automotive;Auto Detailing",
   },
-  XOSRcvtaKc_Q5H1SAzN20A: {
-    business_id: "XOSRcvtaKc_Q5H1SAzN20A",
+  DPmZTwZuknnVPAeIGJq5SA: {
+    business_id: "DPmZTwZuknnVPAeIGJq5SA",
     name: "East Coast Coffee",
     neighborhood: "",
     address: "737 West Pike St",

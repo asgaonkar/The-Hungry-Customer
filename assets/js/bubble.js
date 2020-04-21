@@ -346,15 +346,26 @@ texts = [
   },
 ];
 
+var pre_star_list;
+
 function update_recommend(food) {
-  // Trial
+
+  // Clear Canvas
+  document.getElementById("checkin_canvas").innerHTML = "";
+
+  // Clear Timing
+  document.getElementsByClassName("monday")[0].innerHTML = "";
+  document.getElementsByClassName("tuesday")[0].innerHTML = "";
+  document.getElementsByClassName("wednesday")[0].innerHTML = "";
+  document.getElementsByClassName("thursday")[0].innerHTML = "";
+  document.getElementsByClassName("friday")[0].innerHTML = "";
+  document.getElementsByClassName("saturday")[0].innerHTML = "";
+  document.getElementsByClassName("sunday")[0].innerHTML = "";
 
   if (food.length) {
     document.getElementsByClassName("card_container")[0].style.display =
       "block";
     document.getElementsByClassName("food_details")[0].style.display = "block";
-    document.getElementsByClassName("restaurant_details")[0].style.display =
-      "block";
   }
 
   var state = document.getElementById("selected_state").innerText;
@@ -364,14 +375,12 @@ function update_recommend(food) {
   var card_template = document.getElementsByClassName("card_container")[0]
     .outerHTML;
 
-  var recommendation_number = 3;
-
   card_holder.innerHTML = "<br />";
   card_holder.innerHTML += card_template;
   card_holder.innerHTML += "<br />";
 
   if (food.length) {
-    for (var i = 1; i < recommendation_number; i++) {
+    for (var i = 1; i < Object.keys(recommend[state][food]).length; i++) {
       card_holder.innerHTML += card_template;
       card_holder.innerHTML += "<br />";
     }
@@ -385,17 +394,17 @@ function update_recommend(food) {
   var half_star =
     '<li class="list-inline-item mr-0"><i class="fa fa-star-half amber-text"></i></li>';
 
-  var pre_star_list;
-
   for (var i = 0; i < Object.keys(recommend[state][food]).length; i++) {
     // console.log(i);
     current_business = business[recommend[state][food][i + 1]];
+    // console.log(current_business);
+    pre_star_list =
+      '<li class="list-inline-item ml-2"> <p class="text-muted star_rating_number" id = "star_rating_number"><strong>3</strong></p ></li >';
 
-    pre_star_list = document.getElementsByClassName("restaurant_stars_list")[i]
-      .innerHTML;
+    // console.log(pre_star_list);
 
-    // console.log(current_business.stars == Math.floor(current_business.stars));
     document.getElementsByClassName("restaurant_stars_list")[i].innerHTML = "";
+    // console.log(i, document.getElementsByClassName("restaurant_stars_list")[i]);
     for (
       var i_star = 0;
       i_star < Math.floor(current_business.stars);
@@ -423,6 +432,9 @@ function update_recommend(food) {
     document.getElementsByClassName("review_count")[i].innerHTML =
       "Review Count: <strong>" + current_business.review_count + "</strong>";
 
+    document.getElementsByClassName("restaurant_address")[i].innerHTML =
+      current_business.address + ", " + current_business.city;
+
     categories = current_business.categories.split(" ").join("").split(";");
     tags = "";
     for (var k = 0; k < categories.length; k++) {
@@ -443,20 +455,10 @@ function update_recommend(food) {
   var get_rest_id, get_selected_food, get_selected_state;
   var pre_query_string = "https://www.google.com/maps/embed/v1/place?q==",
     key = "AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8";
-  var pre_query_string_link =
-    "https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=";
+  var pre_query_string_link = "https://maps.google.com/maps?q=";
   var full_address_frame, full_address_link;
 
   $("button.map_call").click(function () {
-    // var class_names = $(this).attr("class").split(" ");
-    console.log($(this));
-    console.log(
-      document.getElementsByClassName("map_frame")[0].getAttribute("src")
-    );
-    console.log(
-      document.getElementsByClassName("map_link")[0].getAttribute("href")
-    );
-
     get_rest_id = $(this).attr("id").split("_");
     get_rest_id = get_rest_id[get_rest_id.length - 1];
 
@@ -483,18 +485,27 @@ function update_recommend(food) {
       pre_query_string_link +
       encodeURI(
         business[recommend[get_selected_state][get_selected_food][get_rest_id]]
+          .name
+      ) +
+      ",+" +
+      encodeURI(
+        business[recommend[get_selected_state][get_selected_food][get_rest_id]]
           .address +
-          " " +
           business[
             recommend[get_selected_state][get_selected_food][get_rest_id]
           ].city
-      ) +
-      "+(" +
-      encodeURI(
-        business[recommend[get_selected_state][get_selected_food][get_rest_id]]
-          .name
-      ) +
-      ")";
+      );
+
+    var lat_long_link =
+      "http://maps.google.com/maps?z=12&t=m&q=loc:" +
+      business[recommend[get_selected_state][get_selected_food][get_rest_id]]
+        .latitude +
+      "+" +
+      business[recommend[get_selected_state][get_selected_food][get_rest_id]]
+        .longitude;
+    document
+      .getElementsByClassName("lat_long_link")[0]
+      .setAttribute("href", lat_long_link);
 
     document
       .getElementsByClassName("map_link")[0]
@@ -503,8 +514,8 @@ function update_recommend(food) {
     full_address_frame = full_address_frame.split(" ").join("+");
 
     full_address_frame = pre_query_string + full_address_frame + "&key=" + key;
-    console.log(full_address_frame);
-    console.log(full_address_link);
+    // console.log(full_address_frame);
+    // console.log(full_address_link);
 
     document
       .getElementsByClassName("map_frame")[0]
@@ -523,7 +534,8 @@ function update_recommend(food) {
     // console.log(document.getElementsByClassName("friday")[0]);
     // console.log(document.getElementsByClassName("saturday")[0]);
     // console.log(document.getElementsByClassName("sunday")[0]);
-
+    document.getElementsByClassName("restaurant_details")[0].style.display =
+      "block";
     get_rest_id = $(this).attr("id").split("_");
     get_rest_id = get_rest_id[get_rest_id.length - 1];
 
@@ -564,5 +576,112 @@ function update_recommend(food) {
       hours[
         recommend[get_selected_state][get_selected_food][get_rest_id]
       ].sunday;
+
+    // console.log(us_checkin);
+
+    var mon =
+      us_checkin[recommend[get_selected_state][get_selected_food][get_rest_id]][
+        "Mon"
+      ];
+    var tue =
+      us_checkin[recommend[get_selected_state][get_selected_food][get_rest_id]][
+        "Tue"
+      ];
+    var wed =
+      us_checkin[recommend[get_selected_state][get_selected_food][get_rest_id]][
+        "Wed"
+      ];
+    var thu =
+      us_checkin[recommend[get_selected_state][get_selected_food][get_rest_id]][
+        "Thu"
+      ];
+    var fri =
+      us_checkin[recommend[get_selected_state][get_selected_food][get_rest_id]][
+        "Fri"
+      ];
+    var sat =
+      us_checkin[recommend[get_selected_state][get_selected_food][get_rest_id]][
+        "Sat"
+      ];
+    var sun =
+      us_checkin[recommend[get_selected_state][get_selected_food][get_rest_id]][
+        "Sun"
+      ];
+
+    var checkin_data = [mon, tue, wed, thu, fri, sat, sun];
+
+    for (
+      var checkin_index = 0;
+      checkin_index < checkin_data.length;
+      checkin_index++
+    ) {
+      if (checkin_data[checkin_index] == null) {
+        checkin_data[checkin_index] = "Data Unavailable";
+      }
+    }
+
+    document.getElementById("checkin_canvas").innerHTML = "";
+    document.getElementById("checkin_canvas").innerHTML =
+      "<canvas id = 'myChart' width = '200' height = '200'></canvas >";
+
+    var ctx = document.getElementById("myChart").getContext("2d");
+    var myChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        datasets: [
+          {
+            label: "# of Checkin",
+            data: checkin_data,
+            backgroundColor: [
+              "rgba(255, 159, 64, 0.75)",
+              "rgba(255, 159, 64, 0.75)",
+              "rgba(255, 159, 64, 0.75)",
+              "rgba(255, 159, 64, 0.75)",
+              "rgba(255, 159, 64, 0.75)",
+              "rgba(255, 159, 64, 0.75)",
+              "rgba(255, 159, 64, 0.75)",
+            ],
+            borderColor: [
+              "rgba(255, 159, 64, 1)",
+              "rgba(255, 159, 64, 1)",
+              "rgba(255, 159, 64, 1)",
+              "rgba(255, 159, 64, 1)",
+              "rgba(255, 159, 64, 1)",
+              "rgba(255, 159, 64, 1)",
+              "rgba(255, 159, 64, 1)",
+            ],
+            borderWidth: 2,
+          },
+          // {
+          //   label: "# Checkin Trend",
+          //   data: checkin_data,
+          //   // Changes this dataset to become a line
+          //   type: "line",
+          // },
+        ],
+      },
+      options: {
+        scales: {
+          xAxes: [
+            {
+              gridLines: {
+                offsetGridLines: true,
+              },
+            },
+          ],
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: false,
+              },
+              gridLines: {
+                offsetGridLines: true,
+              },
+            },
+          ],
+        },
+      },
+    });
   });
 }
