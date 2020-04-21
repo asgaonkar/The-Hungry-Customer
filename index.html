@@ -11,6 +11,10 @@
 
     <!-- Bootstrap CSS -->
     <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet"
+    />
+    <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -21,7 +25,7 @@
     <title>Hungry Customer</title>
     <style></style>
     <script src="https://use.fontawesome.com/922eaae474.js"></script>
-
+    <script src="us_checkin.js"></script>
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/leaflet.css" />
     <script>
@@ -134,14 +138,27 @@
           </div>
           <div class="modal-body">
             <div id="information" style="display: block;">
-              <p>From Quarter-Finals to Finals</p>
+              <p>Instructions</p>
               <div class="alert alert-success">
                 <strong>Features:</strong>
                 <br />
                 <ul>
-                  <li>Select a Year from the timeline provided</li>
-                  <li>Scroll down and select a match</li>
-                  <li>Hovering over stats will give you its meausers</li>
+                  <li>Select a <strong>State</strong> from the Map</li>
+                  <li>
+                    Scroll a <strong>food item</strong> from the bubble cloud
+                  </li>
+                  <li>
+                    Select a <strong>Restaurant</strong> from the recommended
+                    list
+                    <ul>
+                      <li>Opening and Closing Timing</li>
+                      <li>Checkin Distribution</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>View Location</strong> of a restuarant using
+                    Map-Button
+                  </li>
                 </ul>
               </div>
               <div class="alert alert-warning">
@@ -237,7 +254,7 @@
                     class="map_frame"
                     style="height: 100%; width: 100%; border: 0;"
                     frameborder="0"
-                    src="https://www.google.com/maps/embed/v1/place?q==Chula+Taberna+Mexicana+1058+Gerrard+Street+E+Toronto&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
+                    src=""
                   ></iframe>
                 </div>
               </div>
@@ -293,10 +310,16 @@
       <div class="bs-example">
         <nav
           class="navbar navbar-expand-md sticky-top navbar-light bg-light"
-          style="position: fixed; width: 100%; top: 0px;"
+          style="
+            position: fixed;
+            width: 100%;
+            top: 0px;
+            font-family: Montserrat;
+          "
         >
           <a
-            href="#"
+            href="javascript:void(0)"
+            onclick="window.location.replace(baseurl);"
             class="navbar-brand"
             style="text-decoration: none !important;"
           >
@@ -317,27 +340,16 @@
 
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav">
-              <a href="#" class="nav-item nav-link active">Home</a>
-              <a href="#" class="nav-item nav-link">Profile</a>
-              <a href="#" class="nav-item nav-link">Messages</a>
+              <a
+                href="javascript:void(0)"
+                onclick="window.location.replace(baseurl);"
+                class="nav-item nav-link active"
+                >Home</a
+              >
             </div>
             <div class="navbar-nav ml-auto">
-              <!-- <form class="form-inline">
-                <div class="input-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Search"
-                    style="outline: none;"
-                  />
-                  <div class="input-group-append">
-                    <button type="button" class="btn btn-secondary">
-                      <i class="fa fa-search"></i>
-                    </button>
-                  </div>
-                </div>
-              </form> -->
-              <a href="#" class="nav-item nav-link">Contact Us</a>
+              <a href="about.html" class="nav-item nav-link">About</a>
+              <!-- <a href="contact.html" class="nav-item nav-link">Contact</a> -->
             </div>
           </div>
         </nav>
@@ -348,7 +360,7 @@
       <div class="row">
         <div
           class="col-lg-6 text-center"
-          style="margin: auto; overflow: hidden;"
+          style="margin: auto; overflow: hidden; padding-left: 0px;"
         >
           <!-- Map -->
           <div
@@ -412,15 +424,31 @@
                       <div class="restaurant_details" style="display: none;">
                         <!-- Checkin Hours -->
 
+                        <!-- Chart -->
+                        <div
+                          class="row"
+                          style="width: 80%;"
+                          class="checkin_canvas"
+                          id="checkin_canvas"
+                        >
+                          <!-- <h5>Checkin Distribution</h5> -->
+                          <!-- <canvas
+                            id="myChart"
+                            width="200"
+                            height="200"
+                            style="height: 150px; width: 150px;"
+                          ></canvas> -->
+                        </div>
+
                         <!-- Timing -->
-                        <div class="" id="">
+                        <div class="row" style="width: 100%;" id="">
                           <table class="table">
-                            <thead style="border-bottom: 0px !important;">
+                            <!-- <thead style="border-bottom: 0px !important;">
                               <tr>
                                 <th scope="col"></th>
                                 <th scope="col">Timing</th>
                               </tr>
-                            </thead>
+                            </thead> -->
                             <tbody>
                               <tr>
                                 <th scope="row">Monday</th>
@@ -484,14 +512,28 @@
                         />
                         <div class="card-body">
                           <!-- Title -->
-                          <h4 class="card-title font-weight-bold">
+                          <h4
+                            class="card-title font-weight-bold"
+                            style="margin-bottom: 2px;"
+                          >
                             <a
                               class="restaurant restaurant_name"
-                              onclick="$('#btnTrigger1').click();"
+                              href="javascript:void(0);"
                               id="1"
+                              style="text-decoration: none;"
                               >1. La Sirena restaurant</a
                             >
                           </h4>
+                          <!-- Address -->
+                          <h6>
+                            <a
+                              class="restaurant_address"
+                              href="javascript:void(0);"
+                              id="1"
+                              style="text-decoration: none;"
+                              >Address</a
+                            >
+                          </h6>
                           <!-- Data -->
                           <ul
                             class="list-unstyled list-inline mb-0 restaurant_stars_list"
@@ -602,6 +644,9 @@
     <script src="assets/js/bubble.js"></script>
     <script src="bubble_data.js"></script>
 
+    <!-- Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
     <script>
       $(document).ready(function () {
         if ($("body").height() > $(window).height()) {
@@ -680,9 +725,9 @@
         var map;
 
         if (window.innerWidth < 768) {
-          map = L.map("map").setView([37.8, -96], 3.25);
+          map = L.map("map").setView([37.8, -98], 3.25);
         } else {
-          map = L.map("map").setView([37.8, -96], 4);
+          map = L.map("map").setView([37.8, -95], 4);
         }
 
         // control that shows state info on hover
@@ -736,7 +781,46 @@
 
         var save_layer;
 
-        var disabled_states = ["Texas", "Utah", "Nebraska", "Tennessee"];
+        var disabled_states = [
+          "Alabama",
+          "Connecticut",
+          "Delaware",
+          "District of Columbia",
+          "Florida",
+          "Georgia",
+          "Hawaii",
+          "Idaho",
+          "Iowa",
+          "Kansas",
+          "Kentucky",
+          "Louisiana",
+          "Maine",
+          "Maryland",
+          "Massachusetts",
+          "Michigan",
+          "Minnesota",
+          "Mississippi",
+          "Missouri",
+          "Montana",
+          "Nebraska",
+          "New Hampshire",
+          "New Jersey",
+          "New Mexico",
+          "North Dakota",
+          "Oklahoma",
+          "Oregon",
+          "Rhode Island",
+          "South Dakota",
+          "Tennessee",
+          "Texas",
+          "Utah",
+          "Vermont",
+          "Washington",
+          "West Virginia",
+          "Wyoming",
+          "District of Columbia",
+          "Puerto Rico",
+        ];
 
         function highlightFeature(e) {
           // var x = document.getElementsByClassName("leaflet-zoom-animated")[0];
@@ -904,6 +988,8 @@
           }
           // map.fitBounds([37.8, -96], 3.25);
         });
+
+        // Chart
       });
     </script>
   </body>

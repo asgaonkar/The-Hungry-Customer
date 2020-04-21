@@ -149,3 +149,7 @@ footer p {
   padding-bottom: 20px;
   font: 13px sans-serif;
 }
+
+.nav-link.active {
+  font-weight: bold;
+}

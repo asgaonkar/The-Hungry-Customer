@@ -349,6 +349,10 @@ texts = [
 var pre_star_list;
 
 function update_recommend(food) {
+
+  // Clear Canvas
+  document.getElementById("checkin_canvas").innerHTML = "";
+
   // Clear Timing
   document.getElementsByClassName("monday")[0].innerHTML = "";
   document.getElementsByClassName("tuesday")[0].innerHTML = "";
@@ -393,7 +397,7 @@ function update_recommend(food) {
   for (var i = 0; i < Object.keys(recommend[state][food]).length; i++) {
     // console.log(i);
     current_business = business[recommend[state][food][i + 1]];
-
+    // console.log(current_business);
     pre_star_list =
       '<li class="list-inline-item ml-2"> <p class="text-muted star_rating_number" id = "star_rating_number"><strong>3</strong></p ></li >';
 
@@ -427,6 +431,9 @@ function update_recommend(food) {
       "<strong>" + current_business.stars + "</strong>";
     document.getElementsByClassName("review_count")[i].innerHTML =
       "Review Count: <strong>" + current_business.review_count + "</strong>";
+
+    document.getElementsByClassName("restaurant_address")[i].innerHTML =
+      current_business.address + ", " + current_business.city;
 
     categories = current_business.categories.split(" ").join("").split(";");
     tags = "";
@@ -569,5 +576,112 @@ function update_recommend(food) {
       hours[
         recommend[get_selected_state][get_selected_food][get_rest_id]
       ].sunday;
+
+    // console.log(us_checkin);
+
+    var mon =
+      us_checkin[recommend[get_selected_state][get_selected_food][get_rest_id]][
+        "Mon"
+      ];
+    var tue =
+      us_checkin[recommend[get_selected_state][get_selected_food][get_rest_id]][
+        "Tue"
+      ];
+    var wed =
+      us_checkin[recommend[get_selected_state][get_selected_food][get_rest_id]][
+        "Wed"
+      ];
+    var thu =
+      us_checkin[recommend[get_selected_state][get_selected_food][get_rest_id]][
+        "Thu"
+      ];
+    var fri =
+      us_checkin[recommend[get_selected_state][get_selected_food][get_rest_id]][
+        "Fri"
+      ];
+    var sat =
+      us_checkin[recommend[get_selected_state][get_selected_food][get_rest_id]][
+        "Sat"
+      ];
+    var sun =
+      us_checkin[recommend[get_selected_state][get_selected_food][get_rest_id]][
+        "Sun"
+      ];
+
+    var checkin_data = [mon, tue, wed, thu, fri, sat, sun];
+
+    for (
+      var checkin_index = 0;
+      checkin_index < checkin_data.length;
+      checkin_index++
+    ) {
+      if (checkin_data[checkin_index] == null) {
+        checkin_data[checkin_index] = "Data Unavailable";
+      }
+    }
+
+    document.getElementById("checkin_canvas").innerHTML = "";
+    document.getElementById("checkin_canvas").innerHTML =
+      "<canvas id = 'myChart' width = '200' height = '200'></canvas >";
+
+    var ctx = document.getElementById("myChart").getContext("2d");
+    var myChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        datasets: [
+          {
+            label: "# of Checkin",
+            data: checkin_data,
+            backgroundColor: [
+              "rgba(255, 159, 64, 0.75)",
+              "rgba(255, 159, 64, 0.75)",
+              "rgba(255, 159, 64, 0.75)",
+              "rgba(255, 159, 64, 0.75)",
+              "rgba(255, 159, 64, 0.75)",
+              "rgba(255, 159, 64, 0.75)",
+              "rgba(255, 159, 64, 0.75)",
+            ],
+            borderColor: [
+              "rgba(255, 159, 64, 1)",
+              "rgba(255, 159, 64, 1)",
+              "rgba(255, 159, 64, 1)",
+              "rgba(255, 159, 64, 1)",
+              "rgba(255, 159, 64, 1)",
+              "rgba(255, 159, 64, 1)",
+              "rgba(255, 159, 64, 1)",
+            ],
+            borderWidth: 2,
+          },
+          // {
+          //   label: "# Checkin Trend",
+          //   data: checkin_data,
+          //   // Changes this dataset to become a line
+          //   type: "line",
+          // },
+        ],
+      },
+      options: {
+        scales: {
+          xAxes: [
+            {
+              gridLines: {
+                offsetGridLines: true,
+              },
+            },
+          ],
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: false,
+              },
+              gridLines: {
+                offsetGridLines: true,
+              },
+            },
+          ],
+        },
+      },
+    });
   });
 }
