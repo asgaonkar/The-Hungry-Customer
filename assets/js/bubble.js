@@ -395,9 +395,9 @@ function update_recommend(food) {
     '<li class="list-inline-item mr-0"><i class="fa fa-star-half amber-text"></i></li>';
 
   for (var i = 0; i < Object.keys(recommend[state][food]).length; i++) {
-    // console.log(i);
+    console.log(i);
     current_business = business[recommend[state][food][i + 1]];
-    // console.log(current_business);
+    console.log(current_business);
     pre_star_list =
       '<li class="list-inline-item ml-2"> <p class="text-muted star_rating_number" id = "star_rating_number"><strong>3</strong></p ></li >';
 
@@ -543,6 +543,8 @@ function update_recommend(food) {
       .getElementById("selected_food")
       .innerHTML.substring(1);
     get_selected_state = document.getElementById("selected_state").innerHTML;
+
+    console.log(get_rest_id, get_selected_state, get_selected_food);
 
     // console.log(get_rest_id, get_selected_state, get_selected_food);
 
