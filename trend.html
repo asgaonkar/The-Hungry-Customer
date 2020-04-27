@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link rel="icon" href="assets/img/title.png" type="image/icon type" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="assets/css/modal.css" />
+
+    <title>Hungry Customer</title>
+    <style></style>
+    <script src="https://use.fontawesome.com/922eaae474.js"></script>
+    <script src="us_checkin.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/leaflet.css" />
+    <script>
+      // var baseurl = "https://asgaonkar.github.io/The-Hungry-Customer/";
+      var baseurl = "http://127.0.0.1:5500/";
+      // Change the base URL
+    </script>
+    <style>
+      .table td,
+      .table th {
+        padding: 0.25rem;
+        vertical-align: top;
+        border-bottom: 1px solid #dee2e6;
+        border-top: 0px solid #dee2e6;
+      }
+      /* Chart */
+      .axis path,
+      .axis line {
+        fill: none;
+        stroke: #fff;
+      }
+      .axis text {
+        font-size: 13px;
+      }
+      .bar {
+        fill: #8cd3dd;
+      }
+      .bar:hover {
+        fill: #f56c4e;
+      }
+      svg text.label {
+        fill: white;
+        font: 15px;
+        font-weight: 400;
+        text-anchor: middle;
+      }
+      #chartID {
+        min-width: 531px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div onclick="$('#btnTrigger').click();" id="myBtn1" title="Instruction">
+      <a
+        class="fa fa-info-circle fa-x"
+        href="#"
+        onclick="$('#btnTrigger').click();"
+        style="color: white; text-decoration: none !important;"
+      ></a>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-5"></div>
+        <div class="col-2">
+          <div
+            onclick="window.scrollTo(0,document.body.scrollHeight);"
+            id="myBtn"
+            title="Go Down"
+            style="display: none;"
+          >
+            <a
+              class="fa fa-arrow-down fa-x blinking"
+              id="downBtn"
+              onclick="window.scrollTo(0,document.body.scrollHeight);"
+              style="color: white; text-decoration: none !important;"
+            ></a>
+          </div>
+        </div>
+        <div class="col-5"></div>
+      </div>
+    </div>
+
+    <!-- Button trigger modal -->
+    <button
+      type="button"
+      class="btn btn-primary"
+      style="display: none;"
+      data-toggle="modal"
+      id="btnTrigger"
+      data-target="#exampleModalCenter"
+    >
+      Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModalCenter"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">
+              <strong>Hungry Customer</strong> - Instructions
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="information" style="display: block;">
+              <div class="alert alert-success">
+                <strong>Features:</strong>
+                <br />
+                <ul>
+                  <li>Select a <strong>State</strong> from the Map</li>
+                  <li>
+                    Select a <strong>food item</strong> from the bubble cloud
+                  </li>
+                  <li>
+                    Select a <strong>Restaurant</strong> from the recommended
+                    list
+                    <ul>
+                      <li>Opening and Closing Timing</li>
+                      <li>Checkin Distribution</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>View Location</strong> of a restuarant using
+                    Map-Button
+                  </li>
+                </ul>
+              </div>
+              <div class="alert alert-warning">
+                <strong>Warning:</strong> Please reload the page if either data
+                is missing or visualization is distorted.
+              </div>
+              <div class="alert alert-info">
+                <strong>Navigation:</strong>
+                <ul>
+                  <li>
+                    <span class="fa fa-arrow-down fa-x"></span> : Scrolls down
+                    to bottom.
+                  </li>
+                  <li>
+                    <span class="fa fa-info-circle fa-x"></span> : Pops up this
+                    box again
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Restaurant Modal -->
+    <!-- Button trigger modal -->
+    <button
+      type="button"
+      class="btn btn-primary"
+      style="display: none;"
+      data-toggle="modal"
+      id="btnTrigger1"
+      data-target="#exampleModalCenter1"
+    >
+      Launch demo modal
+    </button>
+
+    <div class="container-fluid" style="margin: 0px; padding: 0px;">
+      <div class="bs-example">
+        <nav
+          class="navbar navbar-expand-md sticky-top navbar-light bg-light"
+          style="
+            position: fixed;
+            width: 100%;
+            top: 0px;
+            font-family: Montserrat;
+          "
+        >
+          <a
+            href="javascript:void(0)"
+            onclick="window.location.replace(baseurl);"
+            class="navbar-brand"
+            style="text-decoration: none !important;"
+          >
+            <img
+              src="assets/img/hungry_customer.png"
+              height="30"
+              alt="Hungry-Customer"
+            />
+          </a>
+          <button
+            type="button"
+            class="navbar-toggler"
+            data-toggle="collapse"
+            data-target="#navbarCollapse"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav">
+              <a
+                href="javascript:void(0)"
+                onclick="window.location.replace(baseurl);"
+                class="nav-item nav-link"
+                >Home</a
+              >
+              <a href="trend.html" class="nav-item nav-link active">Trends</a>
+            </div>
+            <div class="navbar-nav ml-auto">
+              <a href="about.html" class="nav-item nav-link">About</a>
+              <!-- <a href="contact.html" class="nav-item nav-link">Contact</a> -->
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <div class="container-fluid" style="padding-top: 50px;">
+      <div class="row">
+        <div
+          class="col-lg-4 text-center"
+          style="margin: auto; overflow: hidden; padding-left: 0px;"
+        >
+          <!-- Map -->
+          <div
+            class="row"
+            style="margin-left: 20px; margin-right: 20px; margin-top: 0px;"
+          >
+            <div id="map"></div>
+
+            <script src="assets/js/leaflet.js"></script>
+            <script
+              type="text/javascript"
+              src="assets/js/us-states.js"
+            ></script>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <!-- Card -->
+          <br />
+          <br />
+          <div class="row" style="width: 100%;">
+            <div class="col-lg-6 col-sm-12">
+              <div
+                class="row state_click"
+                style="width: 100%; padding-left: 10px; display: none;"
+              >
+                <h4
+                  class="text-center"
+                  style="width: 100%; margin-bottom: 2px;"
+                  id="selected_state"
+                >
+                  Arizona
+                </h4>
+                <h6
+                  class="text-center"
+                  style="width: 100%;"
+                  id="selected_state_s_name"
+                >
+                  (AZ)
+                </h6>
+                <br />
+                <div class="row" style="width: 100%;">
+                  <h4 style="color: gray;">Food:</h4>
+                  &nbsp;<strong
+                    ><h4 id="selected_food" style="color: #222222;"></h4
+                  ></strong>
+                </div>
+                <!-- Stats -->
+                <div class="row">
+                  <div
+                    class="bd-example state_details"
+                    style="margin-top: 10px; width: 100%;"
+                  >
+                    <div class="food_details" style="display: none;"></div>
+
+                    <div class="restaurant_details" style="display: none;">
+                      <!-- Checkin Hours -->
+
+                      <!-- Chart -->
+                      <div
+                        class="row"
+                        style="width: 80%;"
+                        class="checkin_canvas"
+                        id="checkin_canvas"
+                      >
+                        <!-- <h5>Checkin Distribution</h5> -->
+                        <!-- <canvas
+                            id="myChart"
+                            width="200"
+                            height="200"
+                            style="height: 150px; width: 150px;"
+                          ></canvas> -->
+                      </div>
+
+                      <!-- Timing -->
+                      <div class="row" style="width: 100%;" id="">
+                        <table class="table">
+                          <!-- <thead style="border-bottom: 0px !important;">
+                              <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Timing</th>
+                              </tr>
+                            </thead> -->
+                          <tbody>
+                            <tr>
+                              <th scope="row">Monday</th>
+                              <td class="monday"></td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Tuesday</th>
+                              <td class="tuesday"></td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Wednesday</th>
+                              <td class="wednesday"></td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Thursday</th>
+                              <td class="thursday"></td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Friday</th>
+                              <td class="friday"></td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Saturday</th>
+                              <td class="saturday"></td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Sunday</th>
+                              <td class="sunday"></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <!-- Bubble Cloud -->
+        <div id="vis"></div>
+        <div id="status" style="display: none;"></div>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script> -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Include js plugin -->
+    <script src="assets/js/libs/d3.min.js"></script>
+    <script src="assets/js/bubble_dup.js"></script>
+    <script src="bubble_data_trend.js"></script>
+    <script src="us_all_restaurants.js"></script>
+
+    <!-- Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        // $("#btnTrigger").click();
+
+        if ($("body").height() > $(window).height()) {
+          document.getElementById("myBtn").style.display = "block";
+        }
+
+        var display, key, plot, text, x;
+
+        // x = dict["AZ"];
+        // console.log(x);
+
+        function Bubble_Call() {
+          plot = Bubbles();
+
+          display = function (state) {
+            return plotData("#vis", dict[state], plot);
+          };
+          key = decodeURIComponent(location.search).replace("?", "");
+          text = texts.filter(function (t) {
+            return t.key === key;
+          })[0];
+          if (!text) {
+            text = texts[0];
+          }
+          $("#text-select").val(key);
+          d3.select("#jitter").on("input", function () {
+            return plot.jitter(parseFloat(this.output.value));
+          });
+          d3.select("#text-select").on("change", function (e) {
+            key = $(this).val();
+
+            location.replace("#");
+            return (location.search = encodeURIComponent(key));
+          });
+
+          d3.select("#book-title").html(text.name);
+        }
+
+        // Call Display
+
+        function call_display(state) {
+          return display(state);
+        }
+
+        // Initial Call
+        Bubble_Call();
+        // call_display("Arizona");
+
+        function StatePush(state) {
+          // alert("State Change");
+
+          for (
+            var i = 0;
+            i < document.getElementsByClassName("card_container").length;
+            i++
+          ) {
+            // console.log("hi");
+            document.getElementsByClassName("card_container")[i].style.display =
+              "none";
+          }
+
+          history.pushState(
+            {
+              id: "unselected",
+            },
+            "",
+            baseurl + "trend.html"
+          );
+          d3.select("#vis").select("svg").remove();
+          $("#bubble-labels").remove();
+          call_display(state);
+        }
+
+        // Map Scripts
+
+        var map;
+
+        if (window.innerWidth < 768) {
+          map = L.map("map").setView([37.8, -98], 2.75);
+        } else {
+          map = L.map("map").setView([37.8, -95], 3.5);
+        }
+
+        // control that shows state info on hover
+        var info = L.control();
+
+        info.onAdd = function (map) {
+          this._div = L.DomUtil.create("div", "info");
+          this.update();
+          return this._div;
+        };
+
+        info.update = function (props) {
+          this._div.innerHTML =
+            "<h4>State</h4>" +
+            (props
+              ? "Hovered State: <b>" + props.name + "</b><br />"
+              : // props.density +
+                // " people / mi<sup>2</sup>"
+                "Hover over a state");
+        };
+
+        info.update_disabled = function (props) {
+          this._div.innerHTML =
+            "<h4>State</h4>" +
+            (props
+              ? "Hovered State: <b>" +
+                props.name +
+                "</b><br /><br /<i><strong>*Note: </strong><u>Data currently unavailable</i></u><br />"
+              : // props.density +
+                // " people / mi<sup>2</sup>"
+                "Hover over a state");
+        };
+
+        info.addTo(map);
+
+        // get color depending on population density value
+        function getColor(d) {
+          return d == 100 ? "#B2B2B2" : "#DDDDDD";
+        }
+
+        function style(feature) {
+          return {
+            weight: 2,
+            opacity: 1,
+            color: "white",
+            dashArray: "4",
+            fillOpacity: 0.7,
+            fillColor: getColor(feature.properties.density),
+          };
+        }
+
+        var save_layer;
+
+        var disabled_states = [
+          "Alabama",
+          "Arkansas",
+          "Connecticut",
+          "Delaware",
+          "District of Columbia",
+          "Florida",
+          "Georgia",
+          "Hawaii",
+          "Idaho",
+          "Iowa",
+          "Kansas",
+          "Kentucky",
+          "Louisiana",
+          "Maine",
+          "Maryland",
+          "Massachusetts",
+          "Michigan",
+          "Minnesota",
+          "Mississippi",
+          "Missouri",
+          "Montana",
+          "Nebraska",
+          "New Hampshire",
+          "New Jersey",
+          "New Mexico",
+          "North Dakota",
+          "Oklahoma",
+          "Oregon",
+          "Rhode Island",
+          "South Dakota",
+          "Tennessee",
+          "Texas",
+          "Utah",
+          "Vermont",
+          "Washington",
+          "West Virginia",
+          "Wyoming",
+          "District of Columbia",
+          "Puerto Rico",
+        ];
+
+        function highlightFeature(e) {
+          // var x = document.getElementsByClassName("leaflet-zoom-animated")[0];
+          // var y = x.children,
+          //   path_element;
+          // for (var i = 0; i < y.length; i++) {
+          //   // console.log(i);
+          //   path_element = y[i].children[0].attributes;
+          //   console.log(path_element["d"].value);
+
+          //   if (path_element["stroke-width"].value == "5") {
+          //     path_element["stroke-width"].value = "2";
+          //     path_element["stroke-dasharray"].value = "3";
+          //     path_element["stroke"].value = "white";
+          //   }
+          // }
+
+          var layer = e.target;
+          // console.log(e);
+          layer.setStyle({
+            weight: 5,
+            color: "#666",
+            dashArray: "",
+            fillOpacity: 0.7,
+          });
+
+          if (!L.Browser.ie && !L.Browser.opera) {
+            layer.bringToFront();
+          }
+
+          info.update(layer.feature.properties);
+        }
+
+        var geojson;
+
+        function resetHighlight(e) {
+          geojson.resetStyle(e.target);
+          info.update();
+          // console.log(save_layer);
+          if (save_layer) {
+            // alert(1);
+            save_layer.setStyle({
+              weight: 5,
+              color: boundary_color,
+              dashArray: "",
+              fillOpacity: 1,
+            });
+            save_layer._path.attributes["fill"].value = "#888888";
+          }
+        }
+
+        function resetHighlight_disabled(e) {
+          info.update_disabled();
+        }
+
+        boundary_color = "#666666";
+
+        function state_click(e) {
+          // Clearing Timing
+          document.getElementsByClassName("monday")[0].innerHTML = "";
+          document.getElementsByClassName("tuesday")[0].innerHTML = "";
+          document.getElementsByClassName("wednesday")[0].innerHTML = "";
+          document.getElementsByClassName("thursday")[0].innerHTML = "";
+          document.getElementsByClassName("friday")[0].innerHTML = "";
+          document.getElementsByClassName("saturday")[0].innerHTML = "";
+          document.getElementsByClassName("sunday")[0].innerHTML = "";
+
+          document.getElementsByClassName(
+            "restaurant_details"
+          )[0].style.display = "none";
+
+          if (
+            document.getElementsByClassName("state_click")[0].style.display ==
+            "none"
+          ) {
+            document.getElementsByClassName("state_click")[0].style.display =
+              "block";
+          }
+
+          var layer = e.target;
+          // console.log(layer._path.attributes["fill"].value);
+
+          var x = document.getElementsByClassName("leaflet-zoom-animated")[0];
+          var y = x.children,
+            path_element;
+
+          for (var i = 0; i < y.length; i++) {
+            path_element = y[i].children[0].attributes;
+            // console.log(y[i]);
+
+            if (path_element["stroke"].value == boundary_color) {
+              geojson.resetStyle(save_layer);
+            }
+          }
+
+          if (e.target != save_layer) {
+            save_layer = e.target;
+          }
+          // console.log(save_layer);
+
+          if (!L.Browser.ie && !L.Browser.opera) {
+            layer.bringToFront();
+          }
+          document.getElementById("selected_state").innerHTML =
+            layer.feature.properties.name;
+          document.getElementById("selected_state_s_name").innerHTML =
+            "(" + layer.feature.properties.s_name + ")";
+
+          // console.log(layer.feature.properties.name);
+
+          // alert(document.getElementById("selected_state").innerHTML);
+          // map.fitBounds(e.target.getBounds());
+          StatePush(layer.feature.properties.name);
+        }
+
+        function disabled_states_mouseover(e) {
+          var layer = e.target;
+          // console.log(e);
+          // layer.setStyle({
+          //   weight: 5,
+          //   color: "#666",
+          //   dashArray: "",
+          //   fillOpacity: 0.7,
+          // });
+
+          // if (!L.Browser.ie && !L.Browser.opera) {
+          //   layer.bringToFront();
+          // }
+
+          info.update_disabled(layer.feature.properties);
+        }
+
+        function onEachFeature(feature, layer) {
+          // console.log(layer.feature.properties.name);
+          if (disabled_states.includes(layer.feature.properties.name)) {
+            //Disabled States
+            layer.on({
+              mouseover: disabled_states_mouseover,
+              mouseout: resetHighlight_disabled,
+            });
+          } else {
+            layer.on({
+              mouseover: highlightFeature,
+              mouseout: resetHighlight,
+              click: state_click,
+            });
+          }
+        }
+
+        geojson = L.geoJson(statesData, {
+          style: style,
+          onEachFeature: onEachFeature,
+        }).addTo(map);
+
+        // Bubble to Card
+        // console.log(
+        //   document.getElementsByClassName("card_container")[0].outerHTML
+        // );
+
+        $(".reset").on("click", function () {
+          if (window.innerWidth < 768) {
+            map.setView([37.8, -96], 2.75);
+          } else {
+            map.setView([37.8, -96], 3.5);
+          }
+          // map.fitBounds([37.8, -96], 3.25);
+        });
+
+        // Chart
+      });
+    </script>
+  </body>
+</html>
