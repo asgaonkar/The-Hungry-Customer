@@ -349,7 +349,6 @@ texts = [
 var pre_star_list;
 
 function update_recommend(food) {
-
   // Clear Canvas
   document.getElementById("checkin_canvas").innerHTML = "";
 
@@ -395,9 +394,16 @@ function update_recommend(food) {
     '<li class="list-inline-item mr-0"><i class="fa fa-star-half amber-text"></i></li>';
 
   for (var i = 0; i < Object.keys(recommend[state][food]).length; i++) {
-    console.log(i);
+    console.log(i + 1);
     current_business = business[recommend[state][food][i + 1]];
     console.log(current_business);
+    console.log(food_to_biz[state][food][i + 1]);
+    var hungry_score =
+      food_to_biz[state][food][i + 1][1] * food_to_biz[state][food][i + 1][2];
+    document.getElementsByClassName("recommended_score")[i].innerHTML =
+      "Hungry Score: <strong>" +
+      Math.floor(hungry_score * 100) / 100 +
+      "</strong>";
     pre_star_list =
       '<li class="list-inline-item ml-2"> <p class="text-muted star_rating_number" id = "star_rating_number"><strong>3</strong></p ></li >';
 
@@ -675,7 +681,7 @@ function update_recommend(food) {
           yAxes: [
             {
               ticks: {
-                beginAtZero: false,
+                beginAtZero: true,
               },
               gridLines: {
                 offsetGridLines: true,
