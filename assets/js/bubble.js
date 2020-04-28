@@ -38,8 +38,8 @@ Bubbles = function () {
   var calculated_width, calculated_height;
   if (window.innerWidth >= 1024) {
     calculated_width = window.innerWidth / 2;
-    calculated_height = window.innerHeight / 2 - 75;
-    maxRadius = window.innerWidth / 30;
+    calculated_height = window.innerHeight / 2 - 100;
+    maxRadius = window.innerWidth / 35;
   } else {
     calculated_width = window.innerWidth;
     calculated_height = window.innerHeight - 200;
@@ -67,7 +67,7 @@ Bubbles = function () {
     return d.name;
   };
   collisionPadding = 3;
-  minCollisionRadius = 2;
+  minCollisionRadius = 3;
   jitter = 0.075;
   transformData = function (rawData) {
     rawData.forEach(function (d) {
@@ -155,6 +155,15 @@ Bubbles = function () {
       .attr("xlink:href", function (d) {
         return "#" + encodeURIComponent(idValue(d));
       })
+      .attr("fill", function (d) {
+        console.log(d.avg_rating);
+        if (d.avg_rating >= 3.5) {
+          return "#b2df8a";
+        } else {
+          return "#fb9a99";
+        }
+      })
+      .attr("opacity", 0.75)
       .call(force.drag)
       .call(connectEvents)
       .append("circle")

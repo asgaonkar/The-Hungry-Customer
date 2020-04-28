@@ -155,6 +155,15 @@ Bubbles = function () {
       .attr("xlink:href", function (d) {
         return "#" + encodeURIComponent(idValue(d));
       })
+      .attr("fill", function (d) {
+        console.log(d.avg_rating);
+        if (d.avg_rating >= 3.5) {
+          return "#b2df8a";
+        } else {
+          return "#fb9a99";
+        }
+      })
+      .attr("opacity", 0.75)
       .call(force.drag)
       .call(connectEvents)
       .append("circle")
@@ -191,7 +200,7 @@ Bubbles = function () {
       });
     label
       .style("font-size", function (d) {
-        return Math.max(8, rScale(rValue(d) / 2)) + "px";
+        return Math.max(6, rScale(rValue(d) / 2)) + "px";
       })
       .style("width", function (d) {
         return 2.5 * rScale(rValue(d)) + "px";
