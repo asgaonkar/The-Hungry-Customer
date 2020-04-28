@@ -127,7 +127,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalCenterTitle">
-              <strong>Hungry Customer</strong> - How-to-Navigate
+              <strong>Hungry Customer</strong> - Instructions
             </h5>
             <button
               type="button"
@@ -140,14 +140,13 @@
           </div>
           <div class="modal-body">
             <div id="information" style="display: block;">
-              <p>Instructions</p>
               <div class="alert alert-success">
                 <strong>Features:</strong>
                 <br />
                 <ul>
                   <li>Select a <strong>State</strong> from the Map</li>
                   <li>
-                    Scroll a <strong>food item</strong> from the bubble cloud
+                    Select a <strong>food item</strong> from the bubble cloud
                   </li>
                   <li>
                     Select a <strong>Restaurant</strong> from the recommended
@@ -172,7 +171,7 @@
                 <ul>
                   <li>
                     <span class="fa fa-arrow-down fa-x"></span> : Scrolls down
-                    and displays matches.
+                    to bottom.
                   </li>
                   <li>
                     <span class="fa fa-info-circle fa-x"></span> : Pops up this
@@ -348,6 +347,7 @@
                 class="nav-item nav-link active"
                 >Home</a
               >
+              <a href="trend.html" class="nav-item nav-link">Trends</a>
             </div>
             <div class="navbar-nav ml-auto">
               <a href="about.html" class="nav-item nav-link">About</a>
@@ -645,12 +645,15 @@
     <script src="assets/js/libs/d3.min.js"></script>
     <script src="assets/js/bubble.js"></script>
     <script src="bubble_data.js"></script>
-
+    <script src="us_all_restaurants.js"></script>
+    <script src="food_to_biz.js"></script>
     <!-- Chart -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 
     <script>
       $(document).ready(function () {
+        $("#btnTrigger").click();
+
         if ($("body").height() > $(window).height()) {
           document.getElementById("myBtn").style.display = "block";
         }
@@ -757,7 +760,7 @@
             (props
               ? "Hovered State: <b>" +
                 props.name +
-                "</b><br /><br /<i><strong>*Note: </strong><u>Data Unavailable</i></u><br />"
+                "</b><br /><br /<i><strong>*Note: </strong><u>Data currently unavailable</i></u><br />"
               : // props.density +
                 // " people / mi<sup>2</sup>"
                 "Hover over a state");
@@ -784,6 +787,7 @@
         var save_layer;
 
         var disabled_states = [
+          // Empty
           "Alabama",
           "Arkansas",
           "Connecticut",
@@ -823,6 +827,13 @@
           "Wyoming",
           "District of Columbia",
           "Puerto Rico",
+          // Almost Empyty Ones
+          "New York",
+          "California",
+          "Indiana",
+          "Colorado",
+          "Alaska",
+          "Virginia",
         ];
 
         function highlightFeature(e) {
