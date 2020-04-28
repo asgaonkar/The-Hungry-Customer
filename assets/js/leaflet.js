@@ -4778,7 +4778,7 @@
       },
     }),
     (n.Control.Zoom = n.Control.extend({
-      options: { position: "topright" },
+      options: { position: "topleft" },
       onAdd: function (t) {
         var e = "leaflet-control-zoom",
           i = "leaflet-bar",

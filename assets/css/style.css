@@ -4,9 +4,19 @@ body {
   color: #ffc107 !important;
 }
 
+th {
+font-weight: 400;
+}
+
 a.restaurant:hover {
   text-decoration: underline;
   cursor: pointer;
+}
+
+.side-cards
+{
+  border-radius: 5px;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 20px 0 rgba(0, 0, 0, 0.2);
 }
 
 .display-card {
@@ -118,11 +128,11 @@ header {
 
 .bubble-selected {
   /* fill: #a8c8ee;  */
-  fill: #e8e9e7;
+  /* fill: #e8e9e7; */
   /* fill: #a8c8ee; */
   /* stroke: #6081a3; */
-  stroke: #999999;
-  stroke-width: 1.5px;
+  stroke: #444;
+  stroke-width: 3px;
   /* opacity: 1; */
 }
 

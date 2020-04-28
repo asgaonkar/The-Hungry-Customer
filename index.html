@@ -31,8 +31,8 @@
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/leaflet.css" />
     <script>
-      // var baseurl = "https://asgaonkar.github.io/The-Hungry-Customer/";
-      var baseurl = "http://127.0.0.1:5500/";
+      var baseurl = "https://asgaonkar.github.io/The-Hungry-Customer/";
+      // var baseurl = "http://127.0.0.1:5500/";
       // Change the base URL
     </script>
     <style>
@@ -358,7 +358,7 @@
       </div>
     </div>
 
-    <div class="container-fluid" style="padding-top: 50px;">
+    <div class="container-fluid" style="padding-top: 40px;">
       <div class="row">
         <div
           class="col-lg-6 text-center"
@@ -379,6 +379,18 @@
           </div>
           <!-- Bubble Cloud -->
           <div class="row">
+            <h5
+              class="text-center"
+              style="
+                width: 100%;
+                margin-bottom: 0px;
+                display: none;
+                margin-top: -20px;
+              "
+              id="selected_state"
+            >
+              Arizona
+            </h5>
             <div id="vis"></div>
             <div id="status"></div>
           </div>
@@ -389,32 +401,154 @@
             <!-- Trial Start -->
             <!-- Card -->
             <div class="row" style="width: 100%;">
+              <script src="restaurant.js"></script>
+              <script src="business_hours.js"></script>
+
+              <div class="row" style="width: 100%;">
+                <div class="col-lg-6 col-sm-12">
+                  <strong
+                    ><h4
+                      class="text-center mb-0"
+                      id="selected_food"
+                      style="color: #222222;"
+                    ></h4
+                  ></strong>
+                  <h4
+                    id="selected_food_helper"
+                    class="text-center mb-0"
+                    style="color: gray; display: none; width: 100%;"
+                  >
+                    &nbsp;Restaurants
+                  </h4>
+                </div>
+              </div>
+              <div
+                class="col-lg-6 col-sm-12"
+                id="trial_cards"
+                style="overflow-y: scroll; display: none;"
+              >
+                <div class="row" style="width: 100%;">
+                  <!-- <div class="col-sm-1 col-md-2"></div> -->
+                  <div class="col-lg-12 col-sm-10 col-md-8 rest_recommend">
+                    <!-- Card  0 -->
+                    <br />
+                    <div
+                      class="row card_container"
+                      style="width: 100%; display: none;"
+                    >
+                      <div class="card display-card" style="width: 100%;">
+                        <img
+                          class="card-img-top"
+                          src="https://mdbootstrap.com/img/Photos/Horizontal/Food/8-col/img(5).jpg"
+                          alt="Card image cap"
+                        />
+                        <div class="card-body">
+                          <!-- Title -->
+                          <h4
+                            class="card-title font-weight-bold"
+                            style="margin-bottom: 2px;"
+                          >
+                            <a
+                              class="restaurant restaurant_name"
+                              href="javascript:void(0);"
+                              onclick="var curr_card = $(this)[0].parentNode.parentNode; console.log(curr_card.getElementsByClassName('restaurant_select')[0].click());"
+                              id="1"
+                              style="text-decoration: none;"
+                              >1. La Sirena restaurant</a
+                            >
+                          </h4>
+                          <!-- Address -->
+                          <h6>
+                            <a
+                              class="restaurant_address"
+                              href="javascript:void(0);"
+                              onclick="var curr_card = $(this)[0].parentNode.parentNode; console.log(curr_card.getElementsByClassName('map_call')[0].click());"
+                              ;
+                              id="1"
+                              style="text-decoration: none;"
+                              >Address</a
+                            >
+                          </h6>
+                          <!-- Data -->
+                          <ul
+                            class="list-unstyled list-inline mb-0 restaurant_stars_list"
+                            style="height: 25px;"
+                          >
+                            <li class="list-inline-item mr-2">
+                              <p
+                                class="text-muted star_rating_number"
+                                id="star_rating_number"
+                              >
+                                <strong>4.5</strong>
+                              </p>
+                            </li>
+                          </ul>
+                          <p class="mb-1 recommended_score" id="">
+                            Hungry Score: <strong>287.98</strong>
+                          </p>
+                          <p class="mb-1 review_count" id="">
+                            Review Count: <strong>413</strong>
+                          </p>
+                          <!-- <p class="mb-2" id="">
+                            Type: American, Restaurant
+                          </p> -->
+                          <hr class="my-2" />
+                          <!-- Text -->
+                          <p class="card-text">
+                            <!-- Tags: -->
+                          </p>
+                          <p class="card-text cuisine_tags"></p>
+                          <button
+                            class="btn btn-flat red-text p-1 my-1 mr-3 mml-1 deep-purple-text collapsed restaurant_select"
+                            style="background-color: #38acec;"
+                          >
+                            Select
+                          </button>
+                          <!-- <a
+                            class="btn btn-flat disabled red-text p-1 my-3 mr-3 mml-1 deep-purple-text collapsed read_more"
+                            data-toggle="collapse"
+                            href="#collapseExample"
+                            aria-expanded="false"
+                            aria-controls="collapseExample"
+                            style="background-color: #38acec;"
+                            >Details
+                            <i class="fa fa-angle-down" aria-hidden="true"></i
+                          ></a> -->
+                          <button
+                            class="btn btn-flat red-text p-1 my-3 mr-3 mml-1 deep-purple-text collapsed map_call"
+                            style="background-color: #38acec;"
+                          >
+                            Map <i class="fa fa-map-marker"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <br />
+                  </div>
+                  <!-- <div class="col-sm-1 col-md-2"></div> -->
+                </div>
+              </div>
+              <!-- New -->
               <div class="col-lg-6 col-sm-12">
                 <div
                   class="row state_click"
                   style="width: 100%; padding-left: 10px; display: none;"
                 >
-                  <h4
+                  <!-- <h4
                     class="text-center"
                     style="width: 100%; margin-bottom: 2px;"
                     id="selected_state"
                   >
                     Arizona
-                  </h4>
-                  <h6
+                  </h4> -->
+                  <!-- <h6
                     class="text-center"
                     style="width: 100%;"
                     id="selected_state_s_name"
                   >
                     (AZ)
                   </h6>
-                  <br />
-                  <div class="row" style="width: 100%;">
-                    <h4 style="color: gray;">Food:</h4>
-                    &nbsp;<strong
-                      ><h4 id="selected_food" style="color: #222222;"></h4
-                    ></strong>
-                  </div>
+                  <br /> -->
                   <!-- Stats -->
                   <div class="row">
                     <div
@@ -425,26 +559,43 @@
 
                       <div class="restaurant_details" style="display: none;">
                         <!-- Checkin Hours -->
+                        <div class="row side-cards" style="width: 100%;">
+                          <div
+                            class="row text-center mb-0"
+                            style="width: 100%;"
+                            id="restaurant_details"
+                          >
+                            <h4 class="mb-0">Checkin Distribution</h4>
+                          </div>
 
-                        <!-- Chart -->
-                        <div
-                          class="row"
-                          style="width: 80%;"
-                          class="checkin_canvas"
-                          id="checkin_canvas"
-                        >
-                          <!-- <h5>Checkin Distribution</h5> -->
-                          <!-- <canvas
+                          <!-- Chart -->
+                          <div
+                            class="row"
+                            style="width: 90%;"
+                            class="checkin_canvas"
+                            id="checkin_canvas"
+                          >
+                            <!-- <h5>Checkin Distribution</h5> -->
+                            <!-- <canvas
                             id="myChart"
                             width="200"
                             height="200"
                             style="height: 150px; width: 150px;"
                           ></canvas> -->
+                          </div>
                         </div>
 
+                        <br />
                         <!-- Timing -->
-                        <div class="row" style="width: 100%;" id="">
-                          <table class="table">
+                        <div
+                          class="row side-cards"
+                          style="width: 100%;"
+                          id="table"
+                        >
+                          <h4 style="width: 100%;" class="text-center">
+                            Timing
+                          </h4>
+                          <table class="table ml-2">
                             <!-- <thead style="border-bottom: 0px !important;">
                               <tr>
                                 <th scope="col"></th>
@@ -488,113 +639,6 @@
                   </div>
                 </div>
               </div>
-
-              <script src="restaurant.js"></script>
-              <script src="business_hours.js"></script>
-
-              <div
-                class="col-lg-6 col-sm-12"
-                id="trial_cards"
-                style="overflow-y: scroll;"
-              >
-                <div class="row" style="width: 100%;">
-                  <div class="col-sm-1 col-md-2"></div>
-                  <div class="col-lg-12 col-sm-10 col-md-8 rest_recommend">
-                    <!-- Card  0 -->
-                    <br />
-                    <div
-                      class="row card_container"
-                      style="width: 100%; display: none;"
-                    >
-                      <div class="card display-card" style="width: 100%;">
-                        <img
-                          class="card-img-top"
-                          src="https://mdbootstrap.com/img/Photos/Horizontal/Food/8-col/img(5).jpg"
-                          alt="Card image cap"
-                        />
-                        <div class="card-body">
-                          <!-- Title -->
-                          <h4
-                            class="card-title font-weight-bold"
-                            style="margin-bottom: 2px;"
-                          >
-                            <a
-                              class="restaurant restaurant_name"
-                              href="javascript:void(0);"
-                              id="1"
-                              style="text-decoration: none;"
-                              >1. La Sirena restaurant</a
-                            >
-                          </h4>
-                          <!-- Address -->
-                          <h6>
-                            <a
-                              class="restaurant_address"
-                              href="javascript:void(0);"
-                              id="1"
-                              style="text-decoration: none;"
-                              >Address</a
-                            >
-                          </h6>
-                          <!-- Data -->
-                          <ul
-                            class="list-unstyled list-inline mb-0 restaurant_stars_list"
-                          >
-                            <li class="list-inline-item mr-2">
-                              <p
-                                class="text-muted star_rating_number"
-                                id="star_rating_number"
-                              >
-                                <strong>4.5</strong>
-                              </p>
-                            </li>
-                          </ul>
-                          <p class="mb-2 recommended_score" id="">
-                            Hungry Score: <strong>287.98</strong>
-                          </p>
-                          <p class="mb-2 review_count" id="">
-                            Review Count: <strong>413</strong>
-                          </p>
-                          <p class="mb-2" id="">
-                            Type: American, Restaurant
-                          </p>
-                          <hr class="my-2" />
-                          <!-- Text -->
-                          <p class="card-text">
-                            Tags:
-                          </p>
-                          <p class="card-text cuisine_tags"></p>
-                          <button
-                            class="btn btn-flat red-text p-1 my-3 mr-3 mml-1 deep-purple-text collapsed restaurant_select"
-                            style="background-color: #38acec;"
-                          >
-                            Select
-                          </button>
-                          <a
-                            class="btn btn-flat disabled red-text p-1 my-3 mr-3 mml-1 deep-purple-text collapsed read_more"
-                            data-toggle="collapse"
-                            href="#collapseExample"
-                            aria-expanded="false"
-                            aria-controls="collapseExample"
-                            style="background-color: #38acec;"
-                            >Details
-                            <i class="fa fa-angle-down" aria-hidden="true"></i
-                          ></a>
-                          <button
-                            class="btn btn-flat red-text p-1 my-3 mr-3 mml-1 deep-purple-text collapsed map_call"
-                            style="background-color: #38acec;"
-                          >
-                            Map <i class="fa fa-map-marker"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                    <br />
-                  </div>
-                  <div class="col-sm-1 col-md-2"></div>
-                </div>
-              </div>
-
               <br />
             </div>
             <br />
@@ -652,6 +696,10 @@
 
     <script>
       $(document).ready(function () {
+        $("restaurant_name").on("click", function () {
+          console.log($(this)[0]);
+        });
+
         $("#btnTrigger").click();
 
         if ($("body").height() > $(window).height()) {
@@ -698,7 +746,7 @@
 
         // Initial Call
         Bubble_Call();
-        // call_display("Arizona");
+        // call_display("South Carolina");
 
         function StatePush(state) {
           // alert("State Change");
@@ -732,7 +780,7 @@
         if (window.innerWidth < 768) {
           map = L.map("map").setView([37.8, -98], 3.25);
         } else {
-          map = L.map("map").setView([37.8, -95], 4);
+          map = L.map("map").setView([37.8, -97], 4);
         }
 
         // control that shows state info on hover
@@ -756,14 +804,14 @@
 
         info.update_disabled = function (props) {
           this._div.innerHTML =
-            "<h4>State</h4>" +
-            (props
+            // "<h4>State</h4>" +
+            props
               ? "Hovered State: <b>" +
                 props.name +
-                "</b><br /><br /<i><strong>*Note: </strong><u>Data currently unavailable</i></u><br />"
+                "</b><br /><br /><i><strong>*Note: </strong><u>Data currently unavailable</i></u><br />"
               : // props.density +
                 // " people / mi<sup>2</sup>"
-                "Hover over a state");
+                "Hover over a state";
         };
 
         info.addTo(map);
@@ -938,10 +986,12 @@
           if (!L.Browser.ie && !L.Browser.opera) {
             layer.bringToFront();
           }
+          document.getElementById("selected_state").style.display = "block";
           document.getElementById("selected_state").innerHTML =
             layer.feature.properties.name;
-          document.getElementById("selected_state_s_name").innerHTML =
-            "(" + layer.feature.properties.s_name + ")";
+
+          // document.getElementById("selected_state_s_name").innerHTML =
+          //   "(" + layer.feature.properties.s_name + ")";
 
           // console.log(layer.feature.properties.name);
 

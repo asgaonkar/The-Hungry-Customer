@@ -39,7 +39,7 @@ Bubbles = function () {
   if (window.innerWidth >= 1024) {
     calculated_width = window.innerWidth / 2;
     calculated_height = window.innerHeight / 2 - 100;
-    maxRadius = window.innerWidth / 35;
+    maxRadius = window.innerWidth / 32;
   } else {
     calculated_width = window.innerWidth;
     calculated_height = window.innerHeight - 200;
@@ -156,7 +156,7 @@ Bubbles = function () {
         return "#" + encodeURIComponent(idValue(d));
       })
       .attr("fill", function (d) {
-        console.log(d.avg_rating);
+        // console.log(d.avg_rating);
         if (d.avg_rating >= 3.5) {
           return "#b2df8a";
         } else {
@@ -196,11 +196,14 @@ Bubbles = function () {
       .append("div")
       .attr("class", "bubble-label-value")
       .text(function (d) {
-        return rValue(d);
+        // return rValue(d);
+        // console.log((d.avg_rating * d.count).toFixed(0));
+        return (d.avg_rating * d.count).toFixed(0);
       });
     label
       .style("font-size", function (d) {
-        return Math.max(8, rScale(rValue(d) / 2)) + "px";
+        // console.log(d, rScale(rValue(d) / 2));
+        return Math.max(8, rScale(rValue(d) / 2.5)) + "px";
       })
       .style("width", function (d) {
         return 2.5 * rScale(rValue(d)) + "px";
@@ -280,7 +283,7 @@ Bubbles = function () {
     });
     if (id.length > 0) {
       // console.log("Selected Word: " + id);
-      d3.select("#selected_food").html("#" + id + "</h5>");
+      d3.select("#selected_food").html("#" + id + "</h4>");
 
       update_recommend(id);
       return;
@@ -360,6 +363,10 @@ var pre_star_list;
 function update_recommend(food) {
   // Clear Canvas
   document.getElementById("checkin_canvas").innerHTML = "";
+  document.getElementById("trial_cards").style.display = "block";
+  document.getElementById("selected_food_helper").style.display = "block";
+  document.getElementById("table").style.display = "none";
+  document.getElementById("restaurant_details").style.display = "none";
 
   // Clear Timing
   document.getElementsByClassName("monday")[0].innerHTML = "";
@@ -403,10 +410,10 @@ function update_recommend(food) {
     '<li class="list-inline-item mr-0"><i class="fa fa-star-half amber-text"></i></li>';
 
   for (var i = 0; i < Object.keys(recommend[state][food]).length; i++) {
-    console.log(i + 1);
+    // console.log(i + 1);
     current_business = business[recommend[state][food][i + 1]];
-    console.log(current_business);
-    console.log(food_to_biz[state][food][i + 1]);
+    // console.log(current_business);
+    // console.log(food_to_biz[state][food][i + 1]);
     var hungry_score =
       food_to_biz[state][food][i + 1][1] * food_to_biz[state][food][i + 1][2];
     document.getElementsByClassName("recommended_score")[i].innerHTML =
@@ -464,7 +471,7 @@ function update_recommend(food) {
     document.getElementsByClassName("map_call")[i].id = "map_call_" + (i + 1);
     document.getElementsByClassName("restaurant_select")[i].id =
       "restaurant_select_" + (i + 1);
-    document.getElementsByClassName("read_more")[i].id = "read_more_" + (i + 1);
+    // document.getElementsByClassName("read_more")[i].id = "read_more_" + (i + 1);
   }
 
   var get_rest_id, get_selected_food, get_selected_state;
@@ -482,9 +489,9 @@ function update_recommend(food) {
       .innerHTML.substring(1);
     get_selected_state = document.getElementById("selected_state").innerHTML;
 
-    console.log(
-      business[recommend[get_selected_state][get_selected_food][get_rest_id]]
-    );
+    // console.log(
+    //   business[recommend[get_selected_state][get_selected_food][get_rest_id]]
+    // );
 
     full_address_frame =
       business[recommend[get_selected_state][get_selected_food][get_rest_id]]
@@ -549,6 +556,8 @@ function update_recommend(food) {
     // console.log(document.getElementsByClassName("friday")[0]);
     // console.log(document.getElementsByClassName("saturday")[0]);
     // console.log(document.getElementsByClassName("sunday")[0]);
+    document.getElementById("table").style.display = "block";
+    document.getElementById("restaurant_details").style.display = "block";
     document.getElementsByClassName("restaurant_details")[0].style.display =
       "block";
     get_rest_id = $(this).attr("id").split("_");
@@ -559,7 +568,7 @@ function update_recommend(food) {
       .innerHTML.substring(1);
     get_selected_state = document.getElementById("selected_state").innerHTML;
 
-    console.log(get_rest_id, get_selected_state, get_selected_food);
+    // console.log(get_rest_id, get_selected_state, get_selected_food);
 
     // console.log(get_rest_id, get_selected_state, get_selected_food);
 
