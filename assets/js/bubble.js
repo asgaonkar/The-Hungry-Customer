@@ -38,12 +38,12 @@ Bubbles = function () {
   var calculated_width, calculated_height;
   if (window.innerWidth >= 1024) {
     calculated_width = window.innerWidth / 2;
-    calculated_height = window.innerHeight / 2 - 100;
+    calculated_height = window.innerHeight / 2 - 75;
     maxRadius = window.innerWidth / 30;
   } else {
     calculated_width = window.innerWidth;
     calculated_height = window.innerHeight - 200;
-    maxRadius = window.innerWidth / 12;
+    maxRadius = window.innerWidth / 15;
   }
   width = calculated_width;
   height = calculated_height;
@@ -68,7 +68,7 @@ Bubbles = function () {
   };
   collisionPadding = 3;
   minCollisionRadius = 2;
-  jitter = 0.1;
+  jitter = 0.075;
   transformData = function (rawData) {
     rawData.forEach(function (d) {
       d.count = parseInt(d.count);

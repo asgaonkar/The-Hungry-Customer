@@ -1,5 +1,5 @@
 // Requires Bubble Data
-
+// Maintain Only 50 Entries here
 var dict = {};
 
 dict["Arizona"] = [
@@ -204,6 +204,7 @@ dict["California"] = [
   },
 ];
 
+// South Carolina Completed
 dict["South Carolina"] = [
   { name: "chicken", count: 793, avg_rating: 3.426229508 },
   { name: "cheese", count: 539, avg_rating: 3.532467532 },
@@ -256,4 +257,59 @@ dict["South Carolina"] = [
   { name: "buffet", count: 75, avg_rating: 3.386666667 },
   { name: "sausage", count: 75, avg_rating: 3.4533333330000002 },
   { name: "asian", count: 73, avg_rating: 4.068493151 },
+];
+
+// Illinois Completed
+dict["Illinois"] = [
+  { name: "chicken", count: 2674, avg_rating: 3.638743455497381 },
+  { name: "sauce", count: 1881, avg_rating: 3.533227006911217 },
+  { name: "pizza", count: 1833, avg_rating: 3.462084015275505 },
+  { name: "cheese", count: 1759, avg_rating: 3.5770324047754394 },
+  { name: "beer", count: 1355, avg_rating: 3.7675276752767526 },
+  { name: "fried", count: 1319, avg_rating: 3.3381349507202405 },
+  { name: "salad", count: 1318, avg_rating: 3.4764795144157814 },
+  { name: "rice", count: 1281, avg_rating: 3.454332552693207 },
+  { name: "beef", count: 1201, avg_rating: 3.691090757701915 },
+  { name: "bread", count: 1176, avg_rating: 3.465986394557824 },
+  { name: "pork", count: 1028, avg_rating: 3.8608949416342413 },
+  { name: "sandwich", count: 999, avg_rating: 3.3943943943943946 },
+  { name: "burger", count: 935, avg_rating: 3.4877005347593584 },
+  { name: "sushi", count: 922, avg_rating: 3.742950108459872 },
+  { name: "flavour", count: 904, avg_rating: 3.3661504424778763 },
+  { name: "spicy", count: 891, avg_rating: 3.9259259259259274 },
+  { name: "coffee", count: 846, avg_rating: 3.7411347517730498 },
+  { name: "soup", count: 802, avg_rating: 3.491271820448878 },
+  { name: "steak", count: 774, avg_rating: 3.4160206718346253 },
+  { name: "fish", count: 741, avg_rating: 3.624831309041835 },
+  { name: "appetizer", count: 709, avg_rating: 3.578279266572637 },
+  { name: "chinese", count: 677, avg_rating: 3.896602658788773 },
+  { name: "potato", count: 650, avg_rating: 3.8 },
+  { name: "hot", count: 644, avg_rating: 3.631987577639751 },
+  { name: "salsa", count: 616, avg_rating: 3.7970779220779214 },
+  { name: "brunch", count: 596, avg_rating: 3.6929530201342287 },
+  { name: "bacon", count: 595, avg_rating: 3.6722689075630246 },
+  { name: "wine", count: 549, avg_rating: 3.8907103825136615 },
+  { name: "dessert", count: 545, avg_rating: 3.6752293577981634 },
+  { name: "egg", count: 542, avg_rating: 3.5738007380073795 },
+  { name: "cream", count: 521, avg_rating: 3.6813819577735134 },
+  { name: "mexican", count: 481, avg_rating: 4.0207900207900265 },
+  { name: "shrimp", count: 436, avg_rating: 3.5435779816513766 },
+  { name: "sweet", count: 426, avg_rating: 3.7159624413145536 },
+  { name: "tacos", count: 425, avg_rating: 3.9058823529411764 },
+  { name: "weekend", count: 414, avg_rating: 3.6062801932367146 },
+  { name: "burrito", count: 393, avg_rating: 3.6335877862595423 },
+  { name: "crispy", count: 385, avg_rating: 3.9792207792207783 },
+  { name: "roll", count: 380, avg_rating: 3.5763157894736843 },
+  { name: "pizzas", count: 367, avg_rating: 3.5640326975476837 },
+  { name: "salty", count: 360, avg_rating: 3.1583333333333314 },
+  { name: "pasta", count: 357, avg_rating: 3.4117647058823533 },
+  { name: "lettuce", count: 357, avg_rating: 3.0756302521008396 },
+  { name: "tea", count: 349, avg_rating: 3.661891117478509 },
+  { name: "sausage", count: 331, avg_rating: 3.679758308157099 },
+  { name: "indian", count: 330, avg_rating: 3.881818181818182 },
+  { name: "salmon", count: 325, avg_rating: 3.747692307692308 },
+  { name: "buffet", count: 319, avg_rating: 3.238244514106583 },
+  { name: "bbq", count: 317, avg_rating: 4.100946372239748 },
+  { name: "korean", count: 311, avg_rating: 3.752411575562701 },
+  { name: "curry", count: 309, avg_rating: 3.802588996763754 },
 ];
