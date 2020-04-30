@@ -31,8 +31,8 @@
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/leaflet.css" />
     <script>
-      var baseurl = "https://asgaonkar.github.io/The-Hungry-Customer/";
-      // var baseurl = "http://127.0.0.1:5500/";
+      // var baseurl = "https://asgaonkar.github.io/The-Hungry-Customer/";
+      var baseurl = "http://127.0.0.1:5500/";
       // Change the base URL
     </script>
     <style>
@@ -405,7 +405,7 @@
               <script src="business_hours.js"></script>
 
               <div class="row" style="width: 100%;">
-                <div class="col-lg-6 col-sm-12">
+                <div class="col-6">
                   <strong
                     ><h4
                       class="text-center mb-0"
@@ -420,6 +420,13 @@
                   >
                     &nbsp;Restaurants
                   </h4>
+                </div>
+                <div class="col-6">
+                  <h5
+                    class="mb-0 text-center"
+                    id="display_rest"
+                    style="display: none;"
+                  ></h5>
                 </div>
               </div>
               <div
@@ -559,6 +566,7 @@
 
                       <div class="restaurant_details" style="display: none;">
                         <!-- Checkin Hours -->
+
                         <div class="row side-cards" style="width: 100%;">
                           <div
                             class="row text-center mb-0"
@@ -570,8 +578,8 @@
 
                           <!-- Chart -->
                           <div
-                            class="row"
-                            style="width: 90%;"
+                            class="row text-center"
+                            style="width: 80%;"
                             class="checkin_canvas"
                             id="checkin_canvas"
                           >
@@ -941,6 +949,10 @@
         boundary_color = "#666666";
 
         function state_click(e) {
+          document.getElementById("selected_food_helper").style.display =
+            "none";
+          document.getElementById("trial_cards").style.display = "none";
+          document.getElementById("display_rest").style.display = "none";
           // Clearing Timing
           document.getElementsByClassName("monday")[0].innerHTML = "";
           document.getElementsByClassName("tuesday")[0].innerHTML = "";

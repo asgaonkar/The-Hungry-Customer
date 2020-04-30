@@ -39,11 +39,11 @@ Bubbles = function () {
   if (window.innerWidth >= 1024) {
     calculated_width = window.innerWidth / 2;
     calculated_height = window.innerHeight / 2 - 100;
-    maxRadius = window.innerWidth / 32;
+    maxRadius = window.innerWidth / 35;
   } else {
     calculated_width = window.innerWidth;
     calculated_height = window.innerHeight - 200;
-    maxRadius = window.innerWidth / 15;
+    maxRadius = window.innerWidth / 20;
   }
   width = calculated_width;
   height = calculated_height;
@@ -361,6 +361,8 @@ texts = [
 var pre_star_list;
 
 function update_recommend(food) {
+  document.getElementById("display_rest").style.display = "none";
+
   // Clear Canvas
   document.getElementById("checkin_canvas").innerHTML = "";
   document.getElementById("trial_cards").style.display = "block";
@@ -414,12 +416,12 @@ function update_recommend(food) {
     current_business = business[recommend[state][food][i + 1]];
     // console.log(current_business);
     // console.log(food_to_biz[state][food][i + 1]);
-    var hungry_score =
-      food_to_biz[state][food][i + 1][1] * food_to_biz[state][food][i + 1][2];
-    document.getElementsByClassName("recommended_score")[i].innerHTML =
-      "Hungry Score: <strong>" +
-      Math.floor(hungry_score * 100) / 100 +
-      "</strong>";
+    // var hungry_score =
+    //   food_to_biz[state][food][i + 1][1] * food_to_biz[state][food][i + 1][2];
+    // document.getElementsByClassName("recommended_score")[i].innerHTML =
+    //   "Hungry Score: <strong>" +
+    //   Math.floor(hungry_score * 100) / 100 +
+    //   "</strong>";
     pre_star_list =
       '<li class="list-inline-item ml-2"> <p class="text-muted star_rating_number" id = "star_rating_number"><strong>3</strong></p ></li >';
 
@@ -556,12 +558,20 @@ function update_recommend(food) {
     // console.log(document.getElementsByClassName("friday")[0]);
     // console.log(document.getElementsByClassName("saturday")[0]);
     // console.log(document.getElementsByClassName("sunday")[0]);
+    document.getElementById("display_rest").style.display = "block";
+
     document.getElementById("table").style.display = "block";
     document.getElementById("restaurant_details").style.display = "block";
     document.getElementsByClassName("restaurant_details")[0].style.display =
       "block";
     get_rest_id = $(this).attr("id").split("_");
     get_rest_id = get_rest_id[get_rest_id.length - 1];
+
+    document.getElementById(
+      "display_rest"
+    ).innerHTML = document.getElementsByClassName("restaurant_name")[
+      get_rest_id - 1
+    ].innerHTML;
 
     get_selected_food = document
       .getElementById("selected_food")
@@ -648,7 +658,7 @@ function update_recommend(food) {
 
     document.getElementById("checkin_canvas").innerHTML = "";
     document.getElementById("checkin_canvas").innerHTML =
-      "<canvas id = 'myChart' width = '200' height = '200'></canvas >";
+      "<canvas id = 'myChart' width = '200' height = '200' style='margin-left: 20px;'></canvas >";
 
     var ctx = document.getElementById("myChart").getContext("2d");
     var myChart = new Chart(ctx, {
