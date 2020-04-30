@@ -4,6 +4,7 @@ root = typeof exports !== "undefined" && exports !== null ? exports : this;
 
 Bubbles = function () {
   // console.log("Width: ", w);
+  bubble_total = 0;
   var chart,
     clear,
     click,
@@ -157,13 +158,23 @@ Bubbles = function () {
       })
       .attr("fill", function (d) {
         // console.log(d.avg_rating);
-        if (d.avg_rating >= 3.5) {
-          return "#b2df8a";
-        } else {
-          return "#fb9a99";
+        if (d.avg_rating >= 4.0) {
+          return "#2D520F";
+        }
+        // 3.5 and above
+        else if (d.avg_rating >= 3.5) {
+          return "#4E7813";
+        }
+        // 3.5 and above
+        else if (d.avg_rating >= 3) {
+          return "#6F9E17";
+        }
+        // 3.5 and below
+        else {
+          return "#90C41C";
         }
       })
-      .attr("opacity", 0.75)
+      .attr("opacity", 0.5)
       .call(force.drag)
       .call(connectEvents)
       .append("circle")
@@ -198,6 +209,8 @@ Bubbles = function () {
       .text(function (d) {
         // return rValue(d);
         // console.log((d.avg_rating * d.count).toFixed(0));
+        bubble_total += parseInt((d.avg_rating * d.count).toFixed(0));
+        // console.log(bubble_total);
         return (d.avg_rating * d.count).toFixed(0);
       });
     label

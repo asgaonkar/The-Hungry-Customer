@@ -31,8 +31,8 @@
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/leaflet.css" />
     <script>
-      var baseurl = "https://asgaonkar.github.io/The-Hungry-Customer/";
-      // var baseurl = "http://127.0.0.1:5500/";
+      // var baseurl = "https://asgaonkar.github.io/The-Hungry-Customer/";
+      var baseurl = "http://127.0.0.1:5500/";
       // Change the base URL
     </script>
     <style>
@@ -834,7 +834,7 @@
             weight: 2,
             opacity: 1,
             color: "white",
-            dashArray: "4",
+            dashArray: "",
             fillOpacity: 0.7,
             fillColor: getColor(feature.properties.density),
           };
@@ -893,21 +893,6 @@
         ];
 
         function highlightFeature(e) {
-          // var x = document.getElementsByClassName("leaflet-zoom-animated")[0];
-          // var y = x.children,
-          //   path_element;
-          // for (var i = 0; i < y.length; i++) {
-          //   // console.log(i);
-          //   path_element = y[i].children[0].attributes;
-          //   console.log(path_element["d"].value);
-
-          //   if (path_element["stroke-width"].value == "5") {
-          //     path_element["stroke-width"].value = "2";
-          //     path_element["stroke-dasharray"].value = "3";
-          //     path_element["stroke"].value = "white";
-          //   }
-          // }
-
           var layer = e.target;
           // console.log(e);
           layer.setStyle({
@@ -933,12 +918,12 @@
           if (save_layer) {
             // alert(1);
             save_layer.setStyle({
-              weight: 5,
+              weight: 4,
               color: boundary_color,
               dashArray: "",
               fillOpacity: 1,
             });
-            save_layer._path.attributes["fill"].value = "#888888";
+            save_layer._path.attributes["fill"].value = "#38acec";
           }
         }
 
@@ -946,7 +931,7 @@
           info.update_disabled();
         }
 
-        boundary_color = "#666666";
+        boundary_color = "#2193d1";
 
         function state_click(e) {
           document.getElementById("selected_food_helper").style.display =
@@ -1010,21 +995,11 @@
           // alert(document.getElementById("selected_state").innerHTML);
           // map.fitBounds(e.target.getBounds());
           StatePush(layer.feature.properties.name);
+          console.log(bubble_total);
         }
 
         function disabled_states_mouseover(e) {
           var layer = e.target;
-          // console.log(e);
-          // layer.setStyle({
-          //   weight: 5,
-          //   color: "#666",
-          //   dashArray: "",
-          //   fillOpacity: 0.7,
-          // });
-
-          // if (!L.Browser.ie && !L.Browser.opera) {
-          //   layer.bringToFront();
-          // }
 
           info.update_disabled(layer.feature.properties);
         }
