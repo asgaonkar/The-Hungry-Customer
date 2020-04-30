@@ -24,15 +24,15 @@
     />
     <link rel="stylesheet" href="assets/css/modal.css" />
 
-    <title>Hungry Customer</title>
+    <title>Food Explorer</title>
     <style></style>
     <script src="https://use.fontawesome.com/922eaae474.js"></script>
     <script src="us_checkin.js"></script>
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/leaflet.css" />
     <script>
-      // var baseurl = "https://asgaonkar.github.io/The-Hungry-Customer/";
-      var baseurl = "http://127.0.0.1:5500/";
+      var baseurl = "https://asgaonkar.github.io/The-Hungry-Customer/";
+      // var baseurl = "http://127.0.0.1:5500/";
       // Change the base URL
     </script>
     <style>
@@ -127,7 +127,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalCenterTitle">
-              <strong>Hungry Customer</strong> - Instructions
+              <strong>Food Explorer</strong> - Instructions
             </h5>
             <button
               type="button"
@@ -220,7 +220,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalCenterTitle">
-              <strong>Hungry Customer</strong> - Restaurant Data
+              <strong>Food Explorer</strong> - Restaurant Data
             </h5>
             <button
               type="button"
@@ -325,9 +325,9 @@
             style="text-decoration: none !important;"
           >
             <img
-              src="assets/img/hungry_customer.png"
+              src="assets/img/hungry_customer - Copy.png"
               height="30"
-              alt="Hungry-Customer"
+              alt="Food-Explorer"
             />
           </a>
           <button
@@ -778,7 +778,21 @@
           );
           d3.select("#vis").select("svg").remove();
           $("#bubble-labels").remove();
+          bubble_total = 0;
           call_display(state);
+
+          var all_bubbles = document.getElementsByClassName(
+            "bubble-label-value"
+          );
+          for (var bubble_i = 0; bubble_i < all_bubbles.length; bubble_i++) {
+            all_bubbles[bubble_i].innerHTML =
+              (
+                parseFloat(
+                  parseInt(all_bubbles[bubble_i].innerHTML) / bubble_total
+                ).toPrecision(3) * 100
+              ).toFixed(2) + "%";
+            // console.log(all_bubbles[bubble_i].innerHTML);
+          }
         }
 
         // Map Scripts
@@ -995,7 +1009,6 @@
           // alert(document.getElementById("selected_state").innerHTML);
           // map.fitBounds(e.target.getBounds());
           StatePush(layer.feature.properties.name);
-          console.log(bubble_total);
         }
 
         function disabled_states_mouseover(e) {

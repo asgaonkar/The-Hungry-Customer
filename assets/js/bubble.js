@@ -159,22 +159,38 @@ Bubbles = function () {
       .attr("fill", function (d) {
         // console.log(d.avg_rating);
         if (d.avg_rating >= 4.0) {
-          return "#2D520F";
+          return "#52A136";
         }
         // 3.5 and above
         else if (d.avg_rating >= 3.5) {
-          return "#4E7813";
+          return "#6BBD57";
         }
         // 3.5 and above
         else if (d.avg_rating >= 3) {
-          return "#6F9E17";
+          return "#9DD76A";
         }
         // 3.5 and below
         else {
-          return "#90C41C";
+          return "#DCF9C6";
         }
       })
-      .attr("opacity", 0.5)
+      .attr("opacity", function (d) {
+        if (d.avg_rating >= 4.0) {
+          return 0.75;
+        }
+        // 3.5 and above
+        else if (d.avg_rating >= 3.5) {
+          return 0.5;
+        }
+        // 3.5 and above
+        else if (d.avg_rating >= 3) {
+          return 0.45;
+        }
+        // 3.5 and below
+        else {
+          return 0.4;
+        }
+      })
       .call(force.drag)
       .call(connectEvents)
       .append("circle")
@@ -487,6 +503,20 @@ function update_recommend(food) {
     document.getElementsByClassName("restaurant_select")[i].id =
       "restaurant_select_" + (i + 1);
     // document.getElementsByClassName("read_more")[i].id = "read_more_" + (i + 1);
+
+    // Change Images
+    // https://mdbootstrap.com/img/Photos/Horizontal/Food/8-col/img(5).jpg
+
+    var rest_img = document.getElementsByClassName("card-img-top");
+    for (var rest_img_i = 0; rest_img_i < rest_img.length; rest_img_i++) {
+      rest_img[rest_img_i].setAttribute(
+        "src",
+        "assets/img/restaurant/" + Math.floor(Math.random() * 52) + ".jpg"
+      );
+      // console.log(
+      //   "assets/img/restaurant/" + Math.floor(Math.random() * 52) + ".jpg"
+      // );
+    }
   }
 
   var get_rest_id, get_selected_food, get_selected_state;
