@@ -158,15 +158,15 @@ Bubbles = function () {
       })
       .attr("fill", function (d) {
         // console.log(d.avg_rating);
-        if (d.avg_rating >= 4.0) {
+        if (d.avg_rating >= 4.5) {
           return "#52A136";
         }
         // 3.5 and above
-        else if (d.avg_rating >= 3.5) {
+        else if (d.avg_rating >= 4) {
           return "#6BBD57";
         }
         // 3.5 and above
-        else if (d.avg_rating >= 3) {
+        else if (d.avg_rating >= 3.5) {
           return "#9DD76A";
         }
         // 3.5 and below
@@ -175,15 +175,15 @@ Bubbles = function () {
         }
       })
       .attr("opacity", function (d) {
-        if (d.avg_rating >= 4.0) {
+        if (d.avg_rating >= 4.5) {
           return 0.75;
         }
         // 3.5 and above
-        else if (d.avg_rating >= 3.5) {
+        else if (d.avg_rating >= 4) {
           return 0.5;
         }
         // 3.5 and above
-        else if (d.avg_rating >= 3) {
+        else if (d.avg_rating >= 3.5) {
           return 0.45;
         }
         // 3.5 and below

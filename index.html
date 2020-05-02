@@ -162,10 +162,44 @@
                   </li>
                 </ul>
               </div>
-              <div class="alert alert-warning">
-                <strong>Warning:</strong> Please reload the page if either data
-                is missing or visualization is distorted.
-              </div>
+              <!-- <div class="alert alert-warning">
+                <strong>Info:</strong> Increasing order of favoured or liked
+                food
+                <div class="ramp BuGn selected">
+                  <svg width="15" height="75">
+                    <rect
+                      fill="rgb(237,248,251)"
+                      width="15"
+                      height="15"
+                      y="0"
+                    ></rect>
+                    <rect
+                      fill="rgb(178,226,226)"
+                      width="15"
+                      height="15"
+                      y="15"
+                    ></rect>
+                    <rect
+                      fill="rgb(102,194,164)"
+                      width="15"
+                      height="15"
+                      y="30"
+                    ></rect>
+                    <rect
+                      fill="rgb(44,162,95)"
+                      width="15"
+                      height="15"
+                      y="45"
+                    ></rect>
+                    <rect
+                      fill="rgb(0,109,44)"
+                      width="15"
+                      height="15"
+                      y="60"
+                    ></rect>
+                  </svg>
+                </div>
+              </div> -->
               <div class="alert alert-info">
                 <strong>Navigation:</strong>
                 <ul>
@@ -178,6 +212,10 @@
                     box again
                   </li>
                 </ul>
+              </div>
+              <div class="alert alert-warning">
+                <strong>Warning:</strong> Please reload the page if either data
+                is missing or visualization is distorted.
               </div>
             </div>
           </div>
@@ -280,6 +318,7 @@
                   href="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=30%20Eglinton%20Avenue%20W%2C%20Mississauga+(Emerald%20Chinese%20Restaurant)"
                   target="blank"
                   class="btn btn-primary map_link mr-2"
+                  style="color: white !important;"
                   >Google-Maps</a
                 >
                 <br />
@@ -287,6 +326,7 @@
                   href="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=30%20Eglinton%20Avenue%20W%2C%20Mississauga+(Emerald%20Chinese%20Restaurant)"
                   target="blank"
                   class="btn btn-primary lat_long_link"
+                  style="color: white !important;"
                 >
                   Lat-Long
                 </a>
@@ -385,12 +425,26 @@
                 width: 100%;
                 margin-bottom: 0px;
                 display: none;
-                margin-top: -20px;
+                margin-top: -30px;
               "
               id="selected_state"
             >
               Arizona
             </h5>
+            <h6
+              class="text-center"
+              style="
+                width: 100%;
+                margin-bottom: 0px;
+                display: none;
+                margin-top: -10px;
+              "
+              id="state_warning"
+            >
+              <span style="color: #cc0000;"
+                >Unreliable Data (Data shortage)</span
+              >
+            </h6>
             <div id="vis"></div>
             <div id="status"></div>
           </div>
@@ -785,6 +839,7 @@
             "bubble-label-value"
           );
           for (var bubble_i = 0; bubble_i < all_bubbles.length; bubble_i++) {
+            all_bubbles[bubble_i].style.fontWeight = "9px";
             all_bubbles[bubble_i].innerHTML =
               (
                 parseFloat(
@@ -818,10 +873,17 @@
           this._div.innerHTML =
             "<h4>State</h4>" +
             (props
-              ? "Hovered State: <b>" + props.name + "</b><br />"
-              : // props.density +
-                // " people / mi<sup>2</sup>"
-                "Hover over a state");
+              ? props.name == "California" ||
+                props.name == "Indiana" ||
+                props.name == "Colorado" ||
+                props.name == "Alaska" ||
+                props.name == "Virginia" ||
+                props.name == "New York"
+                ? "Hovered State: <b>" +
+                  props.name +
+                  "</b><br /><strong>*Note: </strong><span style='color: #CC0000'>Unreliable Data (Data shortage)</span>"
+                : "Hovered State: <b>" + props.name + "</b><br />"
+              : "Hover over a state");
         };
 
         info.update_disabled = function (props) {
@@ -898,12 +960,12 @@
           "District of Columbia",
           "Puerto Rico",
           // Almost Empyty Ones
-          "New York",
-          "California",
-          "Indiana",
-          "Colorado",
-          "Alaska",
-          "Virginia",
+          // "New York",
+          // "California",
+          // "Indiana",
+          // "Colorado",
+          // "Alaska",
+          // "Virginia",
         ];
 
         function highlightFeature(e) {
@@ -998,8 +1060,22 @@
             layer.bringToFront();
           }
           document.getElementById("selected_state").style.display = "block";
+
           document.getElementById("selected_state").innerHTML =
             layer.feature.properties.name;
+
+          if (
+            layer.feature.properties.name == "California" ||
+            layer.feature.properties.name == "Indiana" ||
+            layer.feature.properties.name == "Colorado" ||
+            layer.feature.properties.name == "Alaska" ||
+            layer.feature.properties.name == "Virginia" ||
+            layer.feature.properties.name == "New York"
+          ) {
+            document.getElementById("state_warning").style.display = "block";
+          } else {
+            document.getElementById("state_warning").style.display = "none";
+          }
 
           // document.getElementById("selected_state_s_name").innerHTML =
           //   "(" + layer.feature.properties.s_name + ")";
