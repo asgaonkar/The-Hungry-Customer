@@ -1008,12 +1008,12 @@
           if (save_layer) {
             // alert(1);
             save_layer.setStyle({
-              weight: 4,
+              weight: 2,
               color: boundary_color,
               dashArray: "",
               fillOpacity: 1,
             });
-            save_layer._path.attributes["fill"].value = "#38acec";
+            save_layer._path.attributes["fill"].value = "#0079a8";
           }
         }
 
@@ -1021,7 +1021,7 @@
           info.update_disabled();
         }
 
-        boundary_color = "#2193d1";
+        boundary_color = "#333333";
 
         function state_click(e) {
           document.getElementById("selected_food_helper").style.display =
