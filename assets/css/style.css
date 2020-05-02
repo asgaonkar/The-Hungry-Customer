@@ -121,8 +121,10 @@ header {
 
 .bubble-hover {
   /* fill: #b8c7d9; */
-  fill: #e8e9e7;
-  opacity: 1;
+  /* fill: #e8e9e7; */
+  stroke: #222;
+  stroke-width: 4px;
+  /* opacity: 1; */
 }
 
 .bubble-selected {
